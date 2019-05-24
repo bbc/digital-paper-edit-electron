@@ -1,5 +1,5 @@
 {
-  "name": "electron-tmp",
+  "name": "digital-paper-edit-electron",
   "version": "1.0.0",
   "description": "",
   "main": "electron-starter.js",
@@ -13,6 +13,14 @@
   "contributors": [
     ""
   ],
+  "bugs": {
+    "url": "https://github.com/bbc/digital-paper-edit-electron/issues"
+  },
+  "homepage": "https://github.com/bbc/digital-paper-edit-electron",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
+  },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "electron": "^4.0.8",
