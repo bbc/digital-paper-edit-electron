@@ -10,12 +10,7 @@ const db = require('./dbWrapper.js');
 const mediaDir = path.join(dataPath, 'media');
 
 class ElectronWrapper {
-  constructor() {
-    console.log('inside ElectronWrapper')
-    // window.require = require;
-    // const electron = window.require('electron');
-    // const ipcRenderer = electron.ipcRenderer;
-  }
+
   /**
    * Projects
    */
@@ -41,18 +36,12 @@ class ElectronWrapper {
   }
 
   async createProject(data) {
-    // const res = await corsFetch(this.projectsUrl, 'POST', data, 'json');
     const project = db.create('projects', data);
     project.id = project._id;
     return { status: 'ok', project }
-    // return await res.json();
   }
 
   async updateProject(id, data) {
-    // const res = await corsFetch(this.projectsIdUrl(id), 'PUT', data);
-    // const json = await res.json();
-
-    // return json;
     const projectId = id;
     const newProject = {
       id: projectId,
@@ -65,8 +54,6 @@ class ElectronWrapper {
   }
 
   async deleteProject(id) {
-    // const res = await corsFetch(this.projectsIdUrl(id), 'DELETE');
-    // return res;
     db.delete('projects', { _id: id });
     return { ok: true ,status: 'ok', project: { } }
   }
@@ -75,16 +62,19 @@ class ElectronWrapper {
    * Transcripts
    */
   async getTranscripts(projectId) {
-    // const res = await corsFetch(this.transcriptsUrl(projectId));
-    // const json = await res.json();
-    const transcripts = db.getAll('transcripts', { projectId });
-    // return json;
+    let transcripts = [];
+     transcripts = db.getAll('transcripts', { projectId });
+    // Temporary workaround.
+    transcripts.map((transcript) => {
+          transcript.id = transcript._id;
+
+          return transcript;
+        });
+    
     return {transcripts: transcripts}
   }
 
   async createTranscript(projectId, formData, data) {
-    // const form = new formidable.IncomingForm();
-    // if it doesn't exist create tmpMemdia
     if (!fs.existsSync(mediaDir)){
       fs.mkdirSync(mediaDir);
     }
@@ -98,40 +88,38 @@ class ElectronWrapper {
 
     const newTranscript = db.create('transcripts', newTranscriptData);
     const transcriptId = newTranscript._id;
-    newTranscript.id = newTranscript.id;
+    newTranscript.id = transcriptId;
     return { status: 'ok', transcript: newTranscript, transcriptId: transcriptId }
   }
 
   async getTranscript(projectId, transcriptId, queryParamsOptions) {
     const transcript = db.get('transcripts', { _id: transcriptId, projectId });
     transcript.id = transcript._id;
-    // return json;
     return transcript;
   }
 
   async updateTranscript(projectId, transcriptId, queryParamsOptions, data) {
-    console.log('updateTranscript',data)
-    const updatedTranscript = {
-      // projectId,
+    const updatedTranscriptData = {
+      id: transcriptId,
+      projectId,
       title: data.title,
       description: data.description,
     };
+    // TODO: this part is for when correcting transcript with @bbc/react-transcript-editor as it's not ready
     if (data.words) {
-      updatedTranscript.transcript = {};
-      updatedTranscript.transcript.words = datay.words;
+      updatedTranscriptData.transcript = {};
+      updatedTranscriptData.transcript.words = data.words;
       if (data.paragraphs) {
-        updatedTranscript.transcript.paragraphs = data.paragraphs;
+        updatedTranscriptData.transcript.paragraphs = data.paragraphs;
       }
     }
-    const updated = db.update('transcripts', { _id: transcriptId , projectId }, updatedTranscript);
-    updatedTranscript.id = updatedTranscript._id;
-    return { transcript: updatedTranscript };
+    const updated = db.update('transcripts', { _id: transcriptId , projectId }, updatedTranscriptData);
+    updatedTranscriptData.id = transcriptId;
+    return { ok: true, transcript: updatedTranscriptData };
   }
 
   async deleteTranscript(projectId, transcriptId) {
-    // const res = await corsFetch(this.transcriptsIdUrl(projectId, transcriptId), 'DELETE');
     db.delete('transcripts', { _id: transcriptId, projectId });
-    // return res;
     return { ok: true, status: 'ok', message: `DELETE: transcript ${ transcriptId }` }
   }
 
@@ -139,38 +127,52 @@ class ElectronWrapper {
    * Annotations
    */
   async getAllAnnotations(projectId, transcriptId) {
-    // const res = await fetch(this.annotationsUrl(projectId, transcriptId));
-    // const json = await res.json();
+    let annotations = db.getAll('annotations', { projectId, transcriptId });
+    if (annotations) {
+      annotations = annotations
+      // Temporary workaround.
+        .map((annotation) => {
+          annotation.id = annotation._id;
 
-    // return json;
+          return annotation;
+        });
+    } else {
+      annotations = [];
+    }
+    return { annotations }
   }
 
   // not used
   async getAnnotation(projectId, transcriptId, annotationId) {
-    // const res = await corsFetch(this.annotationsIdUrl(projectId, transcriptId, annotationId));
-    // const json = await res.json();
-
-    // return json;
+    const annotation = db.get('annotations', { _id: annotationId, projectId, transcriptId });//
+    return { annotation }
   }
 
   async createAnnotation(projectId, transcriptId, data) {
-    // const res = await corsFetch(this.annotationsUrl(projectId, transcriptId), 'POST', data, 'json');
-
-    // return await res.json();
+    const newAnnotationData = {
+      projectId,
+      transcriptId,
+      ...data,
+    };
+    const newAnnotation = db.create('annotations', newAnnotationData);
+    newAnnotation.id = newAnnotation._id;
+    return { 'ok': true, status: 'ok', annotation: newAnnotation }
   }
 
   async updateAnnotation(projectId, transcriptId, annotationId, data) {
-    // const res = await corsFetch(this.annotationsIdUrl(projectId, transcriptId, annotationId), 'PUT', data);
-    // const json = await res.json();
-
-    // return json;
+    const annotationData = {
+      _id: annotationId,
+      transcriptId,
+      projectId,
+      ...data,
+    };
+    db.update('annotations', { _id: annotationId, projectId, transcriptId }, annotationData);
+    return { 'ok': true, status: 'ok', annotation: annotationData }
   }
 
   async deleteAnnotation(projectId, transcriptId, annotationId) {
-    // const res = await corsFetch(this.annotationsIdUrl(projectId, transcriptId, annotationId), 'DELETE');
-    // const json = await res.json();
-
-    // return json;
+    db.delete('annotations', { _id: annotationId, projectId, transcriptId });
+    return {'ok': true, status: 'ok' }
   }
 
   /**
@@ -179,75 +181,129 @@ class ElectronWrapper {
 
   // Get All Labels
   async getAllLabels(projectId) {
-    // const res = await fetch(this.labelsUrl(projectId));
-    // const json = await res.json();
-
-    // return json;
+    let labels = db.getAll('labels', { projectId });
+    if (!labels) {
+      labels = [];
+    }
+    const defaultLabel = db.get('labels', { _id: 'default' });
+    labels.unshift(defaultLabel);
+    return { ok: true, status: 'ok', labels }
   }
   // Get Label - not used
   async getLabel(projectId, labelId) {
-    // const res = await corsFetch(this.labelsIdUrl(projectId, labelId));
-    // const json = await res.json();
-
-    // return json;
+    const label = db.get('labels', { _id: labelId, projectId });
+    return {  ok: true, status: 'ok', label };
   }
 
   // Create Label
   async createLabel(projectId, data) {
-    // const res = await corsFetch(this.labelsUrl(projectId), 'POST', data, 'json');
-    // const json = await res.json();
+    const newLabelData = {
+      ...data,
+      projectId,
+    };
+    delete newLabelData.id;
+    const newLabel = db.create('labels', newLabelData);
+    const labelId = newLabel._id;
+    newLabel.id = labelId;
+    // temporary workaround to update the id
+    const updated = db.update('labels', { _id: labelId, projectId }, newLabelData);
+    // TODO: clint requires to send all the ids back
+    // when a new one is created - this should be refactored
+    const labels = db.getAll('labels', { projectId });
 
-    // return json;
+    // Adds default label
+    const defaultLabel = db.get('labels', { _id: 'default' });
+    labels.unshift(defaultLabel);
+    // TODO: does the post labels need to return all the labels?
+    // does the client side logic needs to be adjusted?
+    return ({ ok: true, status: 'ok', labels });
   }
   // Update Label
   async updateLabel(projectId, labelId, data) {
-    // const res = await corsFetch(this.labelsIdUrl(projectId, labelId), 'PUT', data);
-    // const json = await res.json();
-
-    // return json;
+    const updated = db.update('labels', { _id: labelId, projectId }, labelData);
+    const labels = db.getAll('labels', { projectId });
+    const defaultLabel = db.get('labels', { _id: 'default' });
+    labels.unshift(defaultLabel);
+    return { ok: true, status: 'ok', labels }
   }
   // Delete Label
   async deleteLabel(projectId, labelId) {
-    // const res = await corsFetch(this.labelsIdUrl(projectId, labelId), 'DELETE');
-    // const json = await res.json();
+    db.delete('labels', { _id: labelId, projectId });
+    const labels = db.getAll('labels', { projectId });
+    // Adds default label
+    const defaultLabel = db.get('labels', { _id: 'default' });
+    labels.unshift(defaultLabel);
 
-    // return json;
+    return { status: 'ok', labels };
   }
   /**
    * PaperEdits
    */
   async getAllPaperEdits(projectId) {
-    // const res = await corsFetch(this.paperEditsUrl(projectId));
-    // const json = await res.json();
+    const data = {};
+    data.paperedits = [];
+    data.paperedits = db.getAll('paperedits', { projectId });
 
-    // return json.paperedits;
+    if (data.paperedits) {
+      // data.transcripts = [ data.transcripts ];
+      data.paperedits = data.paperedits
+      // Temporary workaround.
+        .map((paperedit) => {
+          paperedit.id = paperedit._id;
+
+          return paperedit;
+        });
+    } 
+    // return { ok: true, status: 'ok', paperedits: data.paperedits};
+    return data.paperedits;
   }
 
   async getPaperEdit(projectId, id) {
-    // const res = await corsFetch(this.paperEditsIdUrl(projectId, id));
-    // const json = await res.json();
+    const paperEditId = id;
+    const paperEdit = db.get('paperedits', { _id: paperEditId, projectId });
+    if (!paperEdit) {
+      const err = new Error('No paper edit found');
+      err.statusCode = 404;
 
-    // return json;
+      return next(err);
+    }
+    return { ok: true, status: 'ok', programmeScript: paperEdit }
   }
 
   async createPaperEdit(projectId, data) {
-    // const res = await corsFetch(this.paperEditsUrl(projectId), 'POST', data, 'json');
+    const newPapereditData = {
+      projectId,
+      title: data.title,
+      description: data.description,
+      elements: [],
+      created: Date(),
+    };
 
-    // return await res.json();
+    const newPaperedit = db.create('paperedits', newPapereditData);
+    newPaperedit.id = newPaperedit._id;
+    return { ok: true, status: 'ok', paperedit: newPaperedit };
   }
 
   async updatePaperEdit(projectId, id, data) {
-    // const res = await corsFetch(this.paperEditsIdUrl(projectId, id), 'PUT', data);
-    // const json = await res.json();
-    // console.log('updatePaperEdit', json);
+    const paperEditId = id;
+    const paperEditData = {
+      id: paperEditId,
+      title: data.title,
+      description: data.description,
+    };
 
-    // return json;
+    if (data.elements) {
+      paperEditData.elements = data.elements;
+    }
+
+    const updated = db.update('paperedits', { _id: paperEditId, projectId }, paperEditData);
+    return { ok:true, status: 'ok', paperedit: paperEditData };
   }
 
   async deletePaperEdit(projectId, id) {
-    // const res = await corsFetch(this.paperEditsIdUrl(projectId, id), 'DELETE');
-
-    // return res;
+    const paperEditId = id;
+    db.delete('paperedits', { _id: paperEditId, projectId });
+    return { ok: true, status: 'ok' }
   }
 
   /**
@@ -255,87 +311,86 @@ class ElectronWrapper {
    * Transcript + Annotations for that transcript + Labels for the project
    */
   async get_TranscriptLabelsAnnotations(projectId, transcriptId) {
-    // // GET Transcripts
-    // const transcriptResult = await this.getTranscript(projectId, transcriptId);
-    // // GET Labels for Project <-- or separate request in label component
-    // const labelsResults = await this.getAllLabels(projectId, transcriptId);
-    // // GET Annotation for Transcript
-    // const annotationsResult = await this.getAllAnnotations(projectId, transcriptId);
+    // GET Transcripts
+    const transcriptResult = await this.getTranscript(projectId, transcriptId);
+    // GET Labels for Project <-- or separate request in label component
+    const labelsResults = await this.getAllLabels(projectId, transcriptId);
+    // GET Annotation for Transcript
+    const annotationsResult = await this.getAllAnnotations(projectId, transcriptId);
 
-    // // Combine results
-    // const results = {
-    //   transcriptId: transcriptId,
-    //   projectId: projectId,
-    //   projectTitle: transcriptResult.projectTitle,
-    //   transcriptTitle: transcriptResult.transcriptTitle,
-    //   url: transcriptResult.url,
-    //   labels: labelsResults.labels,
-    //   transcript:  transcriptResult.transcript,
-    //   annotations: annotationsResult.annotations
-    // };
+    // Combine results
+    const results = {
+      transcriptId: transcriptId,
+      projectId: projectId,
+      projectTitle: transcriptResult.projectTitle,
+      transcriptTitle: transcriptResult.transcriptTitle,
+      url: transcriptResult.url,
+      labels: labelsResults.labels,
+      transcript:  transcriptResult.transcript,
+      annotations: annotationsResult.annotations
+    };
 
-    // return results;
+    return results;
   }
 
   // Helper function to get program script & associated transcript
   // https://flaviocopes.com/javascript-async-await-array-map/
-  async get_ProgrammeScriptAndTranscripts(projectId, papereditId) {
-    // // get transcripts list, this contain id, title, description only
-    // const transcriptsResult = await this.getTranscripts(projectId);
-    // // use that list of ids to loop through and get json payload for each individual transcript
-    // // as separate request
+  async get_ProgrammeScriptAndProject(projectId, papereditId) {  // // get transcripts list, this contain id, title, description only
+    const transcriptsResult = await this.getTranscripts(projectId);
+    // use that list of ids to loop through and get json payload for each individual transcript
+    // as separate request
 
-    // // TODO: also add annotations for each Transcripts
-    // const transcriptsJson = await Promise.all(transcriptsResult.transcripts.map((transcript) => {
-    //   // const annotations = this.getAllAnnotations(projectId, transcript.id);
-    //   const transcriptTmp = this.getTranscript(projectId, transcript.id);
-    //   // transcriptTmp.annotations = annotations;
+    // TODO: also add annotations for each Transcripts
+    const transcriptsJson = await Promise.all(transcriptsResult.transcripts.map((transcript) => {
+      // const annotations = this.getAllAnnotations(projectId, transcript.id);
+      const transcriptTmp = this.getTranscript(projectId, transcript.id);
+      // transcriptTmp.annotations = annotations;
 
-    //   return transcriptTmp;
-    // }));
+      return transcriptTmp;
+    }));
 
-    // const annotationsJson = await Promise.all(transcriptsResult.transcripts.map((transcript) => {
-    //   const annotations = this.getAllAnnotations(projectId, transcript.id);
+    const annotationsJson = await Promise.all(transcriptsResult.transcripts.map((transcript) => {
+      const annotations = this.getAllAnnotations(projectId, transcript.id);
 
-    //   return annotations;
-    // }));
+      return annotations;
+    }));
 
-    // // add annotations to transcript
-    // transcriptsJson.forEach((tr) => {
-    //   // get annotations for transcript
-    //   const currentAnnotationsSet = annotationsJson.find((a) => {
+    // add annotations to transcript
+    transcriptsJson.forEach((tr) => {
+      // get annotations for transcript
+      const currentAnnotationsSet = annotationsJson.find((a) => {
 
-    //     return a.transcriptId === tr.id;
-    //   });
-    //   // if there are annotations for this transcript add them to it
-    //   if (currentAnnotationsSet) {
-    //     tr.annotations = currentAnnotationsSet.annotations;
+        return a.transcriptId === tr.id;
+      });
+      // if there are annotations for this transcript add them to it
+      if (currentAnnotationsSet) {
+        tr.annotations = currentAnnotationsSet.annotations;
 
-    //     return;
-    //   }
-    //   else {
-    //     tr.annotations = [];
-    //   }
-    // });
-    // console.log('ApiWrapper transcriptsJson', transcriptsJson);
+        return;
+      }
+      else {
+        tr.annotations = [];
+      }
+    });
+    console.log('ApiWrapper transcriptsJson', transcriptsJson);
 
-    // // getting program script for paperEdit
-    // const paperEditResult = await this.getPaperEdit(projectId, papereditId);
-    // // getting project info - eg to get tile and description
-    // const projectResult = await this.getProject(projectId);
-    // // Get labels
-    // const labelsResults = await this.getAllLabels(projectId);
-    // // package results
-    // const results = {
-    //   programmeScript: paperEditResult.programmeScript,
-    //   project: projectResult.project,
-    //   // each transcript contains its annotations
-    //   transcripts: transcriptsJson,
-    //   labels: labelsResults.labels
-    // };
-    // console.log('ApiWrapper - results', results);
+    // getting program script for paperEdit
+    const paperEditResult = await this.getPaperEdit(projectId, papereditId);
+    // getting project info - eg to get tile and description
+    const projectResult = await this.getProject(projectId);
+    // Get labels
+    const labelsResults = await this.getAllLabels(projectId);
+    // package results
+    const results = {
+      programmeScript: paperEditResult.programmeScript,
+      project: projectResult.project,
+      // each transcript contains its annotations
+      transcripts: transcriptsJson,
+      labels: labelsResults.labels
+    };
+    console.log('ApiWrapper - results', results);
 
-    // return results;
+    return results;
   }
 }
 
