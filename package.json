@@ -2,11 +2,12 @@
   "name": "digital-paper-edit-electron",
   "version": "1.0.0",
   "description": "",
-  "main": "electron-starter.js",
+  "main": "src/electron-main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development electron .",
-    "build:mwl": "cross-env NODE_ENV=production electron-builder -m"
+    "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
+    "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
   "author": "Pietro Passarelli CC0 BBC 2019",
@@ -20,11 +21,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
-  },
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "electron": "^4.0.8",
-    "electron-builder": "^20.38.5"
   },
   "build": {
     "appId": "org.autoEdit2.autoEdit2-electron",
@@ -70,8 +66,18 @@
       ]
     }
   },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "electron": "^5.0.6",
+    "electron-builder": "^20.38.5",
+    "npm": "^6.10.1"
+  },
   "dependencies": {
-    "graphql": "^14.2.1",
-    "sqlite3": "^4.0.6"
+    "bootstrap-css-only": "^4.3.1",
+    "diskdb": "^0.1.17",
+    "install": "^0.13.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-dom": "^16.8.6"
   }
 }
