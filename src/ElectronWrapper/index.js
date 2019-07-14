@@ -60,7 +60,7 @@ class ElectronWrapper {
     // const res = await corsFetch(this.projectsIdUrl(id), 'DELETE');
     // return res;
     db.delete('projects', { _id: id });
-    return { status: 'ok', project: {} }
+    return { ok: true ,status: 'ok', project: { } }
   }
 
   /**
@@ -75,34 +75,50 @@ class ElectronWrapper {
   }
 
   async createTranscript(projectId, data) {
-    // const res = await corsFetch(this.transcriptsUrl(projectId), 'POST', data);
-    // const json = await res.json();
-
-    // return json;
+    const newTranscriptData = {
+      projectId,
+      title: fields.title,
+      description: fields.description,
+      // id: newTranscriptId,
+      url: null,
+      status: 'in-progress',
+    };
+    
+    const newTranscript = db.create('transcripts', newTranscriptData);
+    newTranscript.id =  newTranscript._id;
+    return { status: 'ok', transcript: newTranscript }
   }
-  async getTranscript(projectId, transcriptId, queryParamsOptions) {
-    // const res = await corsFetch(this.transcriptsIdUrl(projectId, transcriptId, queryParamsOptions));
-    // const json = await res.json();
-    // // get project title
-    // const resProject = await this.getProject(projectId);
-    // // console.log('resProject', resProject.project.title, json);
-    // json.projectTitle = resProject.project.title;
-    // json.transcriptTitle = json.title;
-    // delete json.title;
 
+  async getTranscript(projectId, transcriptId, queryParamsOptions) {
+    const transcript = db.get('transcripts', { _id: transcriptId, projectId });
+    transcript.id = transcript._id;
     // return json;
+    return transcript;
   }
 
   async updateTranscript(projectId, transcriptId, queryParamsOptions, data) {
-    // const res = await corsFetch(this.transcriptsIdUrl(projectId, transcriptId, queryParamsOptions), 'PUT', data);
-
-    // return res;
+    const updatedTranscript = {
+      // projectId,
+      title: data.title,
+      description: data.description,
+    };
+    if (data.words) {
+      updatedTranscript.transcript = {};
+      updatedTranscript.transcript.words = datay.words;
+      if (data.paragraphs) {
+        updatedTranscript.transcript.paragraphs = data.paragraphs;
+      }
+    }
+    const updated = db.update('transcripts', { _id: transcriptId }, updatedTranscript);
+    updatedTranscript.id = updatedTranscript._id;
+    return { transcript: updatedTranscript };
   }
 
   async deleteTranscript(projectId, transcriptId) {
     // const res = await corsFetch(this.transcriptsIdUrl(projectId, transcriptId), 'DELETE');
-
+    db.delete('transcripts', { _id: transcriptId, projectId });
     // return res;
+    return { ok: true, status: 'ok', message: `DELETE: transcript ${ transcriptId }` }
   }
 
   /**
