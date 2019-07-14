@@ -1,5 +1,13 @@
 
+const path = require('path');
+const fs = require('fs');
+const formidable = require('formidable');
+const electron = require('electron');
+const app = electron.app;
+const dataPath = app.getPath("userData");
+
 const db = require('./dbWrapper.js');
+const mediaDir = path.join(dataPath, 'media');
 
 class ElectronWrapper {
   constructor() {
@@ -74,19 +82,24 @@ class ElectronWrapper {
     return {transcripts: transcripts}
   }
 
-  async createTranscript(projectId, data) {
+  async createTranscript(projectId, formData, data) {
+    // const form = new formidable.IncomingForm();
+    // if it doesn't exist create tmpMemdia
+    if (!fs.existsSync(mediaDir)){
+      fs.mkdirSync(mediaDir);
+    }
+
     const newTranscriptData = {
       projectId,
-      title: fields.title,
-      description: fields.description,
-      // id: newTranscriptId,
+      ...data,
       url: null,
-      status: 'in-progress',
+      status: 'in-progress'
     };
-    
+
     const newTranscript = db.create('transcripts', newTranscriptData);
-    newTranscript.id =  newTranscript._id;
-    return { status: 'ok', transcript: newTranscript }
+    const transcriptId = newTranscript._id;
+    newTranscript.id = newTranscript.id;
+    return { status: 'ok', transcript: newTranscript, transcriptId: transcriptId }
   }
 
   async getTranscript(projectId, transcriptId, queryParamsOptions) {
@@ -97,6 +110,7 @@ class ElectronWrapper {
   }
 
   async updateTranscript(projectId, transcriptId, queryParamsOptions, data) {
+    console.log('updateTranscript',data)
     const updatedTranscript = {
       // projectId,
       title: data.title,
@@ -109,7 +123,7 @@ class ElectronWrapper {
         updatedTranscript.transcript.paragraphs = data.paragraphs;
       }
     }
-    const updated = db.update('transcripts', { _id: transcriptId }, updatedTranscript);
+    const updated = db.update('transcripts', { _id: transcriptId , projectId }, updatedTranscript);
     updatedTranscript.id = updatedTranscript._id;
     return { transcript: updatedTranscript };
   }
