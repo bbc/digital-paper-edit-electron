@@ -1,12 +1,4 @@
-const electron = require("electron");
-const { app, BrowserWindow, ipcMain,Menu, shell} = require('electron')
-// Module to control application life.
-// const app = electron.app;
-// const Menu = electron.Menu;
-// const shell = electron.shell;
-// Module to create native browser window.
-// const BrowserWindow = electron.BrowserWindow;
-
+const { app, BrowserWindow ,Menu, shell} = require('electron')
 const path = require("path");
 const url = require("url");
 
@@ -39,7 +31,6 @@ function createNewSettingsWindow(){
       slashes: true
     })
   );
-  // settingsWindow.hide();
 }
 
 function createMainWindow() {
@@ -62,7 +53,10 @@ function createMainWindow() {
     // and load the index.html of the app.
     mainWindow.loadURL("http://localhost:3000");
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.once('dom-ready', () => {
+       mainWindow.webContents.openDevTools();
+    })
+   
   }
   // Once we package this in electron we no longer 
   // have access to process.env.NODE_ENV to set it to production
@@ -81,19 +75,6 @@ function createMainWindow() {
   // https://github.com/electron/electron/issues/1095
   mainWindow.dataPath = app.getPath("userData");
   mainWindow.appPath = app.getAppPath();
-  mainWindow.ElectronWrapper = require(`${ app.getAppPath()}/src/ElectronWrapper/index.js`)
-
-
-  // ipcMain.on('get-projects', (event, status) => {
-  //   console.log('get-projects',status)
-  //   event.returnValue = 'pong';
-  // })
-  // Eg could add ElectronWrapper here
-  // mainWindow.ElectronWrapper = ElectronWrapper;
-
-  // MENU
-  // TODO: menu could be refactored as separate file?
-  // Create the Application's main menu
  
   const template = makeMenuTemplate({ 
     app,
@@ -112,6 +93,7 @@ function createMainWindow() {
     mainWindow = null;
     settingsWindow = null;
   });
+
 }
 
 // This method will be called when Electron has finished
