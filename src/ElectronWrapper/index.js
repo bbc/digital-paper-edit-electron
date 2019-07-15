@@ -1,20 +1,18 @@
 
 const path = require('path');
 const fs = require('fs');
-const formidable = require('formidable');
-const electron = require('electron');
-const app = electron.app;
+const { app } = require('electron').remote
 const dataPath = app.getPath("userData");
 
 const db = require('./dbWrapper.js');
 const mediaDir = path.join(dataPath, 'media');
 
 class ElectronWrapper {
-
   /**
    * Projects
    */
   async getAllProjects() {
+    // ipcRenderer.send('asynchronous-message', 'ping')
     const projects = db.getAll('projects')
     // Temporary workaround.
     let results= 0;
@@ -335,7 +333,7 @@ class ElectronWrapper {
 
   // Helper function to get program script & associated transcript
   // https://flaviocopes.com/javascript-async-await-array-map/
-  async get_ProgrammeScriptAndProject(projectId, papereditId) {  // // get transcripts list, this contain id, title, description only
+  async get_ProgrammeScriptAndTranscripts(projectId, papereditId) {  // // get transcripts list, this contain id, title, description only
     const transcriptsResult = await this.getTranscripts(projectId);
     // use that list of ids to loop through and get json payload for each individual transcript
     // as separate request
