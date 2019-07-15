@@ -1,5 +1,5 @@
 const diskdb = require('diskdb');
-const { app } = require("electron");
+const { app } = require("electron").remote;
 // const currentWindow = electron.remote.getCurrentWindow();
 /* eslint-disable class-methods-use-this */
 class DBWrapper {
