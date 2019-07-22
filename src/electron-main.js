@@ -161,9 +161,11 @@ autoUpdater.on('checking-for-update', () => {
 });
 autoUpdater.on('update-available', (info) => {
   sendStatusToWindow('Update available.');
+  console.log(info);
 });
 autoUpdater.on('update-not-available', (info) => {
   sendStatusToWindow('Update not available.');
+  console.log(info);
 });
 autoUpdater.on('error', (err) => {
   sendStatusToWindow('Error in auto-updater. ' + err);
