@@ -1,0 +1,639 @@
+{
+    "status": "completed",
+    "model_id": null,
+    "audio_src_url": "https://assemblyai-temp.s3.amazonaws.com/7c07ff79-f658-465f-aa74-dbe16602a2be",
+    "text": "Movements that people automatically subconsciously associate with states of mind and there's an entire body of research called human robot interaction that really shows how well this works. So for example, researchers Stanford University found out that it makes people really uncomfortable when you ask them to touch a robot private parts.",
+    "warning": "The segments key will be deprecated. For more see: http://docs.assemblyai.com/updates",
+    "words": [
+      {
+        "text": "Movements",
+        "confidence": 0.9,
+        "end": 640,
+        "start": 0
+      },
+      {
+        "text": "that",
+        "confidence": 0.89,
+        "end": 880,
+        "start": 600
+      },
+      {
+        "text": "people",
+        "confidence": 0.96,
+        "end": 1120,
+        "start": 860
+      },
+      {
+        "text": "automatically",
+        "confidence": 0.95,
+        "end": 1940,
+        "start": 1180
+      },
+      {
+        "text": "subconsciously",
+        "confidence": 0.96,
+        "end": 2860,
+        "start": 1920
+      },
+      {
+        "text": "associate",
+        "confidence": 0.99,
+        "end": 3680,
+        "start": 2880
+      },
+      {
+        "text": "with",
+        "confidence": 0.94,
+        "end": 4200,
+        "start": 4000
+      },
+      {
+        "text": "states",
+        "confidence": 0.94,
+        "end": 4500,
+        "start": 4180
+      },
+      {
+        "text": "of",
+        "confidence": 0.99,
+        "end": 4640,
+        "start": 4500
+      },
+      {
+        "text": "mind",
+        "confidence": 0.99,
+        "end": 4980,
+        "start": 4640
+      },
+      {
+        "text": "and",
+        "confidence": 0.99,
+        "end": 6160,
+        "start": 5360
+      },
+      {
+        "text": "there's",
+        "confidence": 0.93,
+        "end": 6340,
+        "start": 6120
+      },
+      {
+        "text": "an",
+        "confidence": 0.86,
+        "end": 6440,
+        "start": 6300
+      },
+      {
+        "text": "entire",
+        "confidence": 0.96,
+        "end": 6840,
+        "start": 6400
+      },
+      {
+        "text": "body",
+        "confidence": 0.99,
+        "end": 7060,
+        "start": 6820
+      },
+      {
+        "text": "of",
+        "confidence": 0.89,
+        "end": 7160,
+        "start": 7040
+      },
+      {
+        "text": "research",
+        "confidence": 0.96,
+        "end": 7540,
+        "start": 7120
+      },
+      {
+        "text": "called",
+        "confidence": 0.99,
+        "end": 7800,
+        "start": 7520
+      },
+      {
+        "text": "human",
+        "confidence": 0.93,
+        "end": 8040,
+        "start": 7760
+      },
+      {
+        "text": "robot",
+        "confidence": 0.9,
+        "end": 8320,
+        "start": 8020
+      },
+      {
+        "text": "interaction",
+        "confidence": 0.96,
+        "end": 8780,
+        "start": 8320
+      },
+      {
+        "text": "that",
+        "confidence": 0.93,
+        "end": 8960,
+        "start": 8760
+      },
+      {
+        "text": "really",
+        "confidence": 0.97,
+        "end": 9400,
+        "start": 8940
+      },
+      {
+        "text": "shows",
+        "confidence": 0.94,
+        "end": 9760,
+        "start": 9360
+      },
+      {
+        "text": "how",
+        "confidence": 0.91,
+        "end": 9980,
+        "start": 9760
+      },
+      {
+        "text": "well",
+        "confidence": 0.97,
+        "end": 10180,
+        "start": 9960
+      },
+      {
+        "text": "this",
+        "confidence": 0.96,
+        "end": 10320,
+        "start": 10140
+      },
+      {
+        "text": "works.",
+        "confidence": 0.91,
+        "end": 10600,
+        "start": 10300
+      },
+      {
+        "text": "So",
+        "confidence": 0.98,
+        "end": 11280,
+        "start": 10560
+      },
+      {
+        "text": "for",
+        "confidence": 0.9,
+        "end": 11500,
+        "start": 11300
+      },
+      {
+        "text": "example,",
+        "confidence": 0.98,
+        "end": 11920,
+        "start": 11480
+      },
+      {
+        "text": "researchers",
+        "confidence": 0.92,
+        "end": 12560,
+        "start": 11900
+      },
+      {
+        "text": "Stanford",
+        "confidence": 0.98,
+        "end": 13440,
+        "start": 12900
+      },
+      {
+        "text": "University",
+        "confidence": 0.95,
+        "end": 13920,
+        "start": 13400
+      },
+      {
+        "text": "found",
+        "confidence": 1,
+        "end": 14200,
+        "start": 13900
+      },
+      {
+        "text": "out",
+        "confidence": 0.95,
+        "end": 14340,
+        "start": 14160
+      },
+      {
+        "text": "that",
+        "confidence": 0.96,
+        "end": 14520,
+        "start": 14300
+      },
+      {
+        "text": "it",
+        "confidence": 0.96,
+        "end": 14600,
+        "start": 14480
+      },
+      {
+        "text": "makes",
+        "confidence": 0.94,
+        "end": 14760,
+        "start": 14560
+      },
+      {
+        "text": "people",
+        "confidence": 0.93,
+        "end": 15020,
+        "start": 14720
+      },
+      {
+        "text": "really",
+        "confidence": 0.92,
+        "end": 15380,
+        "start": 15000
+      },
+      {
+        "text": "uncomfortable",
+        "confidence": 0.93,
+        "end": 16000,
+        "start": 15360
+      },
+      {
+        "text": "when",
+        "confidence": 0.96,
+        "end": 16160,
+        "start": 15980
+      },
+      {
+        "text": "you",
+        "confidence": 1,
+        "end": 16260,
+        "start": 16120
+      },
+      {
+        "text": "ask",
+        "confidence": 0.9,
+        "end": 16440,
+        "start": 16220
+      },
+      {
+        "text": "them",
+        "confidence": 0.93,
+        "end": 16640,
+        "start": 16420
+      },
+      {
+        "text": "to",
+        "confidence": 0.91,
+        "end": 16760,
+        "start": 16620
+      },
+      {
+        "text": "touch",
+        "confidence": 0.88,
+        "end": 16960,
+        "start": 16720
+      },
+      {
+        "text": "a",
+        "confidence": 0.99,
+        "end": 17020,
+        "start": 16940
+      },
+      {
+        "text": "robot",
+        "confidence": 0.93,
+        "end": 17360,
+        "start": 17020
+      },
+      {
+        "text": "private",
+        "confidence": 0.94,
+        "end": 17880,
+        "start": 17380
+      },
+      {
+        "text": "parts.",
+        "confidence": 0.96,
+        "end": 18080,
+        "start": 17840
+      }
+    ],
+    "id": 5936415,
+    "confidence": 0.945384615384615,
+    "created": "2019-07-19 23:57:47.157983",
+    "segments": [
+      {
+        "text": "Movements",
+        "confidence": 0.9,
+        "end": 640,
+        "start": 0
+      },
+      {
+        "text": "that",
+        "confidence": 0.89,
+        "end": 880,
+        "start": 600
+      },
+      {
+        "text": "people",
+        "confidence": 0.96,
+        "end": 1120,
+        "start": 860
+      },
+      {
+        "text": "automatically",
+        "confidence": 0.95,
+        "end": 1940,
+        "start": 1180
+      },
+      {
+        "text": "subconsciously",
+        "confidence": 0.96,
+        "end": 2860,
+        "start": 1920
+      },
+      {
+        "text": "associate",
+        "confidence": 0.99,
+        "end": 3680,
+        "start": 2880
+      },
+      {
+        "text": "with",
+        "confidence": 0.94,
+        "end": 4200,
+        "start": 4000
+      },
+      {
+        "text": "states",
+        "confidence": 0.94,
+        "end": 4500,
+        "start": 4180
+      },
+      {
+        "text": "of",
+        "confidence": 0.99,
+        "end": 4640,
+        "start": 4500
+      },
+      {
+        "text": "mind",
+        "confidence": 0.99,
+        "end": 4980,
+        "start": 4640
+      },
+      {
+        "text": "and",
+        "confidence": 0.99,
+        "end": 6160,
+        "start": 5360
+      },
+      {
+        "text": "there's",
+        "confidence": 0.93,
+        "end": 6340,
+        "start": 6120
+      },
+      {
+        "text": "an",
+        "confidence": 0.86,
+        "end": 6440,
+        "start": 6300
+      },
+      {
+        "text": "entire",
+        "confidence": 0.96,
+        "end": 6840,
+        "start": 6400
+      },
+      {
+        "text": "body",
+        "confidence": 0.99,
+        "end": 7060,
+        "start": 6820
+      },
+      {
+        "text": "of",
+        "confidence": 0.89,
+        "end": 7160,
+        "start": 7040
+      },
+      {
+        "text": "research",
+        "confidence": 0.96,
+        "end": 7540,
+        "start": 7120
+      },
+      {
+        "text": "called",
+        "confidence": 0.99,
+        "end": 7800,
+        "start": 7520
+      },
+      {
+        "text": "human",
+        "confidence": 0.93,
+        "end": 8040,
+        "start": 7760
+      },
+      {
+        "text": "robot",
+        "confidence": 0.9,
+        "end": 8320,
+        "start": 8020
+      },
+      {
+        "text": "interaction",
+        "confidence": 0.96,
+        "end": 8780,
+        "start": 8320
+      },
+      {
+        "text": "that",
+        "confidence": 0.93,
+        "end": 8960,
+        "start": 8760
+      },
+      {
+        "text": "really",
+        "confidence": 0.97,
+        "end": 9400,
+        "start": 8940
+      },
+      {
+        "text": "shows",
+        "confidence": 0.94,
+        "end": 9760,
+        "start": 9360
+      },
+      {
+        "text": "how",
+        "confidence": 0.91,
+        "end": 9980,
+        "start": 9760
+      },
+      {
+        "text": "well",
+        "confidence": 0.97,
+        "end": 10180,
+        "start": 9960
+      },
+      {
+        "text": "this",
+        "confidence": 0.96,
+        "end": 10320,
+        "start": 10140
+      },
+      {
+        "text": "works.",
+        "confidence": 0.91,
+        "end": 10600,
+        "start": 10300
+      },
+      {
+        "text": "So",
+        "confidence": 0.98,
+        "end": 11280,
+        "start": 10560
+      },
+      {
+        "text": "for",
+        "confidence": 0.9,
+        "end": 11500,
+        "start": 11300
+      },
+      {
+        "text": "example,",
+        "confidence": 0.98,
+        "end": 11920,
+        "start": 11480
+      },
+      {
+        "text": "researchers",
+        "confidence": 0.92,
+        "end": 12560,
+        "start": 11900
+      },
+      {
+        "text": "Stanford",
+        "confidence": 0.98,
+        "end": 13440,
+        "start": 12900
+      },
+      {
+        "text": "University",
+        "confidence": 0.95,
+        "end": 13920,
+        "start": 13400
+      },
+      {
+        "text": "found",
+        "confidence": 1,
+        "end": 14200,
+        "start": 13900
+      },
+      {
+        "text": "out",
+        "confidence": 0.95,
+        "end": 14340,
+        "start": 14160
+      },
+      {
+        "text": "that",
+        "confidence": 0.96,
+        "end": 14520,
+        "start": 14300
+      },
+      {
+        "text": "it",
+        "confidence": 0.96,
+        "end": 14600,
+        "start": 14480
+      },
+      {
+        "text": "makes",
+        "confidence": 0.94,
+        "end": 14760,
+        "start": 14560
+      },
+      {
+        "text": "people",
+        "confidence": 0.93,
+        "end": 15020,
+        "start": 14720
+      },
+      {
+        "text": "really",
+        "confidence": 0.92,
+        "end": 15380,
+        "start": 15000
+      },
+      {
+        "text": "uncomfortable",
+        "confidence": 0.93,
+        "end": 16000,
+        "start": 15360
+      },
+      {
+        "text": "when",
+        "confidence": 0.96,
+        "end": 16160,
+        "start": 15980
+      },
+      {
+        "text": "you",
+        "confidence": 1,
+        "end": 16260,
+        "start": 16120
+      },
+      {
+        "text": "ask",
+        "confidence": 0.9,
+        "end": 16440,
+        "start": 16220
+      },
+      {
+        "text": "them",
+        "confidence": 0.93,
+        "end": 16640,
+        "start": 16420
+      },
+      {
+        "text": "to",
+        "confidence": 0.91,
+        "end": 16760,
+        "start": 16620
+      },
+      {
+        "text": "touch",
+        "confidence": 0.88,
+        "end": 16960,
+        "start": 16720
+      },
+      {
+        "text": "a",
+        "confidence": 0.99,
+        "end": 17020,
+        "start": 16940
+      },
+      {
+        "text": "robot",
+        "confidence": 0.93,
+        "end": 17360,
+        "start": 17020
+      },
+      {
+        "text": "private",
+        "confidence": 0.94,
+        "end": 17880,
+        "start": 17380
+      },
+      {
+        "text": "parts.",
+        "confidence": 0.96,
+        "end": 18080,
+        "start": 17840
+      }
+    ],
+    "speaker_count": null
+  }
