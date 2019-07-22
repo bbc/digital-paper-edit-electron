@@ -25,6 +25,7 @@ env:
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - PUBLISH_FOR_PULL_REQUEST=true
+    - USE_HARD_LINKS=false
 
 script:
   - npm run build:mwl:publish:always;
