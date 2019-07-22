@@ -1,0 +1,597 @@
+[
+    {
+        "Language": "Afrikaans (Suid-Afrika)",
+        "code": "af-ZA",
+        "Language (English name)": "Afrikaans (South Africa)"
+    },
+    {
+        "Language": "አማርኛ (ኢትዮጵያ)",
+        "code": "am-ET",
+        "Language (English name)": "Amharic (Ethiopia)"
+    },
+    {
+        "Language": "Հայ (Հայաստան)",
+        "code": "hy-AM",
+        "Language (English name)": "Armenian (Armenia)"
+    },
+    {
+        "Language": "Azərbaycan (Azərbaycan)",
+        "code": "az-AZ",
+        "Language (English name)": "Azerbaijani (Azerbaijan)"
+    },
+    {
+        "Language": "Bahasa Indonesia (Indonesia)",
+        "code": "id-ID",
+        "Language (English name)": "Indonesian (Indonesia)"
+    },
+    {
+        "Language": "Bahasa Melayu (Malaysia)",
+        "code": "ms-MY",
+        "Language (English name)": "Malay (Malaysia)"
+    },
+    {
+        "Language": "বাংলা (বাংলাদেশ)",
+        "code": "bn-BD",
+        "Language (English name)": "Bengali (Bangladesh)"
+    },
+    {
+        "Language": "বাংলা (ভারত)",
+        "code": "bn-IN",
+        "Language (English name)": "Bengali (India)"
+    },
+    {
+        "Language": "Català (Espanya)",
+        "code": "ca-ES",
+        "Language (English name)": "Catalan (Spain)"
+    },
+    {
+        "Language": "Čeština (Česká republika)",
+        "code": "cs-CZ",
+        "Language (English name)": "Czech (Czech Republic)"
+    },
+    {
+        "Language": "Dansk (Danmark)",
+        "code": "da-DK",
+        "Language (English name)": "Danish (Denmark)"
+    },
+    {
+        "Language": "Deutsch (Deutschland)",
+        "code": "de-DE",
+        "Language (English name)": "German (Germany)"
+    },
+    {
+        "Language": "English (Australia)",
+        "code": "en-AU",
+        "Language (English name)": "English (Australia)"
+    },
+    {
+        "Language": "English (Canada)",
+        "code": "en-CA",
+        "Language (English name)": "English (Canada)"
+    },
+    {
+        "Language": "English (Ghana)",
+        "code": "en-GH",
+        "Language (English name)": "English (Ghana)"
+    },
+    {
+        "Language": "English (Great Britain)",
+        "code": "en-GB",
+        "Language (English name)": "English (United Kingdom)"
+    },
+    {
+        "Language": "English (India)",
+        "code": "en-IN",
+        "Language (English name)": "English (India)"
+    },
+    {
+        "Language": "English (Ireland)",
+        "code": "en-IE",
+        "Language (English name)": "English (Ireland)"
+    },
+    {
+        "Language": "English (Kenya)",
+        "code": "en-KE",
+        "Language (English name)": "English (Kenya)"
+    },
+    {
+        "Language": "English (New Zealand)",
+        "code": "en-NZ",
+        "Language (English name)": "English (New Zealand)"
+    },
+    {
+        "Language": "English (Nigeria)",
+        "code": "en-NG",
+        "Language (English name)": "English (Nigeria)"
+    },
+    {
+        "Language": "English (Philippines)",
+        "code": "en-PH",
+        "Language (English name)": "English (Philippines)"
+    },
+    {
+        "Language": "English (South Africa)",
+        "code": "en-ZA",
+        "Language (English name)": "English (South Africa)"
+    },
+    {
+        "Language": "English (Tanzania)",
+        "code": "en-TZ",
+        "Language (English name)": "English (Tanzania)"
+    },
+    {
+        "Language": "English (United States)",
+        "code": "en-US",
+        "Language (English name)": "English (United States)"
+    },
+    {
+        "Language": "Español (Argentina)",
+        "code": "es-AR",
+        "Language (English name)": "Spanish (Argentina)"
+    },
+    {
+        "Language": "Español (Bolivia)",
+        "code": "es-BO",
+        "Language (English name)": "Spanish (Bolivia)"
+    },
+    {
+        "Language": "Español (Chile)",
+        "code": "es-CL",
+        "Language (English name)": "Spanish (Chile)"
+    },
+    {
+        "Language": "Español (Colombia)",
+        "code": "es-CO",
+        "Language (English name)": "Spanish (Colombia)"
+    },
+    {
+        "Language": "Español (Costa Rica)",
+        "code": "es-CR",
+        "Language (English name)": "Spanish (Costa Rica)"
+    },
+    {
+        "Language": "Español (Ecuador)",
+        "code": "es-EC",
+        "Language (English name)": "Spanish (Ecuador)"
+    },
+    {
+        "Language": "Español (El Salvador)",
+        "code": "es-SV",
+        "Language (English name)": "Spanish (El Salvador)"
+    },
+    {
+        "Language": "Español (España)",
+        "code": "es-ES",
+        "Language (English name)": "Spanish (Spain)"
+    },
+    {
+        "Language": "Español (Estados Unidos)",
+        "code": "es-US",
+        "Language (English name)": "Spanish (United States)"
+    },
+    {
+        "Language": "Español (Guatemala)",
+        "code": "es-GT",
+        "Language (English name)": "Spanish (Guatemala)"
+    },
+    {
+        "Language": "Español (Honduras)",
+        "code": "es-HN",
+        "Language (English name)": "Spanish (Honduras)"
+    },
+    {
+        "Language": "Español (México)",
+        "code": "es-MX",
+        "Language (English name)": "Spanish (Mexico)"
+    },
+    {
+        "Language": "Español (Nicaragua)",
+        "code": "es-NI",
+        "Language (English name)": "Spanish (Nicaragua)"
+    },
+    {
+        "Language": "Español (Panamá)",
+        "code": "es-PA",
+        "Language (English name)": "Spanish (Panama)"
+    },
+    {
+        "Language": "Español (Paraguay)",
+        "code": "es-PY",
+        "Language (English name)": "Spanish (Paraguay)"
+    },
+    {
+        "Language": "Español (Perú)",
+        "code": "es-PE",
+        "Language (English name)": "Spanish (Peru)"
+    },
+    {
+        "Language": "Español (Puerto Rico)",
+        "code": "es-PR",
+        "Language (English name)": "Spanish (Puerto Rico)"
+    },
+    {
+        "Language": "Español (República Dominicana)",
+        "code": "es-DO",
+        "Language (English name)": "Spanish (Dominican Republic)"
+    },
+    {
+        "Language": "Español (Uruguay)",
+        "code": "es-UY",
+        "Language (English name)": "Spanish (Uruguay)"
+    },
+    {
+        "Language": "Español (Venezuela)",
+        "code": "es-VE",
+        "Language (English name)": "Spanish (Venezuela)"
+    },
+    {
+        "Language": "Euskara (Espainia)",
+        "code": "eu-ES",
+        "Language (English name)": "Basque (Spain)"
+    },
+    {
+        "Language": "Filipino (Pilipinas)",
+        "code": "fil-PH",
+        "Language (English name)": "Filipino (Philippines)"
+    },
+    {
+        "Language": "Français (Canada)",
+        "code": "fr-CA",
+        "Language (English name)": "French (Canada)"
+    },
+    {
+        "Language": "Français (France)",
+        "code": "fr-FR",
+        "Language (English name)": "French (France)"
+    },
+    {
+        "Language": "Galego (España)",
+        "code": "gl-ES",
+        "Language (English name)": "Galician (Spain)"
+    },
+    {
+        "Language": "ქართული (საქართველო)",
+        "code": "ka-GE",
+        "Language (English name)": "Georgian (Georgia)"
+    },
+    {
+        "Language": "ગુજરાતી (ભારત)",
+        "code": "gu-IN",
+        "Language (English name)": "Gujarati (India)"
+    },
+    {
+        "Language": "Hrvatski (Hrvatska)",
+        "code": "hr-HR",
+        "Language (English name)": "Croatian (Croatia)"
+    },
+    {
+        "Language": "IsiZulu (Ningizimu Afrika)",
+        "code": "zu-ZA",
+        "Language (English name)": "Zulu (South Africa)"
+    },
+    {
+        "Language": "Íslenska (Ísland)",
+        "code": "is-IS",
+        "Language (English name)": "Icelandic (Iceland)"
+    },
+    {
+        "Language": "Italiano (Italia)",
+        "code": "it-IT",
+        "Language (English name)": "Italian (Italy)"
+    },
+    {
+        "Language": "Jawa (Indonesia)",
+        "code": "jv-ID",
+        "Language (English name)": "Javanese (Indonesia)"
+    },
+    {
+        "Language": "ಕನ್ನಡ (ಭಾರತ)",
+        "code": "kn-IN",
+        "Language (English name)": "Kannada (India)"
+    },
+    {
+        "Language": "ភាសាខ្មែរ (កម្ពុជា)",
+        "code": "km-KH",
+        "Language (English name)": "Khmer (Cambodia)"
+    },
+    {
+        "Language": "ລາວ (ລາວ)",
+        "code": "lo-LA",
+        "Language (English name)": "Lao (Laos)"
+    },
+    {
+        "Language": "Latviešu (latviešu)",
+        "code": "lv-LV",
+        "Language (English name)": "Latvian (Latvia)"
+    },
+    {
+        "Language": "Lietuvių (Lietuva)",
+        "code": "lt-LT",
+        "Language (English name)": "Lithuanian (Lithuania)"
+    },
+    {
+        "Language": "Magyar (Magyarország)",
+        "code": "hu-HU",
+        "Language (English name)": "Hungarian (Hungary)"
+    },
+    {
+        "Language": "മലയാളം (ഇന്ത്യ)",
+        "code": "ml-IN",
+        "Language (English name)": "Malayalam (India)"
+    },
+    {
+        "Language": "मराठी (भारत)",
+        "code": "mr-IN",
+        "Language (English name)": "Marathi (India)"
+    },
+    {
+        "Language": "Nederlands (Nederland)",
+        "code": "nl-NL",
+        "Language (English name)": "Dutch (Netherlands)"
+    },
+    {
+        "Language": "नेपाली (नेपाल)",
+        "code": "ne-NP",
+        "Language (English name)": "Nepali (Nepal)"
+    },
+    {
+        "Language": "Norsk bokmål (Norge)",
+        "code": "nb-NO",
+        "Language (English name)": "Norwegian Bokmål (Norway)"
+    },
+    {
+        "Language": "Polski (Polska)",
+        "code": "pl-PL",
+        "Language (English name)": "Polish (Poland)"
+    },
+    {
+        "Language": "Português (Brasil)",
+        "code": "pt-BR",
+        "Language (English name)": "Portuguese (Brazil)"
+    },
+    {
+        "Language": "Português (Portugal)",
+        "code": "pt-PT",
+        "Language (English name)": "Portuguese (Portugal)"
+    },
+    {
+        "Language": "Română (România)",
+        "code": "ro-RO",
+        "Language (English name)": "Romanian (Romania)"
+    },
+    {
+        "Language": "සිංහල (ශ්රී ලංකාව)",
+        "code": "si-LK",
+        "Language (English name)": "Sinhala (Srilanka)"
+    },
+    {
+        "Language": "Slovenčina (Slovensko)",
+        "code": "sk-SK",
+        "Language (English name)": "Slovak (Slovakia)"
+    },
+    {
+        "Language": "Slovenščina (Slovenija)",
+        "code": "sl-SI",
+        "Language (English name)": "Slovenian (Slovenia)"
+    },
+    {
+        "Language": "Urang (Indonesia)",
+        "code": "su-ID",
+        "Language (English name)": "Sundanese (Indonesia)"
+    },
+    {
+        "Language": "Swahili (Tanzania)",
+        "code": "sw-TZ",
+        "Language (English name)": "Swahili (Tanzania)"
+    },
+    {
+        "Language": "Swahili (Kenya)",
+        "code": "sw-KE",
+        "Language (English name)": "Swahili (Kenya)"
+    },
+    {
+        "Language": "Suomi (Suomi)",
+        "code": "fi-FI",
+        "Language (English name)": "Finnish (Finland)"
+    },
+    {
+        "Language": "Svenska (Sverige)",
+        "code": "sv-SE",
+        "Language (English name)": "Swedish (Sweden)"
+    },
+    {
+        "Language": "தமிழ் (இந்தியா)",
+        "code": "ta-IN",
+        "Language (English name)": "Tamil (India)"
+    },
+    {
+        "Language": "தமிழ் (சிங்கப்பூர்)",
+        "code": "ta-SG",
+        "Language (English name)": "Tamil (Singapore)"
+    },
+    {
+        "Language": "தமிழ் (இலங்கை)",
+        "code": "ta-LK",
+        "Language (English name)": "Tamil (Sri Lanka)"
+    },
+    {
+        "Language": "தமிழ் (மலேசியா)",
+        "code": "ta-MY",
+        "Language (English name)": "Tamil (Malaysia)"
+    },
+    {
+        "Language": "తెలుగు (భారతదేశం)",
+        "code": "te-IN",
+        "Language (English name)": "Telugu (India)"
+    },
+    {
+        "Language": "Tiếng Việt (Việt Nam)",
+        "code": "vi-VN",
+        "Language (English name)": "Vietnamese (Vietnam)"
+    },
+    {
+        "Language": "Türkçe (Türkiye)",
+        "code": "tr-TR",
+        "Language (English name)": "Turkish (Turkey)"
+    },
+    {
+        "Language": "اردو (پاکستان)",
+        "code": "ur-PK",
+        "Language (English name)": "Urdu (Pakistan)"
+    },
+    {
+        "Language": "اردو (بھارت)",
+        "code": "ur-IN",
+        "Language (English name)": "Urdu (India)"
+    },
+    {
+        "Language": "Ελληνικά (Ελλάδα)",
+        "code": "el-GR",
+        "Language (English name)": "Greek (Greece)"
+    },
+    {
+        "Language": "Български (България)",
+        "code": "bg-BG",
+        "Language (English name)": "Bulgarian (Bulgaria)"
+    },
+    {
+        "Language": "Русский (Россия)",
+        "code": "ru-RU",
+        "Language (English name)": "Russian (Russia)"
+    },
+    {
+        "Language": "Српски (Србија)",
+        "code": "sr-RS",
+        "Language (English name)": "Serbian (Serbia)"
+    },
+    {
+        "Language": "Українська (Україна)",
+        "code": "uk-UA",
+        "Language (English name)": "Ukrainian (Ukraine)"
+    },
+    {
+        "Language": "עברית (ישראל)",
+        "code": "he-IL",
+        "Language (English name)": "Hebrew (Israel)"
+    },
+    {
+        "Language": "العربية (إسرائيل)",
+        "code": "ar-IL",
+        "Language (English name)": "Arabic (Israel)"
+    },
+    {
+        "Language": "العربية (الأردن)",
+        "code": "ar-JO",
+        "Language (English name)": "Arabic (Jordan)"
+    },
+    {
+        "Language": "العربية (الإمارات)",
+        "code": "ar-AE",
+        "Language (English name)": "Arabic (United Arab Emirates)"
+    },
+    {
+        "Language": "العربية (البحرين)",
+        "code": "ar-BH",
+        "Language (English name)": "Arabic (Bahrain)"
+    },
+    {
+        "Language": "العربية (الجزائر)",
+        "code": "ar-DZ",
+        "Language (English name)": "Arabic (Algeria)"
+    },
+    {
+        "Language": "العربية (السعودية)",
+        "code": "ar-SA",
+        "Language (English name)": "Arabic (Saudi Arabia)"
+    },
+    {
+        "Language": "العربية (العراق)",
+        "code": "ar-IQ",
+        "Language (English name)": "Arabic (Iraq)"
+    },
+    {
+        "Language": "العربية (الكويت)",
+        "code": "ar-KW",
+        "Language (English name)": "Arabic (Kuwait)"
+    },
+    {
+        "Language": "العربية (المغرب)",
+        "code": "ar-MA",
+        "Language (English name)": "Arabic (Morocco)"
+    },
+    {
+        "Language": "العربية (تونس)",
+        "code": "ar-TN",
+        "Language (English name)": "Arabic (Tunisia)"
+    },
+    {
+        "Language": "العربية (عُمان)",
+        "code": "ar-OM",
+        "Language (English name)": "Arabic (Oman)"
+    },
+    {
+        "Language": "العربية (فلسطين)",
+        "code": "ar-PS",
+        "Language (English name)": "Arabic (State of Palestine)"
+    },
+    {
+        "Language": "العربية (قطر)",
+        "code": "ar-QA",
+        "Language (English name)": "Arabic (Qatar)"
+    },
+    {
+        "Language": "العربية (لبنان)",
+        "code": "ar-LB",
+        "Language (English name)": "Arabic (Lebanon)"
+    },
+    {
+        "Language": "العربية (مصر)",
+        "code": "ar-EG",
+        "Language (English name)": "Arabic (Egypt)"
+    },
+    {
+        "Language": "فارسی (ایران)",
+        "code": "fa-IR",
+        "Language (English name)": "Persian (Iran)"
+    },
+    {
+        "Language": "हिन्दी (भारत)",
+        "code": "hi-IN",
+        "Language (English name)": "Hindi (India)"
+    },
+    {
+        "Language": "ไทย (ประเทศไทย)",
+        "code": "th-TH",
+        "Language (English name)": "Thai (Thailand)"
+    },
+    {
+        "Language": "한국어 (대한민국)",
+        "code": "ko-KR",
+        "Language (English name)": "Korean (South Korea)"
+    },
+    {
+        "Language": "國語 (台灣)",
+        "code": "cmn-Hant-TW",
+        "Language (English name)": "Chinese, Mandarin (Traditional, Taiwan)"
+    },
+    {
+        "Language": "廣東話 (香港)",
+        "code": "yue-Hant-HK",
+        "Language (English name)": "Chinese, Cantonese (Traditional, Hong Kong)"
+    },
+    {
+        "Language": "日本語（日本）",
+        "code": "ja-JP",
+        "Language (English name)": "Japanese (Japan)"
+    },
+    {
+        "Language": "普通話 (香港)",
+        "code": "cmn-Hans-HK",
+        "Language (English name)": "Chinese, Mandarin (Simplified, Hong Kong)"
+    },
+    {
+        "Language": "普通话 (中国大陆)",
+        "code": "cmn-Hans-CN",
+        "Language (English name)": "Chinese, Mandarin (Simplified, China)"
+    }
+]
