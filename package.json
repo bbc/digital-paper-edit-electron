@@ -26,6 +26,11 @@
     "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
   },
   "build": {
+    "publish": {
+      "provider": "github",
+      "releaseType": "prerelease",
+      "vPrefixedTagName": false
+    },
     "appId": "org.autoEdit2.autoEdit2-electron",
     "asar": false,
     "directories": {
