@@ -7,7 +7,7 @@ sudo: required
 
 before_install:
   - node --version
-  # - npm i -g npm@6.1.0 
+  # - npm i -g npm@6.1.0
   - npm --version
 
 install:
@@ -24,7 +24,7 @@ env:
     # - EP_PRE_RELEASE=false
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-    -PUBLISH_FOR_PULL_REQUEST=true
+    - PUBLISH_FOR_PULL_REQUEST=true
 
 script:
   - npm run build:mwl:publish:always;
