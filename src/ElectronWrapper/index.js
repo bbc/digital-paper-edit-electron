@@ -1,42 +1,47 @@
-
-const path = require('path');
+/* eslint-disable class-methods-use-this */
 const fs = require('fs');
-const { app } = require('electron').remote
-const dataPath = app.getPath("userData");
+const path = require('path');
+const { app } = require('electron').remote;
+const dataPath = app.getPath('userData');
 
 const db = require('./dbWrapper.js');
 const mediaDir = path.join(dataPath, 'media');
 
+const transcribe = require('./lib/transcriber');
+const convertToVideo = require('./lib/convert-to-video');
+const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
 class ElectronWrapper {
   /**
    * Projects
    */
   async getAllProjects() {
     // ipcRenderer.send('asynchronous-message', 'ping')
-    const projects = db.getAll('projects')
+    const projects = db.getAll('projects');
     // Temporary workaround.
-    let results= 0;
-    if(projects.length!==0){
+    let results = 0;
+    if (projects.length !== 0) {
       results = projects.map((project) => {
         project.id = project._id;
-  
+
         return project;
       });
+
       return results;
     }
-    
+
   }
 
   async getProject(id) {
     const project = db.get('projects', { _id: id });
-  
-    return  { status: 'ok', project:project }
+
+    return { status: 'ok', project:project };
   }
 
   async createProject(data) {
     const project = db.create('projects', data);
     project.id = project._id;
-    return { status: 'ok', project }
+
+    return { status: 'ok', project };
   }
 
   async updateProject(id, data) {
@@ -48,12 +53,14 @@ class ElectronWrapper {
     };
 
     db.update('projects', { _id: projectId }, newProject);
-    return { status: 'ok', project: newProject }
+
+    return { status: 'ok', project: newProject };
   }
 
   async deleteProject(id) {
     db.delete('projects', { _id: id });
-    return { ok: true ,status: 'ok', project: { } }
+
+    return { ok: true, status: 'ok', project: { } };
   }
 
   /**
@@ -61,21 +68,19 @@ class ElectronWrapper {
    */
   async getTranscripts(projectId) {
     let transcripts = [];
-     transcripts = db.getAll('transcripts', { projectId });
+    transcripts = db.getAll('transcripts', { projectId });
     // Temporary workaround.
     transcripts.map((transcript) => {
-          transcript.id = transcript._id;
+      transcript.id = transcript._id;
 
-          return transcript;
-        });
-    
-    return {transcripts: transcripts}
+      return transcript;
+    });
+
+    return { transcripts: transcripts };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async createTranscript(projectId, formData, data) {
-    if (!fs.existsSync(mediaDir)){
-      fs.mkdirSync(mediaDir);
-    }
 
     const newTranscriptData = {
       projectId,
@@ -87,12 +92,62 @@ class ElectronWrapper {
     const newTranscript = db.create('transcripts', newTranscriptData);
     const transcriptId = newTranscript._id;
     newTranscript.id = transcriptId;
-    return { status: 'ok', transcript: newTranscript, transcriptId: transcriptId }
+
+    // Start transcript
+    // const transcriptResult = await transcribe(data.path);
+    transcribe(data.path)
+      .then((res) => {
+        newTranscriptData.status = 'done';
+        newTranscriptData.transcript = res.transcript;
+        newTranscriptData.audioUrl = res.url;
+        // edge case if video has already been processed then don't override the url
+        if ( newTranscriptData.url ) {
+          newTranscriptData.url = res.url;
+        }
+        newTranscriptData.clipName = res.clipName;
+        console.log('res.transcript ', res.transcript );
+        db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
+      })
+      .catch((err) => {
+        // TODO: audioUrl is not saved, and so cannot be deleted when deleting transcript
+        console.error('transcription error', err);
+        newTranscriptData.status = 'error';
+        newTranscriptData.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
+        db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
+      });
+
+    // TODO: UUIDs for converted media?
+    convertToVideo({
+      src: data.path,
+      outputFullPathName: path.join(mediaDir, path.parse(data.path).name + '.mp4' )
+    })
+      .then((videoPreviewPath) => {
+        console.log(videoPreviewPath);
+        newTranscriptData.videoUrl = videoPreviewPath;
+        newTranscriptData.url = videoPreviewPath;
+        db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    readMetadataForEDL({
+      file: data.path
+    }).then((metadataResponse) => {
+      newTranscriptData.metadata = metadataResponse;
+      db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
+    });
+
+    return { status: 'ok', transcript: newTranscript, transcriptId: transcriptId };
   }
 
   async getTranscript(projectId, transcriptId, queryParamsOptions) {
     const transcript = db.get('transcripts', { _id: transcriptId, projectId });
     transcript.id = transcript._id;
+    const resProject = await this.getProject(projectId);
+    transcript.projectTitle = resProject.project.title;
+    transcript.transcriptTitle = transcript.title;
+
     return transcript;
   }
 
@@ -111,14 +166,33 @@ class ElectronWrapper {
         updatedTranscriptData.transcript.paragraphs = data.paragraphs;
       }
     }
-    const updated = db.update('transcripts', { _id: transcriptId , projectId }, updatedTranscriptData);
+    const updated = db.update('transcripts', { _id: transcriptId, projectId }, updatedTranscriptData);
     updatedTranscriptData.id = transcriptId;
+
     return { ok: true, transcript: updatedTranscriptData };
   }
 
   async deleteTranscript(projectId, transcriptId) {
+    // Deleting associated media
+    const transcript = db.get('transcripts', { _id: transcriptId, projectId });
+    if ( transcript.videoUrl) {
+      fs.unlink( transcript.videoUrl, function(err) {
+        if (err) return console.error('Error deleting video file for this transcript', err);
+        console.log('video file deleted successfully');
+      });
+    }
+
+    if (transcript.audioUrl) {
+      fs.unlink( transcript.audioUrl, function(err) {
+        if (err) return console.error('Error deleting audio file for this transcript', err);
+        console.log('audio file deleted successfully');
+      });
+    }
+
+    // deleting transcript
     db.delete('transcripts', { _id: transcriptId, projectId });
-    return { ok: true, status: 'ok', message: `DELETE: transcript ${ transcriptId }` }
+
+    return { ok: true, status: 'ok', message: `DELETE: transcript ${ transcriptId }` };
   }
 
   /**
@@ -137,13 +211,15 @@ class ElectronWrapper {
     } else {
       annotations = [];
     }
-    return { annotations }
+
+    return { annotations };
   }
 
   // not used
   async getAnnotation(projectId, transcriptId, annotationId) {
     const annotation = db.get('annotations', { _id: annotationId, projectId, transcriptId });//
-    return { annotation }
+
+    return { annotation };
   }
 
   async createAnnotation(projectId, transcriptId, data) {
@@ -154,7 +230,8 @@ class ElectronWrapper {
     };
     const newAnnotation = db.create('annotations', newAnnotationData);
     newAnnotation.id = newAnnotation._id;
-    return { 'ok': true, status: 'ok', annotation: newAnnotation }
+
+    return { 'ok': true, status: 'ok', annotation: newAnnotation };
   }
 
   async updateAnnotation(projectId, transcriptId, annotationId, data) {
@@ -165,12 +242,14 @@ class ElectronWrapper {
       ...data,
     };
     db.update('annotations', { _id: annotationId, projectId, transcriptId }, annotationData);
-    return { 'ok': true, status: 'ok', annotation: annotationData }
+
+    return { 'ok': true, status: 'ok', annotation: annotationData };
   }
 
   async deleteAnnotation(projectId, transcriptId, annotationId) {
     db.delete('annotations', { _id: annotationId, projectId, transcriptId });
-    return {'ok': true, status: 'ok' }
+
+    return { 'ok': true, status: 'ok' };
   }
 
   /**
@@ -185,12 +264,14 @@ class ElectronWrapper {
     }
     const defaultLabel = db.get('labels', { _id: 'default' });
     labels.unshift(defaultLabel);
-    return { ok: true, status: 'ok', labels }
+
+    return { ok: true, status: 'ok', labels };
   }
   // Get Label - not used
   async getLabel(projectId, labelId) {
     const label = db.get('labels', { _id: labelId, projectId });
-    return {  ok: true, status: 'ok', label };
+
+    return { ok: true, status: 'ok', label };
   }
 
   // Create Label
@@ -222,7 +303,8 @@ class ElectronWrapper {
     const labels = db.getAll('labels', { projectId });
     const defaultLabel = db.get('labels', { _id: 'default' });
     labels.unshift(defaultLabel);
-    return { ok: true, status: 'ok', labels }
+
+    return { ok: true, status: 'ok', labels };
   }
   // Delete Label
   async deleteLabel(projectId, labelId) {
@@ -251,7 +333,7 @@ class ElectronWrapper {
 
           return paperedit;
         });
-    } 
+    }
     // return { ok: true, status: 'ok', paperedits: data.paperedits};
     return data.paperedits;
   }
@@ -265,7 +347,8 @@ class ElectronWrapper {
 
       return next(err);
     }
-    return { ok: true, status: 'ok', programmeScript: paperEdit }
+
+    return { ok: true, status: 'ok', programmeScript: paperEdit };
   }
 
   async createPaperEdit(projectId, data) {
@@ -279,6 +362,7 @@ class ElectronWrapper {
 
     const newPaperedit = db.create('paperedits', newPapereditData);
     newPaperedit.id = newPaperedit._id;
+
     return { ok: true, status: 'ok', paperedit: newPaperedit };
   }
 
@@ -295,13 +379,15 @@ class ElectronWrapper {
     }
 
     const updated = db.update('paperedits', { _id: paperEditId, projectId }, paperEditData);
+
     return { ok:true, status: 'ok', paperedit: paperEditData };
   }
 
   async deletePaperEdit(projectId, id) {
     const paperEditId = id;
     db.delete('paperedits', { _id: paperEditId, projectId });
-    return { ok: true, status: 'ok' }
+
+    return { ok: true, status: 'ok' };
   }
 
   /**
@@ -333,7 +419,7 @@ class ElectronWrapper {
 
   // Helper function to get program script & associated transcript
   // https://flaviocopes.com/javascript-async-await-array-map/
-  async get_ProgrammeScriptAndTranscripts(projectId, papereditId) {  // // get transcripts list, this contain id, title, description only
+  async get_ProgrammeScriptAndTranscripts(projectId, papereditId) { // // get transcripts list, this contain id, title, description only
     const transcriptsResult = await this.getTranscripts(projectId);
     // use that list of ids to loop through and get json payload for each individual transcript
     // as separate request
