@@ -9,7 +9,7 @@
     "start:dev": "cross-env NODE_ENV=development electron .",
     "start:prod": "cross-env NODE_ENV=production electron .",
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
-    "build:mwl:publish:always": "cross-env NODE_ENV=production  electron-builder -mwl --publish always",
+    "build:mwl:publish:always": "electron-builder -mwl --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
