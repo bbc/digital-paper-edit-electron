@@ -1,7 +1,7 @@
 {
   "name": "digital-paper-edit-electron",
   "version": "1.0.0",
-  "description": "",
+  "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
