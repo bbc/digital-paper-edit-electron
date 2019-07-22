@@ -1,0 +1,8 @@
+{
+	"eslint.workingDirectories": [
+		{ 
+			"directory": "digital-paper-edit-electron", 
+			"changeProcessCWD": true
+		}
+	]
+}
