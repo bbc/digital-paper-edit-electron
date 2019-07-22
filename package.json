@@ -73,7 +73,9 @@
     "cross-env": "^5.2.0",
     "electron": "^5.0.6",
     "electron-builder": "^20.38.5",
-    "npm": "^6.10.1"
+    "jquery": "^3.4.1",
+    "npm": "^6.10.1",
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "@bbc/digital-paper-edit-client": "^1.0.2",
