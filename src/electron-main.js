@@ -151,7 +151,18 @@ function createAutoUpdateNotificationWindow() {
   autoUpdateNotificationWindow.on('closed', () => {
     autoUpdateNotificationWindow = null;
   });
-  autoUpdateNotificationWindow.loadURL(`file://${ __dirname }/version.html#v${ app.getVersion() }`);
+  // path.join(app.getAppPath(), `/version.html#v${ app.getVersion()`),
+  // autoUpdateNotificationWindow.loadURL(
+  //   `file://${ __dirname }/version.html#v${ app.getVersion() }`
+  // );
+  autoUpdateNotificationWindow.loadURL(
+    url.format({
+      pathname: path.join(app.getAppPath(), 'src', `version.html#v${ app.getVersion() }`),
+      protocol: 'file:',
+      slashes: true
+    })
+  );
+  // autoUpdateNotificationWindow.loadURL(`file://${ __dirname }/version.html#v${ app.getVersion() }`);
 
   return autoUpdateNotificationWindow;
 }
