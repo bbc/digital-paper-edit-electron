@@ -48,29 +48,24 @@ function createMainWindow() {
     }
   });
 
-  console.log(__dirname);
-  if (process.env.NODE_ENV === "development") {
-    // and load the index.html of the app.
-    mainWindow.loadURL("http://localhost:3000");
-    // Open the DevTools.
-    mainWindow.webContents.once('dom-ready', () => {
-       mainWindow.webContents.openDevTools();
-    })
-   
-  }
-  // Once we package this in electron we no longer 
-  // have access to process.env.NODE_ENV to set it to production
-  // so we need to recur to putting the production mode
-  // into the else for now. 
-  else{
+
     mainWindow.loadURL(
       url.format({
         pathname: path.join(app.getAppPath(), "build/index.html"),
+        // TODO: need to update client to `ui-tweak` branch first, and republish npm before swapping this line for the one above 
+        // pathname: path.join(app.getAppPath(), 'node_modules/@bbc/digital-paper-edit-client/index.html'),
         protocol: "file:",
         slashes: true
       })
     );
-  }
+  
+
+    if (process.env.NODE_ENV === "development") {
+    // Open the DevTools.
+      mainWindow.webContents.once('dom-ready', () => {
+        mainWindow.webContents.openDevTools();
+      })
+    }
 
   // https://github.com/electron/electron/issues/1095
   mainWindow.dataPath = app.getPath("userData");
