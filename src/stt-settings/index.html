@@ -21,12 +21,116 @@
     import ReactDOM from 'react-dom';
     import Container from 'react-bootstrap/Container';
     import Breadcrumb from 'react-bootstrap/Breadcrumb';
-    import Alert from 'react-bootstrap/Breadcrumb';
     import Nav from 'react-bootstrap/Nav';
     import Tabs from 'react-bootstrap/Tabs';
     import Tab from 'react-bootstrap/Tab';
     import Button from 'react-bootstrap/Button';
     import Form from 'react-bootstrap/Form';
+
+    import { getDefaultStt, setDefaultStt } from './default-stt.js';
+    import speechmaticsLanguages from './language-options/speechmatics.json'
+
+    class SelectDefaultStt extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          defaultStt: '',
+          defaultLanguage: 'en-GB'
+        }
+      }
+
+      componentDidMount(){
+        const { provider, language } = getDefaultStt();
+        console.log('provider, language',provider, language)
+        this.setState({
+          defaultStt: provider,
+          defaultLanguage: language
+        })
+      }
+      handleChangeDefaultStt = (e)=>{
+        console.log(e, e.target.value)
+        this.setState({
+          defaultStt: e.target.value,
+          saved: false
+        })
+      }
+
+      handleChangeDefaultLanguage = (e) =>{
+        this.setState({
+          defaultLanguage: e.target.value,
+          saved: false
+        })
+
+       
+      }
+
+      handleSave = ()=>{
+        setDefaultStt({ 
+          language: this.state.defaultLanguage,
+          provider: this.state.defaultStt
+        })
+        this.setState({
+          saved: true
+        })
+      }
+
+      render() {
+        let languagesOptions = [<option value='' key='default' disabled></option>]
+        if(this.state.defaultStt ==='AssemblyAI'){
+          languagesOptions = [<option value='en' key='en' disabled>English</option>]
+        }
+        if(this.state.defaultStt === 'Speechmatics'){
+          languagesOptions = speechmaticsLanguages.map((language, index)=>{
+          return (<option key={language.code} value={language.code}>{language.language}</option>);
+        })
+        }
+       
+        return (
+          <div>
+            {this.state.saved?  <p className={'text-success'}>Saved {this.state.defaultStt} and {this.state.defaultLanguage} as defaults!</p>:null}
+            <br/>
+            <h3>Default STT</h3>
+            <br/>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Default Speech To Text engine</Form.Label>
+            <Form.Control 
+              as="select" 
+              value={this.state.defaultStt}
+              onChange={this.handleChangeDefaultStt}
+              >
+              <option value='AssemblyAI'>AssemblyAI</option>
+              <option value='Speechmatics'>Speechmatics</option>
+              <option value='Google' disabled>Google STT</option>
+              <option value='IBM' disabled>IBM STT</option>
+              <option value='Amazon' disabled>Amazon Transcribe</option>
+              <option value='BBC'>BBC</option>
+              <option value='' disabled></option>
+            </Form.Control>
+            <Form.Text className="text-muted">
+             Choose the default STT you would like to use for your transcriptions
+            </Form.Text>
+          </Form.Group>
+
+          {this.state.defaultStt !== 'BBC' && this.state.defaultStt !== 'AssemblyAI'? <Form.Group  controlId="exampleForm.ControlSelect1">
+            <Form.Label>Default Speech To Text language</Form.Label>
+            <Form.Control 
+              as="select" 
+              value={this.state.defaultLanguage}
+              onChange={this.handleChangeDefaultLanguage}
+              >
+              {languagesOptions}
+            </Form.Control>
+            <Form.Text className="text-muted">
+             Choose the default STT language you would like to use for your transcriptions
+            </Form.Text>
+          </Form.Group> :  ( <React.Fragment><Form.Label>Default Speech To Text language</Form.Label>
+          <Form.Text className="text-muted">Only English available as default </Form.Text> </React.Fragment>)}
+            <br/>
+          <Button onClick={this.handleSave}  variant="outline-primary" block>Save default configuration</Button>
+          </div>
+        )
+      }
+    }
 
     class SettingsForm extends React.Component {
       constructor(props) {
@@ -73,7 +177,7 @@
           render() {
             console.log('SettingsForm-this.state.sttUserName', this.state.sttUserName)
               return (<div>
-                  <h3> {this.props.provider} service credentials</h3>
+                  <h4> {this.props.provider} service credentials</h4>
                   <Form
                   noValidate
                   validated={ this.state.validated }
@@ -157,7 +261,7 @@
           }
       }
 
-      const {getCredentials, setCredentials} = require('./credentials.js');
+      import {getCredentials, setCredentials} from './credentials.js';
       class Settings extends React.Component {
         constructor(props) {
         super(props);
@@ -208,80 +312,91 @@
                     <Breadcrumb.Item active>Settings</Breadcrumb.Item>
                   </Breadcrumb>
 
-                  {this.state.saved?  <p className={'text-success'}>Saved {this.state.currentSavedProvider} credentials!</p>:null}
+                  
+                  <Tabs  defaultActiveKey={'defaultStt'}>
+                    <Tab eventKey="defaultStt" title="Default STT">
+                      <SelectDefaultStt />
+                    </Tab>
+                    <Tab eventKey="settings" title="Settings">
+                      {this.state.saved?  <p className={'text-success'}>Saved {this.state.currentSavedProvider} credentials!</p>:null}
 
-                  <Tabs defaultActiveKey="speechmatics" id="uncontrolled-tab-example">
-                  <Tab eventKey="ibm" title="IBM" disabled>
-                    <SettingsForm 
-                      sttUserName={false}
-                      sttAPIKey={'tbc2'}
-                      sttAPIUrl={'tbc3'}
-                      provider={'IBM'}
-                      handleSave={this.handleSave}
-                      />
-                  </Tab>
+                      <br/>
+                      <h3>STT Settings</h3>
+                      <br/>
+                      <Tabs defaultActiveKey="assemblyai">
+                     {/* <Tab eventKey="ibm" title="IBM" disabled>
+                        <SettingsForm 
+                          sttUserName={false}
+                          sttAPIKey={'tbc2'}
+                          sttAPIUrl={'tbc3'}
+                          provider={'IBM'}
+                          handleSave={this.handleSave}
+                          />
+                     </Tab>*/}
+                     {this.state.assemblyAISttAPIKey!== false? 
+                      <Tab eventKey="assemblyai" title="AssemblyAI">
+                        <SettingsForm 
+                          sttUserName={false}
+                          sttAPIKey={this.state.assemblyAISttAPIKey}
+                          sttAPIUrl={false}
+                          provider={'AssemblyAI'}  
+                          handleSave={this.handleSave}
+                          />
+                      </Tab>: null}
 
-                  {this.state.speechmaticsSTTUsername !== false 
-                  && this.state.speechmaticsApiKey !== false ?
-                  <Tab eventKey="speechmatics" title="Speechmatics">
-                    <SettingsForm 
-                      sttUserName={this.state.speechmaticsSTTUsername}
-                      sttAPIKey={this.state.speechmaticsApiKey}
-                      sttAPIUrl={false}
-                      provider={'Speechmatics'} 
-                      handleSave={this.handleSave}
-                      />
-                  </Tab>:null}
+                      {this.state.speechmaticsSTTUsername !== false 
+                      && this.state.speechmaticsApiKey !== false ?
+                      <Tab eventKey="speechmatics" title="Speechmatics">
+                        <SettingsForm 
+                          sttUserName={this.state.speechmaticsSTTUsername}
+                          sttAPIKey={this.state.speechmaticsApiKey}
+                          sttAPIUrl={false}
+                          provider={'Speechmatics'} 
+                          handleSave={this.handleSave}
+                          />
+                      </Tab>:null}
+                     {/* <Tab eventKey="rev" title="Rev" disabled>
+                        <SettingsForm 
+                          sttUserName={'tbc1'}
+                          sttAPIKey={'tbc2'}
+                          sttAPIUrl={'tbc3'}
+                          provider={'Rev'}  
+                          handleSave={this.handleSave}
+                          />
+                      </Tab> 
+                      <Tab eventKey="amazon" title="Amazon" disabled>
+                        <SettingsForm 
+                          sttUserName={'tbc1'}
+                          sttAPIKey={'tbc2'}
+                          sttAPIUrl={'tbc3'}
+                          provider={'Amazon Transcribe'}  
+                          handleSave={this.handleSave}
+                          />
+                      </Tab>
+                      <Tab eventKey="google" title="Google" disabled>
+                        <SettingsForm 
+                          sttUserName={'tbc1'}
+                          sttAPIKey={'tbc2'}
+                          sttAPIUrl={'tbc3'}
+                          provider={'Google Cloud STT'}  
+                          handleSave={this.handleSave}
+                          />
+                      </Tab>*/}
+                      {this.state.bbcSttUserName!== false? 
+                      <Tab eventKey="bbc" title="BBC">
+                        <SettingsForm  
+                          sttUserName={this.state.bbcSttUserName}
+                          sttAPIKey={false}
+                          sttAPIUrl={false}
+                          provider={'BBC'} 
+                          handleSave={this.handleSave}
+                          customInstructions={<div><p>This service only works for BBC employee while on the BBC network. </p><p>In order to use this service add your BBC work email address here.</p></div>}
+                        />
+                      </Tab>
+                      : null}
+                    </Tabs>
 
-                  {this.state.assemblyAISttAPIKey!== false? 
-                  <Tab eventKey="assemblyai" title="AssemblyAI">
-                    <SettingsForm 
-                      sttUserName={false}
-                      sttAPIKey={this.state.assemblyAISttAPIKey}
-                      sttAPIUrl={false}
-                      provider={'AssemblyAI'}  
-                      handleSave={this.handleSave}
-                      />
-                  </Tab>: null}
-                  <Tab eventKey="rev" title="Rev" disabled>
-                    <SettingsForm 
-                      sttUserName={'tbc1'}
-                      sttAPIKey={'tbc2'}
-                      sttAPIUrl={'tbc3'}
-                      provider={'Rev'}  
-                      handleSave={this.handleSave}
-                      />
                   </Tab>
-                  <Tab eventKey="amazon" title="Amazon" disabled>
-                    <SettingsForm 
-                      sttUserName={'tbc1'}
-                      sttAPIKey={'tbc2'}
-                      sttAPIUrl={'tbc3'}
-                      provider={'Amazon Transcribe'}  
-                      handleSave={this.handleSave}
-                      />
-                  </Tab>
-                  <Tab eventKey="google" title="Google" disabled>
-                    <SettingsForm 
-                      sttUserName={'tbc1'}
-                      sttAPIKey={'tbc2'}
-                      sttAPIUrl={'tbc3'}
-                      provider={'Google Cloud STT'}  
-                      handleSave={this.handleSave}
-                      />
-                  </Tab>
-                  {this.state.bbcSttUserName!== false? 
-                  <Tab eventKey="bbc" title="BBC">
-                    <SettingsForm  
-                      sttUserName={this.state.bbcSttUserName}
-                      sttAPIKey={false}
-                      sttAPIUrl={false}
-                      provider={'BBC'} 
-                      handleSave={this.handleSave}
-                      customInstructions={<div><p>This service only works for BBC employee while on the BBC network. </p><p>In order to use this service add your BBC work email address here.</p></div>}
-                    />
-                  </Tab>
-                  : null}
                 </Tabs>
               </Container> );
           }
