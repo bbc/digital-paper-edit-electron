@@ -298,8 +298,8 @@ class ElectronWrapper {
     return ({ ok: true, status: 'ok', labels });
   }
   // Update Label
-  async updateLabel(projectId, labelId, data) {
-    const updated = db.update('labels', { _id: labelId, projectId }, labelData);
+  async updateLabel(projectId, labelId, labelData) {
+    const updated = db.update('labels', { _id: labelId }, labelData);
     const labels = db.getAll('labels', { projectId });
     const defaultLabel = db.get('labels', { _id: 'default' });
     labels.unshift(defaultLabel);
@@ -308,7 +308,7 @@ class ElectronWrapper {
   }
   // Delete Label
   async deleteLabel(projectId, labelId) {
-    db.delete('labels', { _id: labelId, projectId });
+    db.delete('labels', { _id: labelId });
     const labels = db.getAll('labels', { projectId });
     // Adds default label
     const defaultLabel = db.get('labels', { _id: 'default' });

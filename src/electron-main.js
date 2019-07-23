@@ -146,7 +146,14 @@ function sendStatusToWindow(text) {
 }
 
 function createAutoUpdateNotificationWindow() {
-  autoUpdateNotificationWindow = new BrowserWindow();
+  autoUpdateNotificationWindow = new BrowserWindow({
+    width: 300,
+    height: 200,
+    x: 0,
+    y: 0,
+    minWidth: 300,
+    minHeight: 200,
+  });
   // autoUpdateNotificationWindow.webContents.openDevTools();
   autoUpdateNotificationWindow.on('closed', () => {
     autoUpdateNotificationWindow = null;
@@ -157,7 +164,8 @@ function createAutoUpdateNotificationWindow() {
   // );
   autoUpdateNotificationWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'src', `version.html#v${ app.getVersion() }`),
+      // pathname: path.join(app.getAppPath(), 'src', `version.html#v${ app.getVersion() }`),
+      pathname: path.join(app.getAppPath(), 'src', 'version.html'),
       protocol: 'file:',
       slashes: true
     })

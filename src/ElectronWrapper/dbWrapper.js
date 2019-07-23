@@ -1,14 +1,36 @@
+const path = require('path');
+const fs = require('fs');
 const diskdb = require('diskdb');
-const { app } = require("electron").remote;
+const { app } = require('electron').remote;
+const dataPath = app.getPath('userData');
+const appPath = app.getAppPath();
+
+const models = [ 'projects', 'transcripts', 'annotations', 'labels', 'paperedits' ];
 // const currentWindow = electron.remote.getCurrentWindow();
 /* eslint-disable class-methods-use-this */
 class DBWrapper {
   constructor() {
     // TODO: move to user data folder, so that is in the system but not inside the app
     // easier to persist data between upgrades of the app
-    const pathToDiskDb = `${ app.getAppPath() }/src/ElectronWrapper/db`;
+    let pathToDiskDb;
+    if (process.env.NODE_ENV === 'development') {
+      pathToDiskDb = path.join(`${ app.getAppPath() }`, 'src', 'ElectronWrapper', 'db');
+    } else {
+    // if production - check if folder exists
+      pathToDiskDb = path.join(dataPath, 'db');
+      const isDbFolderPresent = fs.existsSync(pathToDiskDb);
+      if (!isDbFolderPresent) {
+        fs.mkdirSync(pathToDiskDb);
+        // seed db with demo projects
+        models.forEach((model) => {
+          fs.copyFileSync(path.join(appPath, 'src', 'ElectronWrapper', 'seed-db', `${ model }.json`), path.join(dataPath, 'db', `${ model }.json`));
+        });
+
+      }
+    }
+
     // const pathToDiskDb =  `${app.getPath("userData")}/db`;
-    this.diskdb = diskdb.connect(pathToDiskDb, [ 'projects', 'transcripts', 'annotations', 'labels', 'paperedits' ]);
+    this.diskdb = diskdb.connect(pathToDiskDb, models);
   }
 
   getAll(model, id) {
