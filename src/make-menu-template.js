@@ -87,13 +87,6 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
             createNewSettingsWindow();
           },
           accelerator: 'CmdOrCtrl+S+T'
-        },
-        {
-          label: 'check for updates(github releases)',
-          click: checkForUpdates
-        //   click() {
-        //     checkForUpdates();
-        //   }
         }
       ]
     },

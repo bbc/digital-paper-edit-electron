@@ -1,17 +1,6 @@
 const { app, BrowserWindow, Menu, shell, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
-const { autoUpdater } = require('electron-updater');
-
-const updater = {};
-autoUpdater.autoDownload = false;
-autoUpdater.updateConfigPath = path.join(app.getAppPath(), 'src', 'dev-app-update.yml');
-
-autoUpdater.setFeedURL({
-  provider: 'github',
-  owner: 'bbc',
-  repo: 'digital-paper-edit-electron'
-});
 
 const makeMenuTemplate = require('./make-menu-template.js');
 
@@ -83,8 +72,7 @@ function createMainWindow() {
   const template = makeMenuTemplate({
     app,
     createNewSettingsWindow,
-    createMainWindow,
-    checkForUpdates
+    createMainWindow
   });
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
@@ -142,49 +130,3 @@ app.on('open-url', (event, url) => {
   event.preventDefault();
   shell.openExternal(url);
 });
-
-autoUpdater.on('error', (error) => {
-  dialog.showErrorBox('Error: ', error == null ? 'unknown' : (error.stack || error).toString());
-});
-
-autoUpdater.on('update-available', () => {
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Found Updates',
-    message: 'Found updates, do you want update now?',
-    buttons: [ 'Sure', 'No' ]
-  }, (buttonIndex) => {
-    if (buttonIndex === 0) {
-      autoUpdater.downloadUpdate();
-    }
-    else {
-      // updater.enabled = true;
-      // updater = null;
-    }
-  });
-});
-
-autoUpdater.on('update-not-available', () => {
-  dialog.showMessageBox({
-    title: 'No Updates',
-    message: 'Current version is up-to-date.'
-  });
-  // updater.enabled = true;
-  // updater = null;
-});
-
-autoUpdater.on('update-downloaded', () => {
-  dialog.showMessageBox({
-    title: 'Install Updates',
-    message: 'Updates downloaded, application will be quit for update...'
-  }, () => {
-    setImmediate(() => autoUpdater.quitAndInstall());
-  });
-});
-
-// export this to MenuItem click callback
-function checkForUpdates (menuItem, focusedWindow, event) {
-  // updater = menuItem;
-  // updater.enabled = false;
-  autoUpdater.checkForUpdates();
-}
