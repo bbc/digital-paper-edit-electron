@@ -1,15 +1,40 @@
-# Travis CI configuration to run automated test when pushing to github
+# Travis config to publish electron build for Mac, Windows and PC onto github releases 
+os: osx
+osx_image: xcode9.4
 language: node_js
-node_js:
- - "10"
+node_js: "8"
+sudo: required
+
+before_install:
+  - node --version
+  # - npm i -g npm@6.1.0
+  - npm --version
 
 install:
-  - node --version
-  - npm i -g npm@5
-  - npm --version
-  # - npm install
+  - npm install
+
+cache:
+  npm: true
+  node: true
+
+env:
+  global:
+    # from https://www.electron.build/configuration/publish#githuboptions
+    # - EP_DRAFT=false
+    # - EP_PRE_RELEASE=false
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+    - PUBLISH_FOR_PULL_REQUEST=true
+    - USE_HARD_LINKS=false
 
 script:
-  # TODO: some make command?
-  # - npm run test:ci
-  # TODO: could also run lit 
+  - npm run build:mwl:publish:always;
+  - ls ./dist;
+  - find . | grep mac.zip;
+  - find . | grep .AppImage;
+  - find . | grep .exe;
+
+branches:
+except:
+  - # Do not build tags that we create when we upload to GitHub Releases
+  - /^(?i:continuous)/

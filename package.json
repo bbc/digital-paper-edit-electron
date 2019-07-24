@@ -1,7 +1,7 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.5",
+  "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,6 +9,7 @@
     "start:dev": "cross-env NODE_ENV=development electron .",
     "start:prod": "cross-env NODE_ENV=production electron .",
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
+    "build:mwl:publish:always": "electron-builder -mwl --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
@@ -25,6 +26,13 @@
     "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
   },
   "build": {
+    "publish": {
+      "provider": "github",
+      "releaseType": "prerelease",
+      "vPrefixedTagName": false,
+      "owner": "bbc",
+      "repo": "digital-paper-edit-electron"
+    },
     "appId": "org.autoEdit2.autoEdit2-electron",
     "asar": false,
     "directories": {
@@ -45,7 +53,7 @@
       "node_modules/ffmpeg-static-electron/bin/${os}/${arch}/ffmpeg",
       "node_modules/ffmpeg-static-electron/index.js",
       "node_modules/ffmpeg-static-electron/package.json",
-      "node_modules/ffprobe-static-electron/bin/${os}/${arch}/ffmpeg",
+      "node_modules/ffprobe-static-electron/bin/${os}/${arch}/ffprobe",
       "node_modules/ffprobe-static-electron/index.js",
       "node_modules/ffprobe-static-electron/package.json"
     ],
@@ -72,13 +80,16 @@
     "cross-env": "^5.2.0",
     "electron": "^5.0.6",
     "electron-builder": "^20.38.5",
-    "npm": "^6.10.1"
+    "jquery": "^3.4.1",
+    "npm": "^6.10.1",
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "@bbc/digital-paper-edit-client": "^1.0.2",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "diskdb": "^0.1.17",
+    "electron-updater": "^4.1.2",
     "ffmpeg-static-electron": "^2.0.1",
     "ffprobe-static-electron": "^2.0.0",
     "fluent-ffmpeg": "^2.1.2",

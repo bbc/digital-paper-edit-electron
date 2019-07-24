@@ -4,7 +4,7 @@ const { readMetadataForEDL, readMetadata } = require('./index.js');
 const sampleVideo = '/Users/passap02/Dropbox\ \(BBC\)/BBC\ News\ Labs/Projects/digital\ paper\ edit/demo-material/PBS\ Frontline\ -\ The\ Facebook\ Dilemma\ -\ interviews/video/The Facebook Dilemma - Naomi Gleit-l-Ivr6kq6fk.mp4';
 // const sampleVideo = '/Users/passap02/Desktop/ADL-fb-short-test/Elizabeth_Linder-3-min57sec.wav';
 
-var ffprobePath = require('ffprobe-static-electron').path;
+const ffprobePath = require('ffprobe-static-electron').path;
 
 readMetadataForEDL({
   file: sampleVideo,

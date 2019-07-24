@@ -1,6 +1,6 @@
-const { app, BrowserWindow ,Menu, shell} = require('electron')
-const path = require("path");
-const url = require("url");
+const { app, BrowserWindow, Menu, shell, dialog } = require('electron');
+const path = require('path');
+const url = require('url');
 
 const makeMenuTemplate = require('./make-menu-template.js');
 
@@ -9,7 +9,7 @@ const makeMenuTemplate = require('./make-menu-template.js');
 let mainWindow;
 let settingsWindow;
 
-function createNewSettingsWindow(){
+function createNewSettingsWindow() {
   settingsWindow = new BrowserWindow({
     width: 700,
     height: 670,
@@ -26,16 +26,16 @@ function createNewSettingsWindow(){
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), "src/stt-settings/index.html"),
-      protocol: "file:",
+      pathname: path.join(app.getAppPath(), 'src', 'stt-settings', 'index.html'),
+      protocol: 'file:',
       slashes: true
     })
   );
 }
 
 function createMainWindow() {
+
   // Create the browser window.
- 
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 670,
@@ -48,30 +48,28 @@ function createMainWindow() {
     }
   });
 
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(app.getAppPath(), 'build', 'index.html'),
+      // TODO: need to update client to `ui-tweak` branch first, and republish npm before swapping this line for the one above
+      // pathname: path.join(app.getAppPath(), 'node_modules/@bbc/digital-paper-edit-client/index.html'),
+      protocol: 'file:',
+      slashes: true
+    })
+  );
 
-    mainWindow.loadURL(
-      url.format({
-        pathname: path.join(app.getAppPath(), "build/index.html"),
-        // TODO: need to update client to `ui-tweak` branch first, and republish npm before swapping this line for the one above 
-        // pathname: path.join(app.getAppPath(), 'node_modules/@bbc/digital-paper-edit-client/index.html'),
-        protocol: "file:",
-        slashes: true
-      })
-    );
-  
-
-    if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     // Open the DevTools.
-      mainWindow.webContents.once('dom-ready', () => {
-        mainWindow.webContents.openDevTools();
-      })
-    }
+    mainWindow.webContents.once('dom-ready', () => {
+      mainWindow.webContents.openDevTools();
+    });
+  }
 
   // https://github.com/electron/electron/issues/1095
-  mainWindow.dataPath = app.getPath("userData");
+  mainWindow.dataPath = app.getPath('userData');
   mainWindow.appPath = app.getAppPath();
- 
-  const template = makeMenuTemplate({ 
+
+  const template = makeMenuTemplate({
     app,
     createNewSettingsWindow,
     createMainWindow
@@ -80,7 +78,7 @@ function createMainWindow() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
   // Emitted when the window is closed.
-  mainWindow.on("closed", function(event) {
+  mainWindow.on('closed', function(event) {
     event.preventDefault();
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
@@ -94,18 +92,18 @@ function createMainWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createMainWindow);
+app.on('ready', createMainWindow);
 
 // Quit when all windows are closed.
-app.on("window-all-closed", function() {
+app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== "darwin") {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on("activate", function() {
+app.on('activate', function() {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
@@ -115,8 +113,8 @@ app.on("activate", function() {
 
 // https://electron.atom.io/docs/api/app/#event-open-file-macos
 //not working ?
-app.on("open-file", (event, path) => {
-  console.log('open-file: ',path);
+app.on('open-file', (event, path) => {
+  console.log('open-file: ', path);
   event.preventDefault();
   // shell.openExternal(url);
 });
@@ -125,8 +123,8 @@ app.on("open-file", (event, path) => {
 // app.setBadgeCount(3)
 
 //not working ?
-app.on("open-url", (event, url) => {
-  console.log('open-url: ',url);
+app.on('open-url', (event, url) => {
+  console.log('open-url: ', url);
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   event.preventDefault();

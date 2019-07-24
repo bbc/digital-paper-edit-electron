@@ -28,7 +28,10 @@
     import Form from 'react-bootstrap/Form';
 
     import { getDefaultStt, setDefaultStt } from './default-stt.js';
-    import speechmaticsLanguages from './language-options/speechmatics.json'
+    import speechmaticsLanguages from './language-options/speechmatics.json';
+    const {app} = require('electron').remote;
+    const appVersion = app.getVersion();
+
 
     class SelectDefaultStt extends React.Component {
       constructor(props) {
@@ -309,7 +312,7 @@
                   <br/>
                  
                   <Breadcrumb>
-                    <Breadcrumb.Item active>Settings</Breadcrumb.Item>
+                    <Breadcrumb.Item active>Settings - v{appVersion}</Breadcrumb.Item>
                   </Breadcrumb>
 
                   
