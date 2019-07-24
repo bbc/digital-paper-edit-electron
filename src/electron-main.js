@@ -139,10 +139,10 @@ ipcMain.on('prompt', function(eventRet, arg) {
   promptResponse = null;
   var promptWindow = new BrowserWindow({
     width: 300,
-    height: 200,
+    height: 250,
     show: false,
-    // resizable: false,
-    // movable: false,
+    resizable: true,
+    movable: true,
     alwaysOnTop: true,
     frame: false,
     webPreferences: {
@@ -150,11 +150,16 @@ ipcMain.on('prompt', function(eventRet, arg) {
     }
   });
   arg.val = arg.val || '';
-  const promptHtml = '<label for="val">' + arg.title + '</label>\
-  <input id="val" value="' + arg.val + '" autofocus />\
-  <button onclick="require(\'electron\').ipcRenderer.send(\'prompt-response\', document.getElementById(\'val\').value);window.close()">Ok</button>\
-  <button onclick="window.close()">Cancel</button>\
-  <style>body {font-family: sans-serif;} button {float:right; margin-left: 10px;} label,input {margin-bottom: 10px; width: 100%; display:block;}</style>';
+  const promptHtml = `<label for="val"> ${ arg.title }</label>
+  <textarea rows="10" cols="50" id="val" autofocus >${ arg.val }</textarea>
+  <button onclick="require('electron').ipcRenderer.send('prompt-response', document.getElementById('val').value);window.close()">Ok</button>
+  <button onclick="window.close()">Cancel</button>
+  <style>
+    body {font-family: sans-serif;} 
+    button {float:right; margin-left: 10px;} 
+    label,textarea {margin-bottom: 10px; width: 100%; display:block;}
+    textarea {font-size: 1em;}
+  </style>`;
   promptWindow.loadURL('data:text/html,' + promptHtml);
   promptWindow.show();
   promptWindow.on('closed', function() {

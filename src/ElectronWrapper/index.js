@@ -237,11 +237,12 @@ class ElectronWrapper {
   async updateAnnotation(projectId, transcriptId, annotationId, data) {
     const annotationData = {
       _id: annotationId,
+      id: annotationId,
       transcriptId,
       projectId,
       ...data,
     };
-    db.update('annotations', { _id: annotationId, projectId, transcriptId }, annotationData);
+    db.update('annotations', { _id: annotationId }, annotationData);
 
     return { 'ok': true, status: 'ok', annotation: annotationData };
   }
