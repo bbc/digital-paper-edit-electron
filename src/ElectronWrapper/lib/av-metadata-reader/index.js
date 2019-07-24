@@ -32,6 +32,8 @@ readMetadataForEDL({
 
 var path = require('path');
 var ffmpeg = require('fluent-ffmpeg');
+const ffprobePath = require('ffprobe-static-electron').path;
+ffmpeg.setFfprobePath(ffprobePath);
 
 /*
  * @function readMetadata.
@@ -41,14 +43,14 @@ var ffmpeg = require('fluent-ffmpeg');
  * @param {string} config.ffprobePath - path to ffprobe binary. If not present it will try to use system one.
  * @returns {callback} config.callback - Optional callback to return when ffprobe done reading. It returns an json object.
  */
-function readMetadata({ file, ffprobePath, }) {
+function readMetadata({ file }) {
 
-  if ( ffprobePath ) {
-    //setting ffprobe bin
-    ffmpeg.setFfprobePath(ffprobePath);
-  } else {
-    console.warn('ffprobe binary path not defined, so using system one. if available');
-  }
+  // if ( ffprobePath ) {
+  //   //setting ffprobe bin
+  //   ffmpeg.setFfprobePath(ffprobePath);
+  // } else {
+  //   console.warn('ffprobe binary path not defined, so using system one. if available');
+  // }
 
   return new Promise((resolve, reject) => {
     ffmpeg.ffprobe(file, function(err, metadata) {
@@ -68,16 +70,16 @@ function readMetadata({ file, ffprobePath, }) {
  * @param {string} config.ffprobePath - path to ffprobe binary. If not present it will try to use system one.
  * @returns {callback} config.callback - Optional callback to return when ffprobe done reading. It returns an object containing metadata info needed for EDL(Edit Decision List): filePathName,fileName,date, reelName, timecode, fps, duration,
  */
-function readMetadataForEDL({ file, ffprobePath }) {
+function readMetadataForEDL({ file }) {
 
-  var video = {};
+  const video = {};
 
-  if ( ffprobePath ) {
-    //setting ffprobe bin
-    ffmpeg.setFfprobePath( ffprobePath );
-  } else {
-    console.warn('ffprobe binary path not defined, so using system one. if available');
-  }
+  // if ( ffprobePath ) {
+  //   //setting ffprobe bin
+  //   ffmpeg.setFfprobePath( ffprobePath );
+  // } else {
+  //   console.warn('ffprobe binary path not defined, so using system one. if available');
+  // }
 
   return new Promise((resolve, reject) => {
   //running ffprobe

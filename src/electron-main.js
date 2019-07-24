@@ -1,7 +1,17 @@
-const { app, BrowserWindow, Menu, shell } = require('electron');
+const { app, BrowserWindow, Menu, shell, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
 const { autoUpdater } = require('electron-updater');
+
+const updater = {};
+autoUpdater.autoDownload = false;
+autoUpdater.updateConfigPath = path.join(app.getAppPath(), 'src', 'dev-app-update.yml');
+
+autoUpdater.setFeedURL({
+  provider: 'github',
+  owner: 'bbc',
+  repo: 'digital-paper-edit-electron'
+});
 
 const makeMenuTemplate = require('./make-menu-template.js');
 
@@ -27,7 +37,7 @@ function createNewSettingsWindow() {
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'src/stt-settings/index.html'),
+      pathname: path.join(app.getAppPath(), 'src', 'stt-settings', 'index.html'),
       protocol: 'file:',
       slashes: true
     })
@@ -35,12 +45,6 @@ function createNewSettingsWindow() {
 }
 
 function createMainWindow() {
-
-  if (process.env.NODE_ENV !== 'development') {
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-
-  createAutoUpdateNotificationWindow();
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -57,7 +61,7 @@ function createMainWindow() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'build/index.html'),
+      pathname: path.join(app.getAppPath(), 'build', 'index.html'),
       // TODO: need to update client to `ui-tweak` branch first, and republish npm before swapping this line for the one above
       // pathname: path.join(app.getAppPath(), 'node_modules/@bbc/digital-paper-edit-client/index.html'),
       protocol: 'file:',
@@ -79,7 +83,8 @@ function createMainWindow() {
   const template = makeMenuTemplate({
     app,
     createNewSettingsWindow,
-    createMainWindow
+    createMainWindow,
+    checkForUpdates
   });
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
@@ -138,64 +143,48 @@ app.on('open-url', (event, url) => {
   shell.openExternal(url);
 });
 
-// https://github.com/iffy/electron-updater-example/blob/master/main.js
-let autoUpdateNotificationWindow;
-function sendStatusToWindow(text) {
-  log.info(text);
-  autoUpdateNotificationWindow.webContents.send('message', text);
-}
+autoUpdater.on('error', (error) => {
+  dialog.showErrorBox('Error: ', error == null ? 'unknown' : (error.stack || error).toString());
+});
 
-function createAutoUpdateNotificationWindow() {
-  autoUpdateNotificationWindow = new BrowserWindow({
-    width: 300,
-    height: 200,
-    x: 0,
-    y: 0,
-    minWidth: 300,
-    minHeight: 200,
+autoUpdater.on('update-available', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Found Updates',
+    message: 'Found updates, do you want update now?',
+    buttons: [ 'Sure', 'No' ]
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate();
+    }
+    else {
+      // updater.enabled = true;
+      // updater = null;
+    }
   });
-  // autoUpdateNotificationWindow.webContents.openDevTools();
-  autoUpdateNotificationWindow.on('closed', () => {
-    autoUpdateNotificationWindow = null;
+});
+
+autoUpdater.on('update-not-available', () => {
+  dialog.showMessageBox({
+    title: 'No Updates',
+    message: 'Current version is up-to-date.'
   });
-  // path.join(app.getAppPath(), `/version.html#v${ app.getVersion()`),
-  // autoUpdateNotificationWindow.loadURL(
-  //   `file://${ __dirname }/version.html#v${ app.getVersion() }`
-  // );
-  autoUpdateNotificationWindow.loadURL(
-    url.format({
-      // pathname: path.join(app.getAppPath(), 'src', `version.html#v${ app.getVersion() }`),
-      pathname: path.join(app.getAppPath(), 'src', 'version.html'),
-      protocol: 'file:',
-      slashes: true
-    })
-  );
-  // autoUpdateNotificationWindow.loadURL(`file://${ __dirname }/version.html#v${ app.getVersion() }`);
+  // updater.enabled = true;
+  // updater = null;
+});
 
-  return autoUpdateNotificationWindow;
+autoUpdater.on('update-downloaded', () => {
+  dialog.showMessageBox({
+    title: 'Install Updates',
+    message: 'Updates downloaded, application will be quit for update...'
+  }, () => {
+    setImmediate(() => autoUpdater.quitAndInstall());
+  });
+});
+
+// export this to MenuItem click callback
+function checkForUpdates (menuItem, focusedWindow, event) {
+  // updater = menuItem;
+  // updater.enabled = false;
+  autoUpdater.checkForUpdates();
 }
-
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
-});
-autoUpdater.on('update-available', (info) => {
-  sendStatusToWindow('Update available.');
-  console.log(info);
-});
-autoUpdater.on('update-not-available', (info) => {
-  sendStatusToWindow('Update not available.');
-  console.log(info);
-});
-autoUpdater.on('error', (err) => {
-  sendStatusToWindow('Error in auto-updater. ' + err);
-});
-autoUpdater.on('download-progress', (progressObj) => {
-  let log_message = 'Download speed: ' + progressObj.bytesPerSecond;
-  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-  log_message = log_message + ' (' + progressObj.transferred + '/' + progressObj.total + ')';
-  sendStatusToWindow(log_message);
-});
-autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Update downloaded');
-  autoUpdater.quitAndInstall();
-});
