@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, shell, dialog } = require('electron');
+const { app, BrowserWindow, Menu, shell, dialog, ipcMain } = require('electron');;
 const path = require('path');
 const url = require('url');
 
@@ -18,8 +18,9 @@ function createNewSettingsWindow() {
     minWidth: 1000,
     minHeight: 670,
     titleBarStyle: 'show',
+    // preload: __dirname + '/prompt.js',
     webPreferences: {
-      webSecurity: false,
+      // webSecurity: false,
       nodeIntegration: true
     }
   });
@@ -42,9 +43,11 @@ function createMainWindow() {
     minWidth: 1000,
     minHeight: 670,
     titleBarStyle: 'show',
+    // preload: __dirname + '/prompt.js',
     webPreferences: {
-      webSecurity: false,
-      nodeIntegration: true
+      // webSecurity: false,
+      nodeIntegration: true,
+      preload: path.join(app.getAppPath(), 'src', 'prompt.js')
     }
   });
 
@@ -129,4 +132,42 @@ app.on('open-url', (event, url) => {
   // to stay active until the user quits explicitly with Cmd + Q
   event.preventDefault();
   shell.openExternal(url);
+});
+
+let promptResponse;
+ipcMain.on('prompt', function(eventRet, arg) {
+  promptResponse = null;
+  var promptWindow = new BrowserWindow({
+    width: 300,
+    height: 250,
+    show: false,
+    resizable: true,
+    movable: true,
+    alwaysOnTop: true,
+    frame: false,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  arg.val = arg.val || '';
+  const promptHtml = `<label for="val"> ${ arg.title }</label>
+  <textarea rows="10" cols="50" id="val" autofocus >${ arg.val }</textarea>
+  <button onclick="require('electron').ipcRenderer.send('prompt-response', document.getElementById('val').value);window.close()">Ok</button>
+  <button onclick="window.close()">Cancel</button>
+  <style>
+    body {font-family: sans-serif;} 
+    button {float:right; margin-left: 10px;} 
+    label,textarea {margin-bottom: 10px; width: 100%; display:block;}
+    textarea {font-size: 1em;}
+  </style>`;
+  promptWindow.loadURL('data:text/html,' + promptHtml);
+  promptWindow.show();
+  promptWindow.on('closed', function() {
+    eventRet.returnValue = promptResponse;
+    promptWindow = null;
+  });
+});
+ipcMain.on('prompt-response', function(event, arg) {
+  if (arg === '') { arg = null; }
+  promptResponse = arg;
 });
