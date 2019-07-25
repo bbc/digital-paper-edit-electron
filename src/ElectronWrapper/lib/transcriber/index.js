@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { app } = require('electron').remote;
 const convertToAudio = require('../convert-to-audio/index.js');
-const convertToDpeJson = require('./assemblyai/assemblyai-to-dpe/index.js');
+const convertAssemblyAIToDpeJson = require('./assemblyai/assemblyai-to-dpe/index.js');
 const assemblyAiStt = require('./assemblyai/index');
 const { getDefaultStt, setDefaultStt } = require('../../../stt-settings/default-stt.js');
 
@@ -26,6 +26,10 @@ const transcriber = async (inputFilePath) => {
     // TODO: should probably do this check and throw this error before converting video preview as well?
     throw new Error('Default STT Engine has not been set');
   }
+
+  if(!navigator.onLine){
+     throw new Error('You don\'t seem to be connected to the internet');
+  }
   const defaultSttEngine = provider;
 
   const response = {};
@@ -47,7 +51,7 @@ const transcriber = async (inputFilePath) => {
   switch (defaultSttEngine) {
   case 'AssemblyAI':
     const transcript = await assemblyAiStt(newAudioFile);
-    response.transcript = await convertToDpeJson(transcript);
+    response.transcript = await convertAssemblyAIToDpeJson(transcript);
     response.clipName = inputFileNameWithExtension;
 
     return response;
