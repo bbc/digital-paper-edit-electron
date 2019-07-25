@@ -47,13 +47,14 @@ const generateDpeParagraphs = (words) => {
 
   paragraphIdsListUniqueValues.forEach((paraId) => {
 
-    const firstWord = wordsList.find((word) => {
+    const wordsListForParagraph = wordsList.filter((word)=>{
       return word.paragraphId == paraId;
-    });
+    })
 
-    const lastWord = wordsList.reverse().find((word) => {
-      return word.paragraphId == paraId;
-    });
+    const firstWord = wordsListForParagraph[0]
+
+    const lastWord = wordsListForParagraph[wordsListForParagraph.length-1];
+
     paragraph.start = firstWord.start;
     paragraph.end = lastWord.end;
     paragraph.speaker = 'U_UKN';
