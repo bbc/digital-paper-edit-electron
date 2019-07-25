@@ -101,7 +101,9 @@ class ElectronWrapper {
         newTranscriptData.transcript = res.transcript;
         newTranscriptData.audioUrl = res.url;
         // edge case if video has already been processed then don't override the url
-        if ( newTranscriptData.url ) {
+        console.log('newTranscriptData.url', newTranscriptData.url);
+        if (!newTranscriptData.url) {
+          console.log('if newTranscriptData.url', newTranscriptData.url);
           newTranscriptData.url = res.url;
         }
         newTranscriptData.clipName = res.clipName;
@@ -122,7 +124,7 @@ class ElectronWrapper {
       outputFullPathName: path.join(mediaDir, path.parse(data.path).name + '.mp4' )
     })
       .then((videoPreviewPath) => {
-        console.log(videoPreviewPath);
+        console.log('videoPreviewPath', videoPreviewPath);
         newTranscriptData.videoUrl = videoPreviewPath;
         newTranscriptData.url = videoPreviewPath;
         db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
