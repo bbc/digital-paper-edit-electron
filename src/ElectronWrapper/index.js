@@ -194,7 +194,7 @@ class ElectronWrapper {
     }
 
     // deleting transcript
-    db.delete('transcripts', { _id: transcriptId, projectId });
+    db.delete('transcripts', { _id: transcriptId });
 
     return { ok: true, status: 'ok', message: `DELETE: transcript ${ transcriptId }` };
   }
@@ -252,7 +252,7 @@ class ElectronWrapper {
   }
 
   async deleteAnnotation(projectId, transcriptId, annotationId) {
-    db.delete('annotations', { _id: annotationId, projectId, transcriptId });
+    db.delete('annotations', { _id: annotationId});
 
     return { 'ok': true, status: 'ok' };
   }
@@ -390,7 +390,7 @@ class ElectronWrapper {
 
   async deletePaperEdit(projectId, id) {
     const paperEditId = id;
-    db.delete('paperedits', { _id: paperEditId, projectId });
+    db.delete('paperedits', { _id: paperEditId });
 
     return { ok: true, status: 'ok' };
   }
