@@ -26,11 +26,48 @@
     import Tab from 'react-bootstrap/Tab';
     import Button from 'react-bootstrap/Button';
     import Form from 'react-bootstrap/Form';
+    import Alert from 'react-bootstrap/Alert';
 
     import { getDefaultStt, setDefaultStt } from './default-stt.js';
     import speechmaticsLanguages from './language-options/speechmatics.json';
     const {app} = require('electron').remote;
     const appVersion = app.getVersion();
+
+    class CustomAlert extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          show: true
+        };
+      }
+
+      handleDismiss = () => this.setState({ show: false });
+
+      render() {
+        if (this.state.show) {
+          return (
+            <Alert
+              variant={ this.props.variant }
+              onClose={ this.handleDismiss }
+              dismissible
+            >
+              {this.props.heading ? (
+                <Alert.Heading>{this.props.heading}</Alert.Heading>
+              ) : (
+                ''
+              )}
+              {this.props.message}
+            </Alert>
+          );
+        } else {
+          return (
+            <React.Fragment>
+              <br />
+            </React.Fragment>
+          );
+        }
+      }
+    }
 
 
     class SelectDefaultStt extends React.Component {
@@ -90,7 +127,12 @@
        
         return (
           <div>
-            {this.state.saved?  <p className={'text-success'}>Saved {this.state.defaultStt} and {this.state.defaultLanguage} as defaults!</p>:null}
+            {this.state.saved? ( <Container>
+              <CustomAlert
+                  variant={ 'success' }
+                  heading={ 'Saved' }
+                  message={ <p>Saved <b>{this.state.defaultStt}</b> and <b>{this.state.defaultLanguage}</b> as defaults!</p> }/>
+              </Container>):null}
             <br/>
             <h3>Default STT</h3>
             <br/>
@@ -321,7 +363,13 @@
                       <SelectDefaultStt />
                     </Tab>
                     <Tab eventKey="settings" title="Settings">
-                      {this.state.saved?  <p className={'text-success'}>Saved {this.state.currentSavedProvider} credentials!</p>:null}
+                    
+                      {this.state.saved? ( <Container>
+                        <CustomAlert
+                            variant={ 'success' }
+                            heading={ 'Saved' }
+                            message={ <p>Saved <b>{this.state.currentSavedProvider}</b> credentials!</p>}/>
+                        </Container>):null}
 
                       <br/>
                       <h3>STT Settings</h3>
