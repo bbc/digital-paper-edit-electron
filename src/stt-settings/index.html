@@ -49,7 +49,7 @@
             <Alert
               variant={ this.props.variant }
               onClose={ this.handleDismiss }
-              dismissible
+              // dismissible
             >
               {this.props.heading ? (
                 <Alert.Heading>{this.props.heading}</Alert.Heading>
@@ -127,13 +127,14 @@
        
         return (
           <div>
+            <br/>
             {this.state.saved? ( <Container>
               <CustomAlert
                   variant={ 'success' }
                   heading={ 'Saved' }
                   message={ <p>Saved <b>{this.state.defaultStt}</b> and <b>{this.state.defaultLanguage}</b> as defaults!</p> }/>
               </Container>):null}
-            <br/>
+         
             <h3>Default STT</h3>
             <br/>
           <Form.Group controlId="exampleForm.ControlSelect1">
@@ -363,15 +364,16 @@
                       <SelectDefaultStt />
                     </Tab>
                     <Tab eventKey="settings" title="Settings">
+                      <br/>
+                      {this.state.saved? ( 
                     
-                      {this.state.saved? ( <Container>
                         <CustomAlert
                             variant={ 'success' }
                             heading={ 'Saved' }
                             message={ <p>Saved <b>{this.state.currentSavedProvider}</b> credentials!</p>}/>
-                        </Container>):null}
-
-                      <br/>
+                    
+                        ):null}
+                   
                       <h3>STT Settings</h3>
                       <br/>
                       <Tabs defaultActiveKey="assemblyai">
