@@ -2,26 +2,24 @@ const SendToSpeechmatics = require('./send-to-speechmatics.js');
 const { getCredentials, areCredentialsSet } = require('../../../../stt-settings/credentials.js');
 
 const speechmaticsSTT = (newFile, language = 'en') => {
-
   let speechmaticsCredentials;
   if (areCredentialsSet('Speechmatics')) {
     speechmaticsCredentials = getCredentials('Speechmatics');
+    const credentials = {
+      username: speechmaticsCredentials.sttUserName,
+      password: speechmaticsCredentials.sttAPIKey
+    };
 
+    // wrapping speechmatics module and SDK into a promise
+    // to keep consistency in use with other stt modules
+    // But not refactoring speechmatics module and sdk for now. eg it uses callbacks etc..
     return new Promise((resolve, reject) => {
       const SendToSpeechmaticsUtil = new SendToSpeechmatics();
-      SendToSpeechmaticsUtil.send(newFile, { username: speechmaticsCredentials.sttUserName, password: speechmaticsCredentials.sttAPIKey }, language, function(error, data) {
+
+      SendToSpeechmaticsUtil.send(newFile, credentials, language, function(error, data) {
         if (error) {
-        //   callback(error, null);
           reject(error);
         }
-        // else {
-        console.log('SPEECHMATICS-DATA', JSON.stringify(data));
-        // console.log('SPEECHMATICS-JSON', JSON.stringify(convertSpeechmaticsJsonToTranscripJson(data), null, 2));
-        // TODO Convert to promise
-        //   callback(null, convertSpeechmaticsJsonToTranscripJson(data));
-        // }
-
-        // TODO: convert to DPE specs
         resolve(data);
       });
     });
