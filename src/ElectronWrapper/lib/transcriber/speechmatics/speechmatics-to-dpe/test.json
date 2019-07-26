@@ -1,0 +1,986 @@
+{
+  "paragraphs": [
+    {
+      "start": 0.96,
+      "end": 14,
+      "speaker": "F1"
+    },
+    {
+      "start": 14.79,
+      "end": 25.38,
+      "speaker": "F1"
+    },
+    {
+      "start": 25.83,
+      "end": 30.63,
+      "speaker": "F1"
+    },
+    {
+      "start": 31.05,
+      "end": 38.849999999999994,
+      "speaker": "F1"
+    },
+    {
+      "start": 39.33,
+      "end": 42.959999999999994,
+      "speaker": "F1"
+    },
+    {
+      "start": 43.02,
+      "end": 43.739999999999995,
+      "speaker": "F1"
+    },
+    {
+      "start": 43.77,
+      "end": 49.01,
+      "speaker": "F1"
+    },
+    {
+      "start": 49.2,
+      "end": 51.59,
+      "speaker": "F1"
+    },
+    {
+      "start": 52.02,
+      "end": 55.230000000000004,
+      "speaker": "F1"
+    },
+    {
+      "start": 55.98,
+      "end": 61.559999999999995,
+      "speaker": "F1"
+    }
+  ],
+  "words": [
+    {
+      "text": "On",
+      "start": 0.96,
+      "end": 1.08,
+      "id": 0
+    },
+    {
+      "text": "one",
+      "start": 1.08,
+      "end": 1.23,
+      "id": 1
+    },
+    {
+      "text": "hand",
+      "start": 1.23,
+      "end": 1.44,
+      "id": 2
+    },
+    {
+      "text": "it's",
+      "start": 1.44,
+      "end": 1.5899999999999999,
+      "id": 3
+    },
+    {
+      "text": "closer",
+      "start": 1.59,
+      "end": 2.04,
+      "id": 4
+    },
+    {
+      "text": "to",
+      "start": 2.04,
+      "end": 2.13,
+      "id": 5
+    },
+    {
+      "text": "Russia",
+      "start": 2.13,
+      "end": 2.4299999999999997,
+      "id": 6
+    },
+    {
+      "text": "than",
+      "start": 2.46,
+      "end": 2.64,
+      "id": 7
+    },
+    {
+      "text": "it",
+      "start": 2.64,
+      "end": 2.7600000000000002,
+      "id": 8
+    },
+    {
+      "text": "is",
+      "start": 2.76,
+      "end": 2.94,
+      "id": 9
+    },
+    {
+      "text": "to",
+      "start": 2.94,
+      "end": 3.1799999999999997,
+      "id": 10
+    },
+    {
+      "text": "the",
+      "start": 3.18,
+      "end": 3.48,
+      "id": 11
+    },
+    {
+      "text": "to",
+      "start": 3.62,
+      "end": 3.79,
+      "id": 12
+    },
+    {
+      "text": "the",
+      "start": 3.9,
+      "end": 4.02,
+      "id": 13
+    },
+    {
+      "text": "United",
+      "start": 4.02,
+      "end": 4.38,
+      "id": 14
+    },
+    {
+      "text": "States",
+      "start": 4.38,
+      "end": 4.82,
+      "id": 15
+    },
+    {
+      "text": "it's",
+      "start": 4.83,
+      "end": 4.98,
+      "id": 16
+    },
+    {
+      "text": "kind",
+      "start": 4.98,
+      "end": 5.16,
+      "id": 17
+    },
+    {
+      "text": "of",
+      "start": 5.16,
+      "end": 5.34,
+      "id": 18
+    },
+    {
+      "text": "just",
+      "start": 6.06,
+      "end": 6.39,
+      "id": 19
+    },
+    {
+      "text": "under",
+      "start": 6.39,
+      "end": 6.75,
+      "id": 20
+    },
+    {
+      "text": "Russia's",
+      "start": 7.35,
+      "end": 7.8,
+      "id": 21
+    },
+    {
+      "text": "underbelly",
+      "start": 7.8,
+      "end": 8.459999999999999,
+      "id": 22
+    },
+    {
+      "text": "but",
+      "start": 10.05,
+      "end": 10.5,
+      "id": 23
+    },
+    {
+      "text": "it's",
+      "start": 10.53,
+      "end": 10.709999999999999,
+      "id": 24
+    },
+    {
+      "text": "another",
+      "start": 10.71,
+      "end": 11.040000000000001,
+      "id": 25
+    },
+    {
+      "text": "to",
+      "start": 11.04,
+      "end": 11.19,
+      "id": 26
+    },
+    {
+      "text": "go",
+      "start": 11.19,
+      "end": 11.49,
+      "id": 27
+    },
+    {
+      "text": "into",
+      "start": 11.49,
+      "end": 11.88,
+      "id": 28
+    },
+    {
+      "text": "the",
+      "start": 11.88,
+      "end": 12.06,
+      "id": 29
+    },
+    {
+      "text": "former",
+      "start": 12.09,
+      "end": 12.57,
+      "id": 30
+    },
+    {
+      "text": "Soviet",
+      "start": 12.57,
+      "end": 12.99,
+      "id": 31
+    },
+    {
+      "text": "republics",
+      "start": 12.99,
+      "end": 13.620000000000001,
+      "id": 32
+    },
+    {
+      "text": "again.",
+      "start": 13.68,
+      "end": 14,
+      "id": 33
+    },
+    {
+      "text": "Russians",
+      "start": 14.79,
+      "end": 15.36,
+      "id": 34
+    },
+    {
+      "text": "understand",
+      "start": 15.42,
+      "end": 16.11,
+      "id": 35
+    },
+    {
+      "text": "intellectually",
+      "start": 16.11,
+      "end": 16.86,
+      "id": 36
+    },
+    {
+      "text": "that",
+      "start": 16.86,
+      "end": 17.009999999999998,
+      "id": 37
+    },
+    {
+      "text": "these",
+      "start": 17.01,
+      "end": 17.25,
+      "id": 38
+    },
+    {
+      "text": "are",
+      "start": 17.25,
+      "end": 17.32,
+      "id": 39
+    },
+    {
+      "text": "a",
+      "start": 17.32,
+      "end": 17.34,
+      "id": 40
+    },
+    {
+      "text": "new",
+      "start": 17.34,
+      "end": 17.52,
+      "id": 41
+    },
+    {
+      "text": "country",
+      "start": 17.52,
+      "end": 17.91,
+      "id": 42
+    },
+    {
+      "text": "that",
+      "start": 17.94,
+      "end": 18.09,
+      "id": 43
+    },
+    {
+      "text": "these",
+      "start": 18.09,
+      "end": 18.27,
+      "id": 44
+    },
+    {
+      "text": "are",
+      "start": 18.27,
+      "end": 18.36,
+      "id": 45
+    },
+    {
+      "text": "separate",
+      "start": 18.36,
+      "end": 18.78,
+      "id": 46
+    },
+    {
+      "text": "countries",
+      "start": 18.78,
+      "end": 19.5,
+      "id": 47
+    },
+    {
+      "text": "that",
+      "start": 19.82,
+      "end": 20,
+      "id": 48
+    },
+    {
+      "text": "they",
+      "start": 20.01,
+      "end": 20.12,
+      "id": 49
+    },
+    {
+      "text": "are",
+      "start": 20.12,
+      "end": 20.35,
+      "id": 50
+    },
+    {
+      "text": "not",
+      "start": 20.49,
+      "end": 20.88,
+      "id": 51
+    },
+    {
+      "text": "rulers",
+      "start": 21.57,
+      "end": 22.32,
+      "id": 52
+    },
+    {
+      "text": "of",
+      "start": 22.41,
+      "end": 22.77,
+      "id": 53
+    },
+    {
+      "text": "Estonia",
+      "start": 22.92,
+      "end": 23.46,
+      "id": 54
+    },
+    {
+      "text": "and",
+      "start": 23.46,
+      "end": 23.580000000000002,
+      "id": 55
+    },
+    {
+      "text": "Ukraine",
+      "start": 23.58,
+      "end": 24.27,
+      "id": 56
+    },
+    {
+      "text": "and",
+      "start": 24.27,
+      "end": 24.599999999999998,
+      "id": 57
+    },
+    {
+      "text": "Kyrgyzstan.",
+      "start": 24.63,
+      "end": 25.38,
+      "id": 58
+    },
+    {
+      "text": "But",
+      "start": 25.83,
+      "end": 26.069999999999997,
+      "id": 59
+    },
+    {
+      "text": "on",
+      "start": 26.07,
+      "end": 26.22,
+      "id": 60
+    },
+    {
+      "text": "some",
+      "start": 26.22,
+      "end": 26.459999999999997,
+      "id": 61
+    },
+    {
+      "text": "visceral",
+      "start": 26.46,
+      "end": 26.91,
+      "id": 62
+    },
+    {
+      "text": "level",
+      "start": 26.91,
+      "end": 27.45,
+      "id": 63
+    },
+    {
+      "text": "there",
+      "start": 28.8,
+      "end": 28.98,
+      "id": 64
+    },
+    {
+      "text": "is",
+      "start": 29.01,
+      "end": 29.16,
+      "id": 65
+    },
+    {
+      "text": "not",
+      "start": 29.16,
+      "end": 29.46,
+      "id": 66
+    },
+    {
+      "text": "that",
+      "start": 29.46,
+      "end": 29.73,
+      "id": 67
+    },
+    {
+      "text": "recognition.",
+      "start": 29.91,
+      "end": 30.63,
+      "id": 68
+    },
+    {
+      "text": "I",
+      "start": 31.05,
+      "end": 31.310000000000002,
+      "id": 69
+    },
+    {
+      "text": "know",
+      "start": 31.68,
+      "end": 31.95,
+      "id": 70
+    },
+    {
+      "text": "a",
+      "start": 32.43,
+      "end": 32.49,
+      "id": 71
+    },
+    {
+      "text": "friend",
+      "start": 32.49,
+      "end": 32.760000000000005,
+      "id": 72
+    },
+    {
+      "text": "of",
+      "start": 32.76,
+      "end": 32.85,
+      "id": 73
+    },
+    {
+      "text": "mine",
+      "start": 32.85,
+      "end": 33.09,
+      "id": 74
+    },
+    {
+      "text": "was",
+      "start": 33.09,
+      "end": 33.480000000000004,
+      "id": 75
+    },
+    {
+      "text": "flying",
+      "start": 33.57,
+      "end": 33.96,
+      "id": 76
+    },
+    {
+      "text": "to",
+      "start": 33.96,
+      "end": 34.08,
+      "id": 77
+    },
+    {
+      "text": "Kiev",
+      "start": 34.08,
+      "end": 34.44,
+      "id": 78
+    },
+    {
+      "text": "from",
+      "start": 34.44,
+      "end": 34.62,
+      "id": 79
+    },
+    {
+      "text": "Moscow",
+      "start": 34.62,
+      "end": 35.01,
+      "id": 80
+    },
+    {
+      "text": "back",
+      "start": 35.01,
+      "end": 35.22,
+      "id": 81
+    },
+    {
+      "text": "when",
+      "start": 35.22,
+      "end": 35.339999999999996,
+      "id": 82
+    },
+    {
+      "text": "there",
+      "start": 35.34,
+      "end": 35.43000000000001,
+      "id": 83
+    },
+    {
+      "text": "were",
+      "start": 35.43,
+      "end": 35.55,
+      "id": 84
+    },
+    {
+      "text": "direct",
+      "start": 35.55,
+      "end": 35.82,
+      "id": 85
+    },
+    {
+      "text": "flights",
+      "start": 35.82,
+      "end": 36.33,
+      "id": 86
+    },
+    {
+      "text": "and",
+      "start": 36.96,
+      "end": 37.11,
+      "id": 87
+    },
+    {
+      "text": "this",
+      "start": 37.11,
+      "end": 37.29,
+      "id": 88
+    },
+    {
+      "text": "was",
+      "start": 37.29,
+      "end": 37.68,
+      "id": 89
+    },
+    {
+      "text": "in",
+      "start": 37.68,
+      "end": 37.98,
+      "id": 90
+    },
+    {
+      "text": "2014.",
+      "start": 37.98,
+      "end": 38.849999999999994,
+      "id": 91
+    },
+    {
+      "text": "And",
+      "start": 39.33,
+      "end": 39.72,
+      "id": 92
+    },
+    {
+      "text": "the",
+      "start": 39.72,
+      "end": 40.26,
+      "id": 93
+    },
+    {
+      "text": "his",
+      "start": 40.35,
+      "end": 40.56,
+      "id": 94
+    },
+    {
+      "text": "taxi",
+      "start": 40.56,
+      "end": 40.95,
+      "id": 95
+    },
+    {
+      "text": "driver",
+      "start": 40.95,
+      "end": 41.49,
+      "id": 96
+    },
+    {
+      "text": "asked",
+      "start": 41.97,
+      "end": 42.21,
+      "id": 97
+    },
+    {
+      "text": "him",
+      "start": 42.21,
+      "end": 42.33,
+      "id": 98
+    },
+    {
+      "text": "Where",
+      "start": 42.33,
+      "end": 42.48,
+      "id": 99
+    },
+    {
+      "text": "is",
+      "start": 42.48,
+      "end": 42.629999999999995,
+      "id": 100
+    },
+    {
+      "text": "he",
+      "start": 42.63,
+      "end": 42.720000000000006,
+      "id": 101
+    },
+    {
+      "text": "dressed.",
+      "start": 42.73,
+      "end": 42.959999999999994,
+      "id": 102
+    },
+    {
+      "text": "Where",
+      "start": 43.02,
+      "end": 43.120000000000005,
+      "id": 103
+    },
+    {
+      "text": "is",
+      "start": 43.14,
+      "end": 43.35,
+      "id": 104
+    },
+    {
+      "text": "he",
+      "start": 43.35,
+      "end": 43.440000000000005,
+      "id": 105
+    },
+    {
+      "text": "flying.",
+      "start": 43.44,
+      "end": 43.739999999999995,
+      "id": 106
+    },
+    {
+      "text": "He",
+      "start": 43.77,
+      "end": 43.830000000000005,
+      "id": 107
+    },
+    {
+      "text": "says",
+      "start": 43.83,
+      "end": 44.04,
+      "id": 108
+    },
+    {
+      "text": "Kiev",
+      "start": 44.04,
+      "end": 44.519999999999996,
+      "id": 109
+    },
+    {
+      "text": "and",
+      "start": 45.27,
+      "end": 45.510000000000005,
+      "id": 110
+    },
+    {
+      "text": "the",
+      "start": 45.51,
+      "end": 45.6,
+      "id": 111
+    },
+    {
+      "text": "taxi",
+      "start": 45.6,
+      "end": 45.96,
+      "id": 112
+    },
+    {
+      "text": "driver",
+      "start": 45.96,
+      "end": 46.32,
+      "id": 113
+    },
+    {
+      "text": "takes",
+      "start": 46.5,
+      "end": 46.77,
+      "id": 114
+    },
+    {
+      "text": "him",
+      "start": 46.77,
+      "end": 46.92,
+      "id": 115
+    },
+    {
+      "text": "to",
+      "start": 46.92,
+      "end": 47.07,
+      "id": 116
+    },
+    {
+      "text": "the",
+      "start": 47.07,
+      "end": 47.19,
+      "id": 117
+    },
+    {
+      "text": "domestic",
+      "start": 47.19,
+      "end": 47.64,
+      "id": 118
+    },
+    {
+      "text": "departures",
+      "start": 47.64,
+      "end": 48.45,
+      "id": 119
+    },
+    {
+      "text": "exit.",
+      "start": 48.69,
+      "end": 49.01,
+      "id": 120
+    },
+    {
+      "text": "He",
+      "start": 49.2,
+      "end": 49.27,
+      "id": 121
+    },
+    {
+      "text": "said",
+      "start": 49.27,
+      "end": 49.440000000000005,
+      "id": 122
+    },
+    {
+      "text": "God",
+      "start": 49.44,
+      "end": 49.8,
+      "id": 123
+    },
+    {
+      "text": "I",
+      "start": 49.8,
+      "end": 49.89,
+      "id": 124
+    },
+    {
+      "text": "keep",
+      "start": 49.89,
+      "end": 50.07,
+      "id": 125
+    },
+    {
+      "text": "forgetting",
+      "start": 50.07,
+      "end": 50.49,
+      "id": 126
+    },
+    {
+      "text": "that",
+      "start": 50.49,
+      "end": 50.61,
+      "id": 127
+    },
+    {
+      "text": "they're",
+      "start": 50.61,
+      "end": 50.72,
+      "id": 128
+    },
+    {
+      "text": "a",
+      "start": 50.73,
+      "end": 50.769999999999996,
+      "id": 129
+    },
+    {
+      "text": "separate",
+      "start": 50.77,
+      "end": 51.09,
+      "id": 130
+    },
+    {
+      "text": "country.",
+      "start": 51.09,
+      "end": 51.59,
+      "id": 131
+    },
+    {
+      "text": "And",
+      "start": 52.02,
+      "end": 52.14,
+      "id": 132
+    },
+    {
+      "text": "this",
+      "start": 52.14,
+      "end": 52.29,
+      "id": 133
+    },
+    {
+      "text": "is",
+      "start": 52.29,
+      "end": 52.44,
+      "id": 134
+    },
+    {
+      "text": "you",
+      "start": 52.44,
+      "end": 52.5,
+      "id": 135
+    },
+    {
+      "text": "know",
+      "start": 52.5,
+      "end": 52.65,
+      "id": 136
+    },
+    {
+      "text": "up",
+      "start": 52.74,
+      "end": 53.010000000000005,
+      "id": 137
+    },
+    {
+      "text": "and",
+      "start": 53.01,
+      "end": 53.129999999999995,
+      "id": 138
+    },
+    {
+      "text": "down",
+      "start": 53.13,
+      "end": 53.34,
+      "id": 139
+    },
+    {
+      "text": "all",
+      "start": 53.61,
+      "end": 53.88,
+      "id": 140
+    },
+    {
+      "text": "across",
+      "start": 53.88,
+      "end": 54.300000000000004,
+      "id": 141
+    },
+    {
+      "text": "Russian",
+      "start": 54.3,
+      "end": 54.599999999999994,
+      "id": 142
+    },
+    {
+      "text": "society.",
+      "start": 54.6,
+      "end": 55.230000000000004,
+      "id": 143
+    },
+    {
+      "text": "So",
+      "start": 55.98,
+      "end": 56.58,
+      "id": 144
+    },
+    {
+      "text": "if",
+      "start": 57.87,
+      "end": 57.989999999999995,
+      "id": 145
+    },
+    {
+      "text": "you're",
+      "start": 57.99,
+      "end": 58.11,
+      "id": 146
+    },
+    {
+      "text": "toppling",
+      "start": 58.11,
+      "end": 58.68,
+      "id": 147
+    },
+    {
+      "text": "Moscow",
+      "start": 58.68,
+      "end": 59.13,
+      "id": 148
+    },
+    {
+      "text": "friendly",
+      "start": 59.13,
+      "end": 59.52,
+      "id": 149
+    },
+    {
+      "text": "leaders",
+      "start": 59.52,
+      "end": 60.24,
+      "id": 150
+    },
+    {
+      "text": "in",
+      "start": 60.39,
+      "end": 60.54,
+      "id": 151
+    },
+    {
+      "text": "countries",
+      "start": 60.54,
+      "end": 61.26,
+      "id": 152
+    },
+    {
+      "text": "that",
+      "start": 61.29,
+      "end": 61.44,
+      "id": 153
+    },
+    {
+      "text": "you.",
+      "start": 61.44,
+      "end": 61.559999999999995,
+      "id": 154
+    }
+  ]
+}

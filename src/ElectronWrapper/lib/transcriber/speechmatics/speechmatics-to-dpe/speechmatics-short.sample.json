@@ -1,0 +1,1011 @@
+{
+    "job": {
+      "lang": "en", 
+      "user_id": 70269, 
+      "name": "The Putin Files - Julia Ioffe - 1 min.wav", 
+      "duration": 62, 
+      "created_at": "Fri Jul 26 10:32:56 2019", 
+      "id": 13971366
+    }, 
+    "speakers": [
+      {
+        "duration": "60.60", 
+        "confidence": null, 
+        "name": "F1", 
+        "time": "0.96"
+      }
+    ], 
+    "words": [
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "On", 
+        "time": "0.96"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "one", 
+        "time": "1.08"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "1.000", 
+        "name": "hand", 
+        "time": "1.23"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.970", 
+        "name": "it's", 
+        "time": "1.44"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "closer", 
+        "time": "1.59"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "to", 
+        "time": "2.04"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "Russia", 
+        "time": "2.13"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "than", 
+        "time": "2.46"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "it", 
+        "time": "2.64"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "is", 
+        "time": "2.76"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "to", 
+        "time": "2.94"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "0.780", 
+        "name": "the", 
+        "time": "3.18"
+      }, 
+      {
+        "duration": "0.17", 
+        "confidence": "0.690", 
+        "name": "to", 
+        "time": "3.62"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "the", 
+        "time": "3.90"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "United", 
+        "time": "4.02"
+      }, 
+      {
+        "duration": "0.44", 
+        "confidence": "1.000", 
+        "name": "States", 
+        "time": "4.38"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.920", 
+        "name": "it's", 
+        "time": "4.83"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "kind", 
+        "time": "4.98"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "of", 
+        "time": "5.16"
+      }, 
+      {
+        "duration": "0.33", 
+        "confidence": "1.000", 
+        "name": "just", 
+        "time": "6.06"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "under", 
+        "time": "6.39"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "Russia's", 
+        "time": "7.35"
+      }, 
+      {
+        "duration": "0.66", 
+        "confidence": "1.000", 
+        "name": "underbelly", 
+        "time": "7.80"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "but", 
+        "time": "10.05"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "it's", 
+        "time": "10.53"
+      }, 
+      {
+        "duration": "0.33", 
+        "confidence": "1.000", 
+        "name": "another", 
+        "time": "10.71"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "to", 
+        "time": "11.04"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "go", 
+        "time": "11.19"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "into", 
+        "time": "11.49"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "the", 
+        "time": "11.88"
+      }, 
+      {
+        "duration": "0.48", 
+        "confidence": "1.000", 
+        "name": "former", 
+        "time": "12.09"
+      }, 
+      {
+        "duration": "0.42", 
+        "confidence": "1.000", 
+        "name": "Soviet", 
+        "time": "12.57"
+      }, 
+      {
+        "duration": "0.63", 
+        "confidence": "1.000", 
+        "name": "republics", 
+        "time": "12.99"
+      }, 
+      {
+        "duration": "0.32", 
+        "confidence": "0.640", 
+        "name": "again", 
+        "time": "13.68"
+      }, 
+      {
+        "duration": "0.52", 
+        "confidence": "0.570", 
+        "name": ".", 
+        "time": "14.00"
+      }, 
+      {
+        "duration": "0.57", 
+        "confidence": "1.000", 
+        "name": "Russians", 
+        "time": "14.79"
+      }, 
+      {
+        "duration": "0.69", 
+        "confidence": "1.000", 
+        "name": "understand", 
+        "time": "15.42"
+      }, 
+      {
+        "duration": "0.75", 
+        "confidence": "1.000", 
+        "name": "intellectually", 
+        "time": "16.11"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "that", 
+        "time": "16.86"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "these", 
+        "time": "17.01"
+      }, 
+      {
+        "duration": "0.07", 
+        "confidence": "1.000", 
+        "name": "are", 
+        "time": "17.25"
+      }, 
+      {
+        "duration": "0.02", 
+        "confidence": "0.770", 
+        "name": "a", 
+        "time": "17.32"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "new", 
+        "time": "17.34"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "country", 
+        "time": "17.52"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "that", 
+        "time": "17.94"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "these", 
+        "time": "18.09"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "are", 
+        "time": "18.27"
+      }, 
+      {
+        "duration": "0.42", 
+        "confidence": "1.000", 
+        "name": "separate", 
+        "time": "18.36"
+      }, 
+      {
+        "duration": "0.72", 
+        "confidence": "1.000", 
+        "name": "countries", 
+        "time": "18.78"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "0.980", 
+        "name": "that", 
+        "time": "19.82"
+      }, 
+      {
+        "duration": "0.11", 
+        "confidence": "0.740", 
+        "name": "they", 
+        "time": "20.01"
+      }, 
+      {
+        "duration": "0.23", 
+        "confidence": "0.740", 
+        "name": "are", 
+        "time": "20.12"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "not", 
+        "time": "20.49"
+      }, 
+      {
+        "duration": "0.75", 
+        "confidence": "1.000", 
+        "name": "rulers", 
+        "time": "21.57"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "of", 
+        "time": "22.41"
+      }, 
+      {
+        "duration": "0.54", 
+        "confidence": "1.000", 
+        "name": "Estonia", 
+        "time": "22.92"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "and", 
+        "time": "23.46"
+      }, 
+      {
+        "duration": "0.69", 
+        "confidence": "1.000", 
+        "name": "Ukraine", 
+        "time": "23.58"
+      }, 
+      {
+        "duration": "0.33", 
+        "confidence": "1.000", 
+        "name": "and", 
+        "time": "24.27"
+      }, 
+      {
+        "duration": "0.75", 
+        "confidence": "1.000", 
+        "name": "Kyrgyzstan", 
+        "time": "24.63"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "0.550", 
+        "name": ".", 
+        "time": "25.38"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "But", 
+        "time": "25.83"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "on", 
+        "time": "26.07"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "some", 
+        "time": "26.22"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "visceral", 
+        "time": "26.46"
+      }, 
+      {
+        "duration": "0.54", 
+        "confidence": "1.000", 
+        "name": "level", 
+        "time": "26.91"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "0.980", 
+        "name": "there", 
+        "time": "28.80"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.980", 
+        "name": "is", 
+        "time": "29.01"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "not", 
+        "time": "29.16"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "that", 
+        "time": "29.46"
+      }, 
+      {
+        "duration": "0.72", 
+        "confidence": "1.000", 
+        "name": "recognition", 
+        "time": "29.91"
+      }, 
+      {
+        "duration": "0.33", 
+        "confidence": "0.900", 
+        "name": ".", 
+        "time": "30.66"
+      }, 
+      {
+        "duration": "0.26", 
+        "confidence": "0.950", 
+        "name": "I", 
+        "time": "31.05"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "know", 
+        "time": "31.68"
+      }, 
+      {
+        "duration": "0.06", 
+        "confidence": "1.000", 
+        "name": "a", 
+        "time": "32.43"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "friend", 
+        "time": "32.49"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "of", 
+        "time": "32.76"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "mine", 
+        "time": "32.85"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "was", 
+        "time": "33.09"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "flying", 
+        "time": "33.57"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "to", 
+        "time": "33.96"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "Kiev", 
+        "time": "34.08"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "from", 
+        "time": "34.44"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "Moscow", 
+        "time": "34.62"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "1.000", 
+        "name": "back", 
+        "time": "35.01"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "when", 
+        "time": "35.22"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "0.980", 
+        "name": "there", 
+        "time": "35.34"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "were", 
+        "time": "35.43"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "direct", 
+        "time": "35.55"
+      }, 
+      {
+        "duration": "0.51", 
+        "confidence": "1.000", 
+        "name": "flights", 
+        "time": "35.82"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "and", 
+        "time": "36.96"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "this", 
+        "time": "37.11"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "was", 
+        "time": "37.29"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "in", 
+        "time": "37.68"
+      }, 
+      {
+        "duration": "0.87", 
+        "confidence": "1.000", 
+        "name": "2014", 
+        "time": "37.98"
+      }, 
+      {
+        "duration": "0", 
+        "confidence": "1.000", 
+        "name": ".", 
+        "time": "38.85"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "And", 
+        "time": "39.33"
+      }, 
+      {
+        "duration": "0.54", 
+        "confidence": "1.000", 
+        "name": "the", 
+        "time": "39.72"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "1.000", 
+        "name": "his", 
+        "time": "40.35"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "taxi", 
+        "time": "40.56"
+      }, 
+      {
+        "duration": "0.54", 
+        "confidence": "1.000", 
+        "name": "driver", 
+        "time": "40.95"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "asked", 
+        "time": "41.97"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "him", 
+        "time": "42.21"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.840", 
+        "name": "Where", 
+        "time": "42.33"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.840", 
+        "name": "is", 
+        "time": "42.48"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "he", 
+        "time": "42.63"
+      }, 
+      {
+        "duration": "0.23", 
+        "confidence": "0.460", 
+        "name": "dressed", 
+        "time": "42.73"
+      }, 
+      {
+        "duration": "0.05", 
+        "confidence": "0.810", 
+        "name": ".", 
+        "time": "42.96"
+      }, 
+      {
+        "duration": "0.10", 
+        "confidence": "0.510", 
+        "name": "Where", 
+        "time": "43.02"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "0.510", 
+        "name": "is", 
+        "time": "43.14"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "he", 
+        "time": "43.35"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "flying", 
+        "time": "43.44"
+      }, 
+      {
+        "duration": "0.03", 
+        "confidence": "0.970", 
+        "name": ".", 
+        "time": "43.74"
+      }, 
+      {
+        "duration": "0.06", 
+        "confidence": "0.990", 
+        "name": "He", 
+        "time": "43.77"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "1.000", 
+        "name": "says", 
+        "time": "43.83"
+      }, 
+      {
+        "duration": "0.48", 
+        "confidence": "1.000", 
+        "name": "Kiev", 
+        "time": "44.04"
+      }, 
+      {
+        "duration": "0.24", 
+        "confidence": "1.000", 
+        "name": "and", 
+        "time": "45.27"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "the", 
+        "time": "45.51"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "taxi", 
+        "time": "45.60"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "1.000", 
+        "name": "driver", 
+        "time": "45.96"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "0.880", 
+        "name": "takes", 
+        "time": "46.50"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "0.990", 
+        "name": "him", 
+        "time": "46.77"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "to", 
+        "time": "46.92"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "the", 
+        "time": "47.07"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "domestic", 
+        "time": "47.19"
+      }, 
+      {
+        "duration": "0.81", 
+        "confidence": "1.000", 
+        "name": "departures", 
+        "time": "47.64"
+      }, 
+      {
+        "duration": "0.32", 
+        "confidence": "1.000", 
+        "name": "exit", 
+        "time": "48.69"
+      }, 
+      {
+        "duration": "0.14", 
+        "confidence": "0.770", 
+        "name": ".", 
+        "time": "49.03"
+      }, 
+      {
+        "duration": "0.07", 
+        "confidence": "0.870", 
+        "name": "He", 
+        "time": "49.20"
+      }, 
+      {
+        "duration": "0.17", 
+        "confidence": "0.860", 
+        "name": "said", 
+        "time": "49.27"
+      }, 
+      {
+        "duration": "0.36", 
+        "confidence": "0.940", 
+        "name": "God", 
+        "time": "49.44"
+      }, 
+      {
+        "duration": "0.09", 
+        "confidence": "1.000", 
+        "name": "I", 
+        "time": "49.80"
+      }, 
+      {
+        "duration": "0.18", 
+        "confidence": "1.000", 
+        "name": "keep", 
+        "time": "49.89"
+      }, 
+      {
+        "duration": "0.42", 
+        "confidence": "1.000", 
+        "name": "forgetting", 
+        "time": "50.07"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "that", 
+        "time": "50.49"
+      }, 
+      {
+        "duration": "0.11", 
+        "confidence": "0.460", 
+        "name": "they're", 
+        "time": "50.61"
+      }, 
+      {
+        "duration": "0.04", 
+        "confidence": "0.870", 
+        "name": "a", 
+        "time": "50.73"
+      }, 
+      {
+        "duration": "0.32", 
+        "confidence": "0.900", 
+        "name": "separate", 
+        "time": "50.77"
+      }, 
+      {
+        "duration": "0.50", 
+        "confidence": "0.980", 
+        "name": "country", 
+        "time": "51.09"
+      }, 
+      {
+        "duration": "0.23", 
+        "confidence": "0.510", 
+        "name": ".", 
+        "time": "51.59"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "And", 
+        "time": "52.02"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "this", 
+        "time": "52.14"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "is", 
+        "time": "52.29"
+      }, 
+      {
+        "duration": "0.06", 
+        "confidence": "1.000", 
+        "name": "you", 
+        "time": "52.44"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "know", 
+        "time": "52.50"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "up", 
+        "time": "52.74"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "and", 
+        "time": "53.01"
+      }, 
+      {
+        "duration": "0.21", 
+        "confidence": "1.000", 
+        "name": "down", 
+        "time": "53.13"
+      }, 
+      {
+        "duration": "0.27", 
+        "confidence": "1.000", 
+        "name": "all", 
+        "time": "53.61"
+      }, 
+      {
+        "duration": "0.42", 
+        "confidence": "1.000", 
+        "name": "across", 
+        "time": "53.88"
+      }, 
+      {
+        "duration": "0.30", 
+        "confidence": "1.000", 
+        "name": "Russian", 
+        "time": "54.30"
+      }, 
+      {
+        "duration": "0.63", 
+        "confidence": "1.000", 
+        "name": "society", 
+        "time": "54.60"
+      }, 
+      {
+        "duration": "0.75", 
+        "confidence": "0.860", 
+        "name": ".", 
+        "time": "55.23"
+      }, 
+      {
+        "duration": "0.60", 
+        "confidence": "1.000", 
+        "name": "So", 
+        "time": "55.98"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "1.000", 
+        "name": "if", 
+        "time": "57.87"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "0.990", 
+        "name": "you're", 
+        "time": "57.99"
+      }, 
+      {
+        "duration": "0.57", 
+        "confidence": "1.000", 
+        "name": "toppling", 
+        "time": "58.11"
+      }, 
+      {
+        "duration": "0.45", 
+        "confidence": "1.000", 
+        "name": "Moscow", 
+        "time": "58.68"
+      }, 
+      {
+        "duration": "0.39", 
+        "confidence": "1.000", 
+        "name": "friendly", 
+        "time": "59.13"
+      }, 
+      {
+        "duration": "0.72", 
+        "confidence": "1.000", 
+        "name": "leaders", 
+        "time": "59.52"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "in", 
+        "time": "60.39"
+      }, 
+      {
+        "duration": "0.72", 
+        "confidence": "1.000", 
+        "name": "countries", 
+        "time": "60.54"
+      }, 
+      {
+        "duration": "0.15", 
+        "confidence": "1.000", 
+        "name": "that", 
+        "time": "61.29"
+      }, 
+      {
+        "duration": "0.12", 
+        "confidence": "0.980", 
+        "name": "you", 
+        "time": "61.44"
+      }, 
+      {
+        "duration": "0.00", 
+        "confidence": "1.000", 
+        "name": ".", 
+        "time": "61.56"
+      }
+    ], 
+    "format": "1.0"
+  }

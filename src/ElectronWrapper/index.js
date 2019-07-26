@@ -107,12 +107,11 @@ class ElectronWrapper {
           newTranscriptData.url = res.url;
         }
         newTranscriptData.clipName = res.clipName;
-        console.log('res.transcript ', res.transcript );
         db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
       })
       .catch((err) => {
         // TODO: audioUrl is not saved, and so cannot be deleted when deleting transcript
-        console.error('transcription error', err);
+        console.error('Transcription error', err);
         newTranscriptData.status = 'error';
         newTranscriptData.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
         db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
@@ -130,7 +129,7 @@ class ElectronWrapper {
         db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
       })
       .catch((err) => {
-        console.error(err);
+        console.error('Error converting to video', err);
       });
 
     readMetadataForEDL({
@@ -138,7 +137,10 @@ class ElectronWrapper {
     }).then((metadataResponse) => {
       newTranscriptData.metadata = metadataResponse;
       db.update('transcripts', { _id: transcriptId, projectId }, newTranscriptData);
-    });
+    })
+      .catch((err) => {
+        console.error('Error reading metadata', err);
+      });
 
     return { status: 'ok', transcript: newTranscript, transcriptId: transcriptId };
   }

@@ -5,7 +5,9 @@ const { app } = require('electron').remote;
 const convertToAudio = require('../convert-to-audio/index.js');
 const convertAssemblyAIToDpeJson = require('./assemblyai/assemblyai-to-dpe/index.js');
 const assemblyAiStt = require('./assemblyai/index');
-const { getDefaultStt, setDefaultStt } = require('../../../stt-settings/default-stt.js');
+const speechmaticsSTT = require('./speechmatics/index.js');
+const convertSpeechmaticsDpe = require('./speechmatics/speechmatics-to-dpe/index.js');
+const { getDefaultStt } = require('../../../stt-settings/default-stt.js');
 
 const dataPath = app.getPath('userData');
 const mediaDir = path.join(dataPath, 'media');
@@ -27,8 +29,8 @@ const transcriber = async (inputFilePath) => {
     throw new Error('Default STT Engine has not been set');
   }
 
-  if(!navigator.onLine){
-     throw new Error('You don\'t seem to be connected to the internet');
+  if (!navigator.onLine) {
+    throw new Error('You don\'t seem to be connected to the internet');
   }
   const defaultSttEngine = provider;
 
@@ -50,21 +52,27 @@ const transcriber = async (inputFilePath) => {
   // transcribe
   switch (defaultSttEngine) {
   case 'AssemblyAI':
-    const transcript = await assemblyAiStt(newAudioFile);
-    response.transcript = await convertAssemblyAIToDpeJson(transcript);
+    const assemblyAITranscript = await assemblyAiStt(newAudioFile);
+    response.transcript = await convertAssemblyAIToDpeJson(assemblyAITranscript);
     response.clipName = inputFileNameWithExtension;
 
     return response;
-  case 'speechmatics':
+  case 'Speechmatics':
     // language
+    // const transcript = await speechmaticsSTT(newAudioFile);
+    const speechmaticsTranscript = await speechmaticsSTT(newAudioFile, language);
+    console.log('speechmaticsTranscript', speechmaticsTranscript);
+    // TODO: convertSpeechmaticsToDpeJson
+    response.transcript = convertSpeechmaticsDpe(speechmaticsTranscript);
+    response.clipName = inputFileNameWithExtension;
 
-    // code block
-    break;
+    return response;
   case 'BBC':
     // code block
-    break;
+    return response;
   default:
-      // code block
+    throw new Error('A valid STT engine wasn\'t specified in the transcriber module');
+
   }
 
   // return transcription

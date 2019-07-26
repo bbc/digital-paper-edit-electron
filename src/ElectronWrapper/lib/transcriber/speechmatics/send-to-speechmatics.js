@@ -5,7 +5,7 @@ const Speechmatics = require('./speechmatics-sdk.js');
 var SendToSpeechmatics = function() {};
 
 SendToSpeechmatics.prototype.send = function(audioFile, keys, languageModel, cb) {
-  console.log('SendToSpeechmatics.send', audioFile, keys, languageModel, cb);
+  console.log('SendToSpeechmatics.send', audioFile, keys, languageModel);
 
   var opts = {};
 
