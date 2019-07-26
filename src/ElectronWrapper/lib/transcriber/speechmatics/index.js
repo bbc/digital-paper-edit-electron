@@ -1,3 +1,4 @@
+const sampleJson = require('./speechmatics-to-dpe/speechmatics-short.sample.json');
 const SendToSpeechmatics = require('./send-to-speechmatics.js');
 const { getCredentials, areCredentialsSet } = require('../../../../stt-settings/credentials.js');
 
@@ -14,6 +15,11 @@ const speechmaticsSTT = (newFile, language = 'en') => {
     // to keep consistency in use with other stt modules
     // But not refactoring speechmatics module and sdk for now. eg it uses callbacks etc..
     return new Promise((resolve, reject) => {
+
+      if (process.env.NODE_ENV === 'development') {
+        return resolve(sampleJson);
+      }
+
       const SendToSpeechmaticsUtil = new SendToSpeechmatics();
 
       SendToSpeechmaticsUtil.send(newFile, credentials, language, function(error, data) {
