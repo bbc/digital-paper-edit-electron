@@ -7,6 +7,8 @@ Electron Cross Platform Desktop app
 <!-- _One liner + link to confluence page_
 _Screenshot of UI - optional_ -->
 
+For a ready to use release of the desktop application, checkout the[user instructions](./docs/guides/user-instructions.md) for more details on how to get started.
+
  
 [See here for overall project architecture info](https://github.com/bbc/digital-paper-edit-client#project-architecture)
 
