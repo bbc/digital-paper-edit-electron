@@ -1,6 +1,6 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -85,7 +85,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@bbc/digital-paper-edit-client": "^1.0.7",
+    "@bbc/digital-paper-edit-client": "^1.0.8",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "diskdb": "^0.1.17",
