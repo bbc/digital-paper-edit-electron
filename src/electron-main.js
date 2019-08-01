@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, shell, dialog, ipcMain } = require('electron');;
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');;
 const path = require('path');
 const url = require('url');
 
@@ -53,9 +53,7 @@ function createMainWindow() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'build', 'index.html'),
-      // TODO: need to update client to `ui-tweak` branch first, and republish npm before swapping this line for the one above
-      // pathname: path.join(app.getAppPath(), 'node_modules', '@bbc', 'digital-paper-edit-client', 'index.html'),
+      pathname: path.join(app.getAppPath(), 'node_modules', '@bbc', 'digital-paper-edit-client', 'index.html'),
       protocol: 'file:',
       slashes: true
     })

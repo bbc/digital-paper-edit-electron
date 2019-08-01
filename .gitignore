@@ -135,3 +135,5 @@ dist/com.autoedit2.it.zxp
 # dotenv ENV var
 .env
 
+
+build/

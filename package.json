@@ -138,7 +138,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@bbc/digital-paper-edit-client": "^1.0.8",
+    "@bbc/digital-paper-edit-client": "^1.0.8-alpha.1",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "diskdb": "^0.1.17",
