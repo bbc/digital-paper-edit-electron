@@ -44,8 +44,6 @@ function areCredentialsSet(provider) {
     return credentials.sttAPIKey !== '';
   case 'Speechmatics':
     return credentials.sttUserName !== '' && credentials.sttAPIKey !== '';
-  case 'BBC':
-    return credentials.sttUserName !== '';
   default:
     console.error(`Could not find credentials for provier: ${ provider }`);
 
