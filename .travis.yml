@@ -30,7 +30,7 @@ env:
 script:
   - npm run build:mwl:publish:always;
   - ls ./dist;
-  - find . | grep mac.zip;
+  - find . | grep .dmg;
   - find . | grep .AppImage;
   - find . | grep .exe;
 

@@ -7,14 +7,10 @@ You can download the pre release from this link
 https://github.com/bbc/digital-paper-edit-electron/releases
 
 
-1. Click on ‘assets’ and choose the first one that ends with ‘Mac.zip’
- 
-2. Once you have downloaded the app you need to unzip it 
-
-3. Move it to the applications folder 
-
-3. Right click on the app and click open 
-
+1. Click on ‘assets’ and choose the first one that ends with `.dmg``
+2. Once you have downloaded the app you need to open the `.dmg` file
+3.  Drag the app into the applications folder 
+3.  In the applications folder, then right click on the app and click open 
 4. Once the app as launched in the top bar ( the one with the Apple logo) you should see an option that says ‘speech to text settings’ click on that and then on ‘edit speech to text configuration’.
 
 A new window should come up where you can set default speech to text service and language, as well as adding the credentials for the service to use for generating transcriptions.
