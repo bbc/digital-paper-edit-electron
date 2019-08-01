@@ -34,7 +34,7 @@
       "owner": "bbc",
       "repo": "digital-paper-edit-electron"
     },
-    "appId": "org.autoEdit2.autoEdit2-electron",
+    "appId": "org.dpe.dpe-electron",
     "asar": false,
     "directories": {
       "buildResources": "assets"
@@ -69,7 +69,7 @@
       ],
       "target": [
         {
-          "target": "zip",
+          "target": "dmg",
           "arch": [
             "x64"
           ]
