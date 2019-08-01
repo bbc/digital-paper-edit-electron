@@ -8,6 +8,7 @@
     "start": "cross-env NODE_ENV=development electron .",
     "start:dev": "cross-env NODE_ENV=development electron .",
     "start:prod": "cross-env NODE_ENV=production electron .",
+    "build:m": "cross-env NODE_ENV=production electron-builder -m",
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
     "build:mwl:publish:always": "electron-builder -mwl --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
@@ -73,6 +74,58 @@
             "x64"
           ]
         }
+      ]
+    },
+    "dmg": {
+      "background": "assets/background.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 448,
+          "y": 340,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 340,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.ico",
+      "files": [
+        "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
+        "!node_modules/ffmpeg-static-electron/bin/win/ia32${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/linux${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/mac${/*}",
+        "node_modules/ffprobe-static-electron/bin/win/${arch}/ffprobe",
+        "!node_modules/ffprobe-static-electron/bin/win/ia32${/*}",
+        "!node_modules/ffprobe-static-electron/bin/linux${/*}",
+        "!node_modules/ffprobe-static-electron/bin/mac${/*}"
+      ]
+    },
+    "deb": {
+      "synopsis": "Digital Paper Edit Desktop App"
+    },
+    "linux": {
+      "category": "",
+      "packageCategory": "GNOME;GTK;VideoEditing;PaperEditing;Transcriptions",
+      "description": "Digital Paper Edit Desktop App",
+      "target": [
+        "AppImage"
+      ],
+      "maintainer": "Pietro Passarelli",
+      "files": [
+        "!node_modules/ffmpeg-static-electron/bin/linux/ia32${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/win${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/mac${/*}",
+        "!node_modules/ffprobe-static-electron/bin/linux/ia32${/*}",
+        "!node_modules/ffprobe-static-electron/bin/win${/*}",
+        "!node_modules/ffprobe-static-electron/bin/mac${/*}"
       ]
     }
   },
