@@ -7,6 +7,8 @@ const convertAssemblyAIToDpeJson = require('./assemblyai/assemblyai-to-dpe/index
 const assemblyAiStt = require('./assemblyai/index');
 const speechmaticsSTT = require('./speechmatics/index.js');
 const convertSpeechmaticsDpe = require('./speechmatics/speechmatics-to-dpe/index.js');
+const pocketsphinxSTT = require('./pocketsphinx-stt/index.js');
+const convertPocketsphinxOutputToDpe = require('./pocketsphinx-stt/pocketsphinx-to-dpe/index.js');
 const { getDefaultStt } = require('../../../stt-settings/default-stt.js');
 
 const dataPath = app.getPath('userData');
@@ -67,14 +69,17 @@ const transcriber = async (inputFilePath) => {
     response.clipName = inputFileNameWithExtension;
 
     return response;
-  case 'BBC':
-    // code block
+  case 'pocketsphinx':
+    const pocketsphinxTranscript = await pocketsphinxSTT(newAudioFile);
+    console.log('pocketsphinxTranscript', pocketsphinxTranscript);
+    response.transcript = convertPocketsphinxOutputToDpe(pocketsphinxTranscript);
+    response.clipName = inputFileNameWithExtension;
+    console.log('pocketsphinxTranscript', response);
+
     return response;
   default:
     throw new Error('A valid STT engine wasn\'t specified in the transcriber module');
-
   }
-
   // return transcription
 };
 

@@ -116,13 +116,20 @@
 
       render() {
         let languagesOptions = [<option value='' key='default' disabled></option>]
-        if(this.state.defaultStt ==='AssemblyAI'){
+        if(this.state.defaultStt ==='AssemblyAI'&& this.state.defaultStt ==='pocketsphinx'){
           languagesOptions = [<option value='en' key='en' disabled>English</option>]
         }
         if(this.state.defaultStt === 'Speechmatics'){
           languagesOptions = speechmaticsLanguages.map((language, index)=>{
           return (<option key={language.code} value={language.code}>{language.language}</option>);
         })
+        }
+
+        let languageToDisplay = 'English';
+        console.log('this.state.provider ', this.state.defaultStt )
+        if(this.state.defaultStt === 'Speechmatics'){
+          console.log('here!')
+          languageToDisplay = speechmaticsLanguages.find((language)=>{return language.code === this.state.defaultLanguage}).language;
         }
        
         return (
@@ -132,7 +139,7 @@
               <CustomAlert
                   variant={ 'success' }
                   heading={ 'Saved' }
-                  message={ <p>Saved <b>{this.state.defaultStt}</b> and <b>{speechmaticsLanguages.find((language)=>{return language.code === this.state.defaultLanguage}).language}</b> as defaults!</p> }/>
+                  message={ <p>Saved <b>{this.state.defaultStt}</b> and <b>{languageToDisplay}</b> as defaults!</p> }/>
               </Container>):null}
          
             <h3>Default STT</h3>
@@ -146,6 +153,7 @@
               >
               <option value='AssemblyAI'>AssemblyAI</option>
               <option value='Speechmatics'>Speechmatics</option>
+              {process.platform ==='darwin'? <option value='pocketsphinx'>Pocketsphinx (offline)</option>: null}
               <option value='' disabled></option>
             </Form.Control>
             <Form.Text className="text-muted">
@@ -153,7 +161,7 @@
             </Form.Text>
           </Form.Group>
 
-          {this.state.defaultStt !== 'AssemblyAI'? <Form.Group  controlId="exampleForm.ControlSelect1">		        
+          {this.state.defaultStt !== 'AssemblyAI' && this.state.defaultStt !== 'pocketsphinx'? <Form.Group  controlId="exampleForm.ControlSelect1">		        
             <Form.Label>Default Speech To Text language</Form.Label>		
             <Form.Control 		
               as="select" 		

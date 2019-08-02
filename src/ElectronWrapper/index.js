@@ -97,6 +97,7 @@ class ElectronWrapper {
     // const transcriptResult = await transcribe(data.path);
     transcribe(data.path)
       .then((res) => {
+        console.log('transcribe', res);
         newTranscriptData.status = 'done';
         newTranscriptData.transcript = res.transcript;
         newTranscriptData.audioUrl = res.url;
@@ -252,7 +253,7 @@ class ElectronWrapper {
   }
 
   async deleteAnnotation(projectId, transcriptId, annotationId) {
-    db.delete('annotations', { _id: annotationId});
+    db.delete('annotations', { _id: annotationId });
 
     return { 'ok': true, status: 'ok' };
   }

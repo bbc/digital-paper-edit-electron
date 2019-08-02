@@ -1,0 +1,1041 @@
+[
+  [
+    {
+      "text": "on",
+      "start": 0.97,
+      "end": 1.22,
+      "accuracy": 0.199471,
+      "id": 0
+    },
+    {
+      "text": "and",
+      "start": 1.23,
+      "end": 1.41,
+      "accuracy": 0.4287,
+      "id": 1
+    },
+    {
+      "text": "it's",
+      "start": 1.42,
+      "end": 1.59,
+      "accuracy": 0.112641,
+      "id": 2
+    },
+    {
+      "text": "closer",
+      "start": 1.6,
+      "end": 2.05,
+      "accuracy": 0.885667,
+      "id": 3
+    },
+    {
+      "text": "to",
+      "start": 2.06,
+      "end": 2.12,
+      "accuracy": 0.546692,
+      "id": 4
+    },
+    {
+      "text": "russia",
+      "start": 2.13,
+      "end": 2.46,
+      "accuracy": 0.97951,
+      "id": 5
+    },
+    {
+      "text": "but",
+      "start": 2.47,
+      "end": 2.73,
+      "accuracy": 0.107878,
+      "id": 6
+    },
+    {
+      "text": "as",
+      "start": 2.74,
+      "end": 2.88,
+      "accuracy": 0.17468,
+      "id": 7
+    },
+    {
+      "text": "to",
+      "start": 2.89,
+      "end": 3.09,
+      "accuracy": 0.507033,
+      "id": 8
+    },
+    {
+      "text": "the",
+      "start": 3.1,
+      "end": 3.68,
+      "accuracy": 0.161329,
+      "id": 9
+    },
+    {
+      "text": "to",
+      "start": 3.77,
+      "end": 3.88,
+      "accuracy": 0.080581,
+      "id": 10
+    },
+    {
+      "text": "the",
+      "start": 3.89,
+      "end": 4.05,
+      "accuracy": 0.655768,
+      "id": 11
+    },
+    {
+      "text": "united",
+      "start": 4.06,
+      "end": 4.39,
+      "accuracy": 0.466878,
+      "id": 12
+    },
+    {
+      "text": "states",
+      "start": 4.4,
+      "end": 4.79,
+      "accuracy": 0.99094,
+      "id": 13
+    },
+    {
+      "text": "and",
+      "start": 4.8,
+      "end": 5.57,
+      "accuracy": 0.994813,
+      "id": 14
+    },
+    {
+      "text": "i",
+      "start": 5.58,
+      "end": 5.6,
+      "accuracy": 0.694584,
+      "id": 15
+    },
+    {
+      "text": "just",
+      "start": 6.08,
+      "end": 6.37,
+      "accuracy": 0.93472,
+      "id": 16
+    },
+    {
+      "text": "under",
+      "start": 6.38,
+      "end": 6.69,
+      "accuracy": 0.531489,
+      "id": 17
+    },
+    {
+      "text": "an",
+      "start": 6.7,
+      "end": 7.17,
+      "accuracy": 0.277468,
+      "id": 18
+    },
+    {
+      "text": "russia",
+      "start": 7.32,
+      "end": 7.72,
+      "accuracy": 0.147678,
+      "id": 19
+    },
+    {
+      "text": "center",
+      "start": 7.73,
+      "end": 8.03,
+      "accuracy": 0.015303,
+      "id": 20
+    },
+    {
+      "text": "yelling",
+      "start": 8.04,
+      "end": 8.44,
+      "accuracy": 0.057336,
+      "id": 21
+    }
+  ],
+  [
+    {
+      "text": "by",
+      "start": 10.07,
+      "end": 10.46,
+      "accuracy": 0.386428,
+      "id": 22
+    },
+    {
+      "text": "it's",
+      "start": 10.47,
+      "end": 10.71,
+      "accuracy": 0.295839,
+      "id": 23
+    },
+    {
+      "text": "another",
+      "start": 10.72,
+      "end": 11.06,
+      "accuracy": 0.534795,
+      "id": 24
+    },
+    {
+      "text": "to",
+      "start": 11.07,
+      "end": 11.2,
+      "accuracy": 0.582362,
+      "id": 25
+    },
+    {
+      "text": "go",
+      "start": 11.21,
+      "end": 11.45,
+      "accuracy": 0.975795,
+      "id": 26
+    },
+    {
+      "text": "into",
+      "start": 11.46,
+      "end": 11.86,
+      "accuracy": 0.534581,
+      "id": 27
+    },
+    {
+      "text": "the",
+      "start": 11.87,
+      "end": 12.04,
+      "accuracy": 0.924956,
+      "id": 28
+    },
+    {
+      "text": "former",
+      "start": 12.05,
+      "end": 12.56,
+      "accuracy": 0.9993,
+      "id": 29
+    },
+    {
+      "text": "soviet",
+      "start": 12.57,
+      "end": 12.99,
+      "accuracy": 0.602566,
+      "id": 30
+    },
+    {
+      "text": "republics",
+      "start": 13,
+      "end": 13.61,
+      "accuracy": 0.962516,
+      "id": 31
+    },
+    {
+      "text": "began",
+      "start": 13.62,
+      "end": 14.12,
+      "accuracy": 0.480136,
+      "id": 32
+    },
+    {
+      "text": "[NOISE]",
+      "start": 14.13,
+      "end": 14.67,
+      "accuracy": 0.9995,
+      "id": 33
+    },
+    {
+      "text": "russia",
+      "start": 14.8,
+      "end": 15.2,
+      "accuracy": 0.375043,
+      "id": 34
+    },
+    {
+      "text": "as",
+      "start": 15.21,
+      "end": 15.38,
+      "accuracy": 0.146633,
+      "id": 35
+    },
+    {
+      "text": "i",
+      "start": 15.39,
+      "end": 15.47,
+      "accuracy": 0.715239,
+      "id": 36
+    },
+    {
+      "text": "understand",
+      "start": 15.48,
+      "end": 16.09,
+      "accuracy": 0.899504,
+      "id": 37
+    },
+    {
+      "text": "intellectually",
+      "start": 16.1,
+      "end": 16.89,
+      "accuracy": 0.549762,
+      "id": 38
+    },
+    {
+      "text": "that",
+      "start": 16.9,
+      "end": 17.02,
+      "accuracy": 0.052296,
+      "id": 39
+    },
+    {
+      "text": "these",
+      "start": 17.03,
+      "end": 17.23,
+      "accuracy": 0.381818,
+      "id": 40
+    },
+    {
+      "text": "are",
+      "start": 17.24,
+      "end": 17.32,
+      "accuracy": 0.194429,
+      "id": 41
+    },
+    {
+      "text": "new",
+      "start": 17.33,
+      "end": 17.5,
+      "accuracy": 0.307206,
+      "id": 42
+    },
+    {
+      "text": "country",
+      "start": 17.51,
+      "end": 17.91,
+      "accuracy": 0.896271,
+      "id": 43
+    },
+    {
+      "text": "that",
+      "start": 17.92,
+      "end": 18.07,
+      "accuracy": 0.491456,
+      "id": 44
+    },
+    {
+      "text": "these",
+      "start": 18.08,
+      "end": 18.26,
+      "accuracy": 0.377376,
+      "id": 45
+    },
+    {
+      "text": "are",
+      "start": 18.27,
+      "end": 18.31,
+      "accuracy": 0.226599,
+      "id": 46
+    },
+    {
+      "text": "separate",
+      "start": 18.32,
+      "end": 18.76,
+      "accuracy": 0.818139,
+      "id": 47
+    },
+    {
+      "text": "countries",
+      "start": 18.77,
+      "end": 19.5,
+      "accuracy": 0.884428,
+      "id": 48
+    },
+    {
+      "text": "[NOISE]",
+      "start": 19.51,
+      "end": 19.82,
+      "accuracy": 0.851958,
+      "id": 49
+    },
+    {
+      "text": "that",
+      "start": 19.83,
+      "end": 20.01,
+      "accuracy": 0.563118,
+      "id": 50
+    },
+    {
+      "text": "they're",
+      "start": 20.02,
+      "end": 20.36,
+      "accuracy": 0.188004,
+      "id": 51
+    },
+    {
+      "text": "not",
+      "start": 20.48,
+      "end": 20.87,
+      "accuracy": 0.9992,
+      "id": 52
+    }
+  ],
+  [
+    {
+      "text": "rulers",
+      "start": 21.6,
+      "end": 22.28,
+      "accuracy": 0.817975,
+      "id": 53
+    },
+    {
+      "text": "and",
+      "start": 22.29,
+      "end": 22.4,
+      "accuracy": 0.138716,
+      "id": 54
+    },
+    {
+      "text": "estonian",
+      "start": 22.9,
+      "end": 23.57,
+      "accuracy": 0.469218,
+      "id": 55
+    },
+    {
+      "text": "ukraine",
+      "start": 23.58,
+      "end": 24.24,
+      "accuracy": 0.997004,
+      "id": 56
+    },
+    {
+      "text": "and",
+      "start": 24.25,
+      "end": 24.63,
+      "accuracy": 0.886731,
+      "id": 57
+    },
+    {
+      "text": "kyrgyzstan",
+      "start": 24.68,
+      "end": 25.39,
+      "accuracy": 0.991733,
+      "id": 58
+    },
+    {
+      "text": "[NOISE]",
+      "start": 25.4,
+      "end": 25.81,
+      "accuracy": 0.990247,
+      "id": 59
+    },
+    {
+      "text": "but",
+      "start": 25.82,
+      "end": 26.04,
+      "accuracy": 0.477264,
+      "id": 60
+    },
+    {
+      "text": "on",
+      "start": 26.05,
+      "end": 26.19,
+      "accuracy": 0.328661,
+      "id": 61
+    },
+    {
+      "text": "some",
+      "start": 26.2,
+      "end": 26.48,
+      "accuracy": 0.803944,
+      "id": 62
+    },
+    {
+      "text": "visceral",
+      "start": 26.49,
+      "end": 26.94,
+      "accuracy": 0.9995,
+      "id": 63
+    },
+    {
+      "text": "level",
+      "start": 26.95,
+      "end": 27.44,
+      "accuracy": 0.9999,
+      "id": 64
+    }
+  ],
+  [
+    {
+      "text": "there's",
+      "start": 28.86,
+      "end": 29.18,
+      "accuracy": 0.634478,
+      "id": 65
+    },
+    {
+      "text": "not",
+      "start": 29.19,
+      "end": 29.48,
+      "accuracy": 0.997204,
+      "id": 66
+    },
+    {
+      "text": "that",
+      "start": 29.49,
+      "end": 29.71,
+      "accuracy": 0.886642,
+      "id": 67
+    },
+    {
+      "text": "recognition",
+      "start": 29.89,
+      "end": 30.61,
+      "accuracy": 0.997104,
+      "id": 68
+    },
+    {
+      "text": "by",
+      "start": 31.02,
+      "end": 31.3,
+      "accuracy": 0.387899,
+      "id": 69
+    },
+    {
+      "text": "eating",
+      "start": 31.53,
+      "end": 31.74,
+      "accuracy": 0.113273,
+      "id": 70
+    },
+    {
+      "text": "out",
+      "start": 31.75,
+      "end": 31.94,
+      "accuracy": 0.455941,
+      "id": 71
+    },
+    {
+      "text": "a",
+      "start": 32.41,
+      "end": 32.47,
+      "accuracy": 0.628667,
+      "id": 72
+    },
+    {
+      "text": "friend",
+      "start": 32.48,
+      "end": 32.73,
+      "accuracy": 0.991138,
+      "id": 73
+    },
+    {
+      "text": "of",
+      "start": 32.74,
+      "end": 32.83,
+      "accuracy": 0.987478,
+      "id": 74
+    },
+    {
+      "text": "mine",
+      "start": 32.84,
+      "end": 33.09,
+      "accuracy": 0.571343,
+      "id": 75
+    },
+    {
+      "text": "was",
+      "start": 33.1,
+      "end": 33.5,
+      "accuracy": 0.996805,
+      "id": 76
+    },
+    {
+      "text": "flying",
+      "start": 33.57,
+      "end": 33.96,
+      "accuracy": 0.995709,
+      "id": 77
+    },
+    {
+      "text": "to",
+      "start": 33.97,
+      "end": 34.06,
+      "accuracy": 0.883279,
+      "id": 78
+    },
+    {
+      "text": "kiev",
+      "start": 34.07,
+      "end": 34.56,
+      "accuracy": 0.832251,
+      "id": 79
+    },
+    {
+      "text": "moscow",
+      "start": 34.57,
+      "end": 34.98,
+      "accuracy": 0.171169,
+      "id": 80
+    },
+    {
+      "text": "back",
+      "start": 34.99,
+      "end": 35.23,
+      "accuracy": 0.895912,
+      "id": 81
+    },
+    {
+      "text": "on",
+      "start": 35.24,
+      "end": 35.35,
+      "accuracy": 0.755457,
+      "id": 82
+    },
+    {
+      "text": "your",
+      "start": 35.36,
+      "end": 35.53,
+      "accuracy": 0.851532,
+      "id": 83
+    },
+    {
+      "text": "direct",
+      "start": 35.54,
+      "end": 35.82,
+      "accuracy": 0.792291,
+      "id": 84
+    },
+    {
+      "text": "flights",
+      "start": 35.83,
+      "end": 36.33,
+      "accuracy": 0.996406,
+      "id": 85
+    },
+    {
+      "text": "[NOISE]",
+      "start": 36.34,
+      "end": 36.65,
+      "accuracy": 0.659451,
+      "id": 86
+    },
+    {
+      "text": "and",
+      "start": 36.95,
+      "end": 37.12,
+      "accuracy": 0.431625,
+      "id": 87
+    },
+    {
+      "text": "this",
+      "start": 37.13,
+      "end": 37.31,
+      "accuracy": 0.795705,
+      "id": 88
+    },
+    {
+      "text": "was",
+      "start": 37.32,
+      "end": 37.67,
+      "accuracy": 0.706212,
+      "id": 89
+    },
+    {
+      "text": "an",
+      "start": 37.68,
+      "end": 38.01,
+      "accuracy": 0.056561,
+      "id": 90
+    },
+    {
+      "text": "twenty",
+      "start": 38.02,
+      "end": 38.26,
+      "accuracy": 0.85409,
+      "id": 91
+    },
+    {
+      "text": "fourteen",
+      "start": 38.27,
+      "end": 38.92,
+      "accuracy": 0.497937,
+      "id": 92
+    },
+    {
+      "text": "and",
+      "start": 39.32,
+      "end": 39.71,
+      "accuracy": 0.707413,
+      "id": 93
+    },
+    {
+      "text": "be",
+      "start": 39.72,
+      "end": 40.28,
+      "accuracy": 0.346413,
+      "id": 94
+    },
+    {
+      "text": "his",
+      "start": 40.32,
+      "end": 40.54,
+      "accuracy": 0.639895,
+      "id": 95
+    },
+    {
+      "text": "taxi",
+      "start": 40.55,
+      "end": 40.95,
+      "accuracy": 0.997104,
+      "id": 96
+    },
+    {
+      "text": "driver",
+      "start": 40.96,
+      "end": 41.5,
+      "accuracy": 0.998401,
+      "id": 97
+    },
+    {
+      "text": "afterwards",
+      "start": 41.95,
+      "end": 42.62,
+      "accuracy": 0.815606,
+      "id": 98
+    },
+    {
+      "text": "he",
+      "start": 42.63,
+      "end": 42.71,
+      "accuracy": 0.733934,
+      "id": 99
+    },
+    {
+      "text": "tracked",
+      "start": 42.72,
+      "end": 43.04,
+      "accuracy": 0.048395,
+      "id": 100
+    },
+    {
+      "text": "oversee",
+      "start": 43.05,
+      "end": 43.41,
+      "accuracy": 0.004205,
+      "id": 101
+    },
+    {
+      "text": "flying",
+      "start": 43.42,
+      "end": 43.74,
+      "accuracy": 0.175099,
+      "id": 102
+    },
+    {
+      "text": "he",
+      "start": 43.75,
+      "end": 43.82,
+      "accuracy": 0.617883,
+      "id": 103
+    },
+    {
+      "text": "says",
+      "start": 43.83,
+      "end": 44.03,
+      "accuracy": 0.496049,
+      "id": 104
+    },
+    {
+      "text": "kiev",
+      "start": 44.04,
+      "end": 44.55,
+      "accuracy": 0.16611,
+      "id": 105
+    },
+    {
+      "text": "and",
+      "start": 45.24,
+      "end": 45.52,
+      "accuracy": 0.949323,
+      "id": 106
+    },
+    {
+      "text": "the",
+      "start": 45.53,
+      "end": 45.6,
+      "accuracy": 0.824299,
+      "id": 107
+    },
+    {
+      "text": "taxi",
+      "start": 45.61,
+      "end": 45.93,
+      "accuracy": 0.998601,
+      "id": 108
+    },
+    {
+      "text": "driver",
+      "start": 45.94,
+      "end": 46.3,
+      "accuracy": 0.892425,
+      "id": 109
+    },
+    {
+      "text": "takes",
+      "start": 46.54,
+      "end": 46.79,
+      "accuracy": 0.588745,
+      "id": 110
+    },
+    {
+      "text": "him",
+      "start": 46.8,
+      "end": 46.91,
+      "accuracy": 0.030531,
+      "id": 111
+    },
+    {
+      "text": "to",
+      "start": 46.92,
+      "end": 47.08,
+      "accuracy": 0.465851,
+      "id": 112
+    },
+    {
+      "text": "the",
+      "start": 47.09,
+      "end": 47.19,
+      "accuracy": 0.998301,
+      "id": 113
+    },
+    {
+      "text": "domestic",
+      "start": 47.2,
+      "end": 47.64,
+      "accuracy": 0.998801,
+      "id": 114
+    },
+    {
+      "text": "departures",
+      "start": 47.65,
+      "end": 48.43,
+      "accuracy": 0.857171,
+      "id": 115
+    },
+    {
+      "text": "exit",
+      "start": 48.68,
+      "end": 48.98,
+      "accuracy": 0.028444,
+      "id": 116
+    },
+    {
+      "text": "he",
+      "start": 49.12,
+      "end": 49.27,
+      "accuracy": 0.25242,
+      "id": 117
+    },
+    {
+      "text": "said",
+      "start": 49.28,
+      "end": 49.45,
+      "accuracy": 0.251563,
+      "id": 118
+    },
+    {
+      "text": "can",
+      "start": 49.46,
+      "end": 49.62,
+      "accuracy": 0.061666,
+      "id": 119
+    },
+    {
+      "text": "i",
+      "start": 49.63,
+      "end": 49.87,
+      "accuracy": 0.474409,
+      "id": 120
+    },
+    {
+      "text": "keep",
+      "start": 49.88,
+      "end": 50.07,
+      "accuracy": 0.469782,
+      "id": 121
+    },
+    {
+      "text": "forgetting",
+      "start": 50.08,
+      "end": 50.45,
+      "accuracy": 0.691811,
+      "id": 122
+    },
+    {
+      "text": "that",
+      "start": 50.46,
+      "end": 50.61,
+      "accuracy": 0.591519,
+      "id": 123
+    },
+    {
+      "text": "their",
+      "start": 50.62,
+      "end": 50.75,
+      "accuracy": 0.415488,
+      "id": 124
+    },
+    {
+      "text": "severed",
+      "start": 50.76,
+      "end": 51.09,
+      "accuracy": 0.070835,
+      "id": 125
+    },
+    {
+      "text": "country",
+      "start": 51.1,
+      "end": 51.64,
+      "accuracy": 0.863625,
+      "id": 126
+    },
+    {
+      "text": "that",
+      "start": 52.04,
+      "end": 52.24,
+      "accuracy": 0.052774,
+      "id": 127
+    },
+    {
+      "text": "has",
+      "start": 52.25,
+      "end": 52.43,
+      "accuracy": 0.060089,
+      "id": 128
+    },
+    {
+      "text": "yet",
+      "start": 52.44,
+      "end": 52.73,
+      "accuracy": 0.01394,
+      "id": 129
+    },
+    {
+      "text": "been",
+      "start": 52.98,
+      "end": 53.14,
+      "accuracy": 0.127538,
+      "id": 130
+    },
+    {
+      "text": "data",
+      "start": 53.15,
+      "end": 53.56,
+      "accuracy": 0.026625,
+      "id": 131
+    },
+    {
+      "text": "all",
+      "start": 53.57,
+      "end": 53.87,
+      "accuracy": 0.933879,
+      "id": 132
+    },
+    {
+      "text": "across",
+      "start": 53.88,
+      "end": 54.32,
+      "accuracy": 0.937717,
+      "id": 133
+    },
+    {
+      "text": "russian",
+      "start": 54.33,
+      "end": 54.59,
+      "accuracy": 0.377527,
+      "id": 134
+    },
+    {
+      "text": "society",
+      "start": 54.6,
+      "end": 55.21,
+      "accuracy": 0.982552,
+      "id": 135
+    },
+    {
+      "text": "[NOISE]",
+      "start": 55.72,
+      "end": 55.96,
+      "accuracy": 0.741608,
+      "id": 136
+    },
+    {
+      "text": "so",
+      "start": 55.97,
+      "end": 56.55,
+      "accuracy": 0.978629,
+      "id": 137
+    }
+  ],
+  [
+    {
+      "text": "if",
+      "start": 57.84,
+      "end": 57.96,
+      "accuracy": 0.458181,
+      "id": 138
+    },
+    {
+      "text": "you're",
+      "start": 57.97,
+      "end": 58.1,
+      "accuracy": 0.196993,
+      "id": 139
+    },
+    {
+      "text": "toppling",
+      "start": 58.11,
+      "end": 58.67,
+      "accuracy": 0.596271,
+      "id": 140
+    },
+    {
+      "text": "moscow",
+      "start": 58.68,
+      "end": 59.1,
+      "accuracy": 0.970151,
+      "id": 141
+    },
+    {
+      "text": "friendly",
+      "start": 59.11,
+      "end": 59.52,
+      "accuracy": 0.673582,
+      "id": 142
+    },
+    {
+      "text": "leaders",
+      "start": 59.53,
+      "end": 60.25,
+      "accuracy": 0.85409,
+      "id": 143
+    },
+    {
+      "text": "in",
+      "start": 60.38,
+      "end": 60.52,
+      "accuracy": 0.975307,
+      "id": 144
+    },
+    {
+      "text": "country",
+      "start": 60.53,
+      "end": 61.06,
+      "accuracy": 0.181882,
+      "id": 145
+    },
+    {
+      "text": "estate",
+      "start": 61.07,
+      "end": 61.65,
+      "accuracy": 0.084114,
+      "id": 146
+    }
+  ]
+]
