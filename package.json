@@ -131,7 +131,7 @@
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "electron": "^5.0.6",
+    "electron": "^6.0.7",
     "electron-builder": "^20.38.5",
     "jquery": "^3.4.1",
     "npm": "^6.10.1",
@@ -141,6 +141,7 @@
     "@bbc/digital-paper-edit-client": "^1.0.10",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
+    "digital-paper-edit-client": "^1.0.6",
     "diskdb": "^0.1.17",
     "electron-updater": "^4.1.2",
     "ffmpeg-static-electron": "^2.0.1",
