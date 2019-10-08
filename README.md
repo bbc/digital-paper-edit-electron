@@ -91,6 +91,7 @@ _TBC_
 ## Deployment
 <!-- _How to deploy the code/app into test/staging/production_ -->
 
-_TBC_
+We use [Travis CI](https://travis-ci.org/bbc/digital-paper-edit-electron/builds/) to build. The Github access token (from newslabs_deploy user, which is the general News Labs deployment account) is used to deploy. This means that you **cannot** deploy directly by triggering a build via pushing to master. Because your access token isn't used. You would manually need to trigger the build through the Github UI (which is dumb), because then the changes you make from there is seen as the correct newslabs_deploy user by Travis CI.
 
+There is a ticket to address this workaround: [issue](https://github.com/bbc/digital-paper-edit-electron/issues/6)
 <!-- Probably through Travis or Circle CI -->
