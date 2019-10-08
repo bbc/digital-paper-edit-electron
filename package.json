@@ -130,15 +130,15 @@
     }
   },
   "devDependencies": {
-    "cross-env": "^5.2.0",
-    "electron": "^6.0.7",
-    "electron-builder": "^20.38.5",
+    "cross-env": "^5.2.1",
+    "electron": "^6.0.11",
+    "electron-builder": "^20.44.4",
     "jquery": "^3.4.1",
-    "npm": "^6.10.1",
-    "typescript": "^3.5.3"
+    "npm": "^6.11.3",
+    "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@bbc/digital-paper-edit-client": "^1.0.10",
+    "@bbc/digital-paper-edit-client": "^1.1.0",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "digital-paper-edit-client": "^1.0.6",
@@ -147,8 +147,8 @@
     "ffmpeg-static-electron": "^2.0.1",
     "ffprobe-static-electron": "^2.0.0",
     "fluent-ffmpeg": "^2.1.2",
-    "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.9",
-    "react-dom": "^16.8.6"
+    "react": "^16.10.2",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.10.2"
   }
 }
