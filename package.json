@@ -139,7 +139,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@bbc/digital-paper-edit-client": "^1.2.0",
+    "@bbc/digital-paper-edit-client": "^1.2.1",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "digital-paper-edit-client": "^1.0.6",
