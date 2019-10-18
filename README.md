@@ -84,7 +84,6 @@ npm run build:mwl
 _TBC_
 
 ## Tests
-<!-- _How to carry out tests_ -->
 
  _TBC_
 
