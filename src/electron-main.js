@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');;
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -29,7 +29,12 @@ function createNewSettingsWindow() {
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'src', 'stt-settings', 'index.html'),
+      pathname: path.join(
+        app.getAppPath(),
+        'src',
+        'stt-settings',
+        'index.html'
+      ),
       protocol: 'file:',
       slashes: true
     })
@@ -37,7 +42,6 @@ function createNewSettingsWindow() {
 }
 
 function createMainWindow() {
-
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -55,7 +59,13 @@ function createMainWindow() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'node_modules', '@bbc', 'digital-paper-edit-client', 'index.html'),
+      pathname: path.join(
+        app.getAppPath(),
+        'node_modules',
+        '@bbc',
+        'digital-paper-edit-client',
+        'index.html'
+      ),
       protocol: 'file:',
       slashes: true
     })
@@ -90,12 +100,11 @@ function createMainWindow() {
     settingsWindow = null;
   });
 
-  mainWindow.webContents.on('crashed', (e) => {
+  mainWindow.webContents.on('crashed', e => {
     console.log(e);
     app.relaunch();
     // app.quit()
   });
-
 }
 
 // This method will be called when Electron has finished
@@ -112,7 +121,9 @@ app.on('window-all-closed', function() {
   }
 });
 
-app.on('uncaughtException', (err) => { console.error('uncaughtException', err); });
+app.on('uncaughtException', err => {
+  console.error('uncaughtException', err);
+});
 
 app.on('activate', function() {
   // On OS X it's common to re-create a window in the app when the
@@ -191,6 +202,8 @@ ipcMain.on('prompt', function(eventRet, arg) {
   });
 });
 ipcMain.on('prompt-response', function(event, arg) {
-  if (arg === '') { arg = null; }
+  if (arg === '') {
+    arg = null;
+  }
   promptResponse = arg;
 });
