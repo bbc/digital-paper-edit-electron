@@ -135,7 +135,7 @@
     "electron": "^6.0.11",
     "electron-builder": "^21.2.0",
     "jquery": "^3.4.1",
-    "npm": "^6.12.1",
+    "npm": "^6.13.4",
     "typescript": "^3.6.3"
   },
   "dependencies": {
