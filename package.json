@@ -19,19 +19,19 @@
     ""
   ],
   "bugs": {
-    "url": "https://github.com/bbc/digital-paper-edit-electron/issues"
+    "url": "https://github.com/pietrop/digital-paper-edit-electron/issues"
   },
-  "homepage": "https://github.com/bbc/digital-paper-edit-electron",
+  "homepage": "https://github.com/pietrop/digital-paper-edit-electron",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
+    "url": "git+https://github.com/pietrop/digital-paper-edit-electron.git"
   },
   "build": {
     "publish": {
       "provider": "github",
       "releaseType": "prerelease",
       "vPrefixedTagName": false,
-      "owner": "bbc",
+      "owner": "pietrop",
       "repo": "digital-paper-edit-electron"
     },
     "appId": "org.dpe.dpe-electron",
