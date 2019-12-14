@@ -28,7 +28,7 @@ env:
     - USE_HARD_LINKS=false
 
 script:
-  - npm run build:mwl:publish:always;
+  - npm run build:m:publish:always;
   - ls ./dist;
   - find . | grep .dmg;
   - find . | grep .AppImage;

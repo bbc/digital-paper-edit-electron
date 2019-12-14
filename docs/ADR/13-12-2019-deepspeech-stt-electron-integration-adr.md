@@ -8,3 +8,9 @@ Problem as discussed in [ADR in that repository](https://github.com/pietrop/deep
 previously open source offline STT integrated with electron [pocketsphinx](https://github.com/OpenNewsLabs/pocketsphinx-stt) where model is self contained in npm, as it's not very bick. And Gentle, that [requires spinning up a separate app](https://autoedit.gitbook.io/user-manual), eg as used in [autoEdit](http://www.autoedit.io/).
 
 <!-- 1.0.8-alpha.3 -->
+
+
+- [ ] travis github release deploy for pietrop repo 
+- [ ] add `deepspeech-node-wrapper`
+- [ ] add logic to download model under settings
+- [ ] package/deploy and test 
