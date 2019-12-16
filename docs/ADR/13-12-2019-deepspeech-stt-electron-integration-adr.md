@@ -10,7 +10,8 @@ previously open source offline STT integrated with electron [pocketsphinx](https
 <!-- 1.0.8-alpha.3 -->
 
 
-- [ ] travis github release deploy for pietrop repo 
+- [x] travis github release deploy for pietrop repo 
 - [ ] add `deepspeech-node-wrapper`
-- [ ] add logic to download model under settings
+- [ ] add logic to download model under settings in `deepspeech-node-wrapper`
+- [ ] add logic to download model under settings in electron app
 - [ ] package/deploy and test 
