@@ -101,6 +101,7 @@ class ElectronWrapper {
         newTranscriptData.status = 'done';
         newTranscriptData.transcript = res.transcript;
         newTranscriptData.audioUrl = res.url;
+        newTranscriptData.sttEngine = res.sttEngine;
         // edge case if video has already been processed then don't override the url
         console.log('newTranscriptData.url', newTranscriptData.url);
         if (!newTranscriptData.url) {

@@ -3,6 +3,25 @@ const path = require('path');
 const electron = require('electron');
 const appUserDataPath = electron.remote.app.getPath('userData');
 
+// TODO: add some way to check if model, 
+// folder and necessary files,
+// are set in user folder in application libary path
+function getIsDeepspeechModelSet(){
+  // eg check if this path exists? 
+  // path.join(appUserDataPath, `${ deepspeeshmodels }`);
+  return true;
+}
+
+function getDeepSpeechModelPath(){
+  console.log('setDeepSpeechModel')
+  return path.join(appUserDataPath, 'deepspeeshmodels');
+}
+
+function setDeepSpeechModel(){
+  console.log('setDeepSpeechModel')
+  return path.join(appUserDataPath, 'deepspeeshmodels');
+}
+
 const credentialsTemplate = {
   provider: '',
   sttUserName: '',
@@ -54,3 +73,6 @@ function areCredentialsSet(provider) {
 module.exports.setCredentials = setCredentials;
 module.exports.getCredentials = getCredentials;
 module.exports.areCredentialsSet = areCredentialsSet;
+module.exports.getIsDeepspeechModelSet = getIsDeepspeechModelSet;
+module.exports.setDeepSpeechModel = setDeepSpeechModel;
+module.exports.getDeepSpeechModelPath = getDeepSpeechModelPath;
