@@ -28,12 +28,18 @@
       import Tabs from "react-bootstrap/Tabs";
       import Tab from "react-bootstrap/Tab";
       import Button from "react-bootstrap/Button";
-      import ProgressBar from "react-bootstrap/ProgressBar"
+      import ProgressBar from "react-bootstrap/ProgressBar";
       import Form from "react-bootstrap/Form";
       import Alert from "react-bootstrap/Alert";
-
       import { getDefaultStt, setDefaultStt } from "./default-stt.js";
       import speechmaticsLanguages from "./language-options/speechmatics.json";
+      import {
+        getCredentials,
+        setCredentials,
+        getIsDeepspeechModelSet,
+        setDeepSpeechModel,
+        getDeepSpeechModelPath
+      } from "./credentials.js";
       const { app } = require("electron").remote;
       const appVersion = app.getVersion();
 
@@ -85,9 +91,12 @@
         componentDidMount() {
           const { provider, language } = getDefaultStt();
           console.log("provider, language", provider, language);
+          const isDeepspeechModelSet = getIsDeepspeechModelSet();
           this.setState({
             defaultStt: provider,
-            defaultLanguage: language
+            defaultLanguage: language,
+            isDeepspeechModelSet: isDeepspeechModelSet,
+            downloadingDeepspeech: false
           });
         }
         handleChangeDefaultStt = e => {
@@ -112,6 +121,19 @@
           });
           this.setState({
             saved: true
+          });
+        };
+
+        handleDownloadDeepspeechModel = async () => {
+          console.log("handleDownloadDeepspeechModel");
+          this.setState({
+              downloadingDeepspeech: true
+            });
+          setDeepSpeechModel().then(res => {
+            this.setState({
+              isDeepspeechModelSet: true,
+              downloadingDeepspeech: false
+            });
           });
         };
 
@@ -181,11 +203,9 @@
                 >
                   <option value="AssemblyAI">AssemblyAI</option>
                   <option value="Speechmatics">Speechmatics</option>
-                  {process.platform === "darwin" ? (
-                    <option value="deepspeech">
-                      Mozilla Deepspeech (offline)
-                    </option>
-                  ) : null}
+                  <option value="deepspeech">
+                    Mozilla Deepspeech (offline){" "}
+                  </option>
                   {process.platform === "darwin" ? (
                     <option value="pocketsphinx">Pocketsphinx (offline)</option>
                   ) : null}
@@ -221,12 +241,44 @@
                     Only English available as default{" "}
                   </Form.Text>
 
-                  {this.state.defaultStt === "deepspeech" ? (
-                    <Form.Text className="text-warning">
-                      You need to download the STT Model (1.8gb) to be able to
-                      use this STT (offline){" "}
-                    </Form.Text>
+                  {this.state.defaultStt === "deepspeech" && !this.state.downloadingDeepspeech ? (
+                    this.state.isDeepspeechModelSet ? (
+                      <Form.Text className="text-info">
+                        You have downloaded the Deepspeech STT model (1.8gb) and
+                        are ready to go
+                      </Form.Text>
+                    ) : (
+                      <React.Fragment>
+                        <br />
+                        <CustomAlert
+                          variant={"info"}
+                          message={
+                            <React.Fragment>
+                              <p>
+                                You need to download the Mozilla Deepspeech STT
+                                Model (1.8gb) to be able to use this STT Engine
+                                (offline)
+                              </p>
+                              <Button
+                                variant="outline-info"
+                                block
+                                onClick={this.handleDownloadDeepspeechModel}
+                              >
+                                Download
+                              </Button>
+                            </React.Fragment>
+                          }
+                        />
+                      </React.Fragment>
+                    )
                   ) : null}
+
+                  {this.state.downloadingDeepspeech ? (
+                  <React.Fragment>
+                    <h6>Downloading Deepspeech model</h6>
+                    <ProgressBar animated now={100} />
+                  </React.Fragment>
+                  ): null}
                 </React.Fragment>
               )}
               <br />
@@ -349,13 +401,6 @@
         }
       }
 
-      import {
-        getCredentials,
-        setCredentials,
-        getIsDeepspeechModelSet,
-        setDeepSpeechModel,
-        getDeepSpeechModelPath
-      } from "./credentials.js";
       class Settings extends React.Component {
         constructor(props) {
           super(props);
@@ -364,7 +409,7 @@
             speechmaticsSTTUsername: false,
             speechmaticsApiKey: false,
             assemblyAISttAPIKey: false,
-            deepspeechModelSet: false,
+            isDeepspeechModelSet: false,
             currentSavedProvider: ""
           };
         }
@@ -374,13 +419,13 @@
           // console.log('speechmaticsCredentials', speechmaticsCredentials);
           const assemblyAiCred = getCredentials("AssemblyAI");
           // console.log('AssemblyAICredentials',AssemblyAICredentials)
-          const isDeepspeechModelSet = getIsDeepspeechModelSet("deepspeech");
+          const isDeepspeechModelSet = getIsDeepspeechModelSet();
           this.setState(
             {
               speechmaticsSTTUsername: speechmaticsCredentials.sttUserName,
               speechmaticsApiKey: speechmaticsCredentials.sttAPIKey,
               assemblyAISttAPIKey: assemblyAiCred.sttAPIKey,
-              deepspeechModelSet: isDeepspeechModelSet
+              isDeepspeechModelSet: isDeepspeechModelSet
             },
             () => {
               this.forceUpdate();
@@ -427,30 +472,7 @@
 
                   <h3>STT Settings</h3>
                   <br />
-                  <Tabs defaultActiveKey="deepspeech">
-                    {this.state.assemblyAISttAPIKey !== false ? (
-                      <Tab eventKey="deepspeech" title="deepspeech">
-                        <React.Fragment>
-                          <h4>Deepspeech download English Model</h4>
-                          <Form.Label>
-                            download English Model for Deepspeech (1.8gb)
-                          </Form.Label>
-                          {/*TODO: 
-                          - First start, option to download
-                          - progress bar option while downloading
-                          - success message, once downloaded sucesfully 
-                          - when coming, back, showing it has been downloaded and it's ready to use
-                          - handle if download not sucessfull, start over. 
-                          */} 
-                          <Button block onClick={setDeepSpeechModel} >Download</Button>
-                          <br/>
-                          <ProgressBar now={60} label={`${60}%`} />
-                          <Form.Text className="text-muted">
-                            Only English available
-                          </Form.Text>
-                        </React.Fragment>
-                      </Tab>
-                    ) : null}
+                  <Tabs defaultActiveKey="assemblyai">
                     {this.state.assemblyAISttAPIKey !== false ? (
                       <Tab eventKey="assemblyai" title="AssemblyAI">
                         <SettingsForm
