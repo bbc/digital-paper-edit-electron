@@ -1,6 +1,6 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
     "build:mwl:publish:always": "electron-builder -mwl --publish always",
     "build:m:publish:always": "electron-builder -m --publish always",
+    "build:mw:publish:always": "electron-builder -mw --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
