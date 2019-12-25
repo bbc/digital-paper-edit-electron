@@ -137,7 +137,7 @@
     "electron-builder": "^20.38.5",
     "jquery": "^3.4.1",
     "npm": "^6.13.4",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "digital-paper-edit-react-client": "^1.0.0",
