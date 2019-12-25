@@ -143,6 +143,7 @@
     "node-sass": "^4.13.0",
     "npm": "^6.13.4",
     "sass": "^1.24.0",
+    "typescript": "^3.7.4",
     "webpack": "^4.41.4"
   },
   "dependencies": {
