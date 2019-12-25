@@ -53,7 +53,7 @@ function createMainWindow() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'node_modules', '@bbc', 'digital-paper-edit-client', 'index.html'),
+      pathname: path.join(app.getAppPath(), 'node_modules', 'digital-paper-edit-react-client', 'index.html'),
       protocol: 'file:',
       slashes: true
     })

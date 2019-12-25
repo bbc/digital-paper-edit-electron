@@ -349,6 +349,27 @@
                   {this.props.customInstructions}
                 </Form.Text>
 
+                {this.state.sttUserName !== false ? (
+                  <Form.Group controlId="sttUserName">
+                    <Form.Label>STT user name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter the STT user name"
+                      value={this.state.sttUserName}
+                      // defaultValue={ this.state.sttAPIKey }
+                      onChange={this.handlesttUserNameChange}
+                      required
+                    />
+                    <Form.Text className="text-muted">
+                      STT user name provided by {this.props.provider}
+                    </Form.Text>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      Please add the Speech To STT user name
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : null}
+
                 {this.state.sttAPIKey !== false ? (
                   <Form.Group controlId="sttAPIKey">
                     <Form.Label>API Key</Form.Label>

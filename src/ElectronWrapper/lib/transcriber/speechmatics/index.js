@@ -16,9 +16,9 @@ const speechmaticsSTT = (newFile, language = 'en') => {
     // But not refactoring speechmatics module and sdk for now. eg it uses callbacks etc..
     return new Promise((resolve, reject) => {
 
-      if (process.env.NODE_ENV === 'development') {
-        return resolve(sampleJson);
-      }
+      // if (process.env.NODE_ENV === 'development') {
+      //   return resolve(sampleJson);
+      // }
 
       const SendToSpeechmaticsUtil = new SendToSpeechmatics();
 
