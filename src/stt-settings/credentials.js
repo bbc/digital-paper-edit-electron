@@ -8,7 +8,7 @@ const appUserDataPath = electron.remote.app.getPath("userData");
 
 function getDeepSpeechModelFolderName( modelVersion) {
   const deepspeechModelVersion = modelVersion ? modelVersion : "0.6.0";
-  return `deepspeech-${deepspeechModelVersion}-models`;
+  return `deepspeech-${modelVersion}-models`;
   // return deepspeeshmodels
 }
 
