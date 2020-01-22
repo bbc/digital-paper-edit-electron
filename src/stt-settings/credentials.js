@@ -19,6 +19,7 @@ function getDeepSpeechModelPath(deepspeechModelVersion) {
 // TODO: add some way to check if model,
 // folder and necessary files,
 // are set in user folder in application libary path
+// Files required described in README of https://github.com/pietrop/deepspeech-node-wrapper
 function getIsDeepspeechModelSet() {
   // eg check if this path exists?
   const deepSpeechModelPath = getDeepSpeechModelPath();
