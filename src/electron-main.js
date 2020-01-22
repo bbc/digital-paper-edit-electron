@@ -1,6 +1,8 @@
-const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');;
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
+
+const { crashReporter } = require('electron');
 
 const makeMenuTemplate = require('./make-menu-template.js');
 
@@ -27,7 +29,12 @@ function createNewSettingsWindow() {
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'src', 'stt-settings', 'index.html'),
+      pathname: path.join(
+        app.getAppPath(),
+        'src',
+        'stt-settings',
+        'index.html'
+      ),
       protocol: 'file:',
       slashes: true
     })
@@ -35,7 +42,6 @@ function createNewSettingsWindow() {
 }
 
 function createMainWindow() {
-
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -53,7 +59,13 @@ function createMainWindow() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(app.getAppPath(), 'node_modules', '@bbc', 'digital-paper-edit-client', 'index.html'),
+      pathname: path.join(
+        app.getAppPath(),
+        'node_modules',
+        '@bbc',
+        'digital-paper-edit-client',
+        'index.html'
+      ),
       protocol: 'file:',
       slashes: true
     })
@@ -88,6 +100,11 @@ function createMainWindow() {
     settingsWindow = null;
   });
 
+  mainWindow.webContents.on('crashed', e => {
+    console.log(e);
+    app.relaunch();
+    // app.quit()
+  });
 }
 
 // This method will be called when Electron has finished
@@ -102,6 +119,10 @@ app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+app.on('uncaughtException', err => {
+  console.error('uncaughtException', err);
 });
 
 app.on('activate', function() {
@@ -130,6 +151,21 @@ app.on('open-url', (event, url) => {
   // to stay active until the user quits explicitly with Cmd + Q
   event.preventDefault();
   shell.openExternal(url);
+});
+
+app.on('renderer-process-crashed', function(event, webContents, killed) {
+  console.log('renderer-process-crashed', event);
+  console.log('webContents', webContents);
+  console.log('killed', killed);
+});
+
+app.setPath('temp', '/tmp/DPE');
+
+crashReporter.start({
+  productName: 'DPE_ELECTRON',
+  companyName: 'BBC',
+  submitURL: 'http://127.0.0.1:1127/post',
+  uploadToServer: true
 });
 
 let promptResponse;
@@ -166,6 +202,8 @@ ipcMain.on('prompt', function(eventRet, arg) {
   });
 });
 ipcMain.on('prompt-response', function(event, arg) {
-  if (arg === '') { arg = null; }
+  if (arg === '') {
+    arg = null;
+  }
   promptResponse = arg;
 });
