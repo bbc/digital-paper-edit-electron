@@ -2,7 +2,7 @@
 os: osx
 osx_image: xcode9.4
 language: node_js
-node_js: "8"
+node_js: "12.13.0" # one of node js travis pre installed versions
 sudo: required
 
 before_install:
@@ -26,6 +26,7 @@ env:
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
     - PUBLISH_FOR_PULL_REQUEST=false
     - USE_HARD_LINKS=false
+    - YARN_GPG=no
 
 script:
   - npm run build:mwl:publish:always;
