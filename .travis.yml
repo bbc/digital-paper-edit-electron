@@ -24,7 +24,7 @@ env:
     # - EP_PRE_RELEASE=false
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-    - PUBLISH_FOR_PULL_REQUEST=true
+    - PUBLISH_FOR_PULL_REQUEST=false
     - USE_HARD_LINKS=false
     - YARN_GPG=no
 
