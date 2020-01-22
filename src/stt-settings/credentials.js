@@ -7,9 +7,7 @@ const appUserDataPath = electron.remote.app.getPath("userData");
 // TODO: consider moving deepspeech logic to a separate file from credentials.js?
 
 function getDeepSpeechModelFolderName( modelVersion = "0.6.0") {
-  const deepspeechModelVersion = modelVersion ? modelVersion : "0.6.0";
   return `deepspeech-${modelVersion}-models`;
-  // return deepspeeshmodels
 }
 
 function getDeepSpeechModelPath(deepspeechModelVersion) {
