@@ -135,5 +135,6 @@ dist/com.autoedit2.it.zxp
 # dotenv ENV var
 .env
 
+.vscode
 
 build/
