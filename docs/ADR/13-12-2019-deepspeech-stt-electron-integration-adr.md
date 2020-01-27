@@ -12,6 +12,6 @@ previously open source offline STT integrated with electron [pocketsphinx](https
 Decided to add option in settings for downloading Deepspeech as opposed to package it with the electron app, so that it can be optional setup for user once app is installed.
 
 - [x] add `deepspeech-node-wrapper`
-- [ ] add logic to download model under settings in `deepspeech-node-wrapper`	- [x] add logic to download model under settings in `deepspeech-node-wrapper`
-- [ ] add logic to download model under settings in electron app	- [x] add logic to download model under settings in electron app
-- [ ] package/deploy and test 	- [x] package/deploy and test 
+- [x] add logic to download model under settings in `deepspeech-node-wrapper`
+- [x] add logic to download model under settings in electron app
+- [x] package/deploy and test 
