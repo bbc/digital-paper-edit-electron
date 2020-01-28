@@ -26,7 +26,8 @@ function wavFileExtension(filePath) {
   // https://nodejs.org/api/path.html#path_path_parse_path
   const pathParsed = path.parse(audioFileOutputPath);
   if (pathParsed.ext !== '.wav') {
-    audioFileOutputPath = path.join(pathParsed.root, pathParsed.dir, `${ pathParsed.name }.wav`);
+    // audioFileOutputPath = path.join(pathParsed.root, pathParsed.dir, `${ pathParsed.name }.wav`);
+    audioFileOutputPath = path.join(pathParsed.dir, `${ pathParsed.name }.wav`);
   }
 
   return audioFileOutputPath;

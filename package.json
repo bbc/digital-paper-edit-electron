@@ -12,6 +12,8 @@
     "build:m": "cross-env NODE_ENV=production electron-builder -m",
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
     "build:mwl:publish:always": "electron-builder -mwl --publish always",
+    "build:m:publish:always": "electron-builder -m --publish always",
+    "build:mw:publish:always": "electron-builder -mw --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
@@ -131,17 +133,25 @@
     }
   },
   "devDependencies": {
-    "cross-env": "^5.2.1",
-    "electron": "^6.0.11",
-    "electron-builder": "^21.2.0",
+    "@babel/core": "^7.7.7",
+    "cross-env": "^5.2.0",
+    "electron": "^7.1.10",
+    "electron-builder": "^20.38.5",
+    "eslint": "^6.8.0",
+    "fibers": "^4.0.2",
+    "jest-resolve": "^24.9.0",
     "jquery": "^3.4.1",
-    "npm": "^6.12.1",
-    "typescript": "^3.6.3"
+    "node-sass": "^4.13.0",
+    "npm": "^6.13.4",
+    "sass": "^1.24.0",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.4"
   },
   "dependencies": {
     "@bbc/digital-paper-edit-client": "^1.2.5",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
+    "deepspeech-node-wrapper": "^1.0.6",
     "diskdb": "^0.1.17",
     "electron-updater": "^4.1.2",
     "ffmpeg-static-electron": "^2.0.1",
