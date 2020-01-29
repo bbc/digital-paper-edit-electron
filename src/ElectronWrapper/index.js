@@ -186,7 +186,7 @@ class ElectronWrapper {
       title: data.title,
       description: data.description
     };
-    // TODO: this part is for when correcting transcript with @bbc/react-transcript-editor as it's not ready
+    // TODO: this part is for when correcting transcript with react-transcript-editor as it's not ready
     if (data.words) {
       updatedTranscriptData.transcript = {};
       updatedTranscriptData.transcript.words = data.words;

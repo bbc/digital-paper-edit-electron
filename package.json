@@ -1,6 +1,6 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.3-alpha.1",
+  "version": "1.0.3-alpha.2",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -17,24 +17,24 @@
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
   },
   "license": "MIT",
-  "author": "Pietro Passarelli CC0 BBC 2019",
+  "author": "Pietro Passarelli CC0 2019",
   "contributors": [
     ""
   ],
   "bugs": {
-    "url": "https://github.com/bbc/digital-paper-edit-electron/issues"
+    "url": "https://github.com/pietrop/digital-paper-edit-electron/issues"
   },
-  "homepage": "https://github.com/bbc/digital-paper-edit-electron",
+  "homepage": "https://github.com/pietrop/digital-paper-edit-electron",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bbc/digital-paper-edit-electron.git"
+    "url": "git+https://github.com/pietrop/digital-paper-edit-electron.git"
   },
   "build": {
     "publish": {
       "provider": "github",
       "releaseType": "prerelease",
       "vPrefixedTagName": false,
-      "owner": "bbc",
+      "owner": "pietrop",
       "repo": "digital-paper-edit-electron"
     },
     "appId": "org.dpe.dpe-electron",
@@ -61,7 +61,7 @@
       "node_modules/ffprobe-static-electron/index.js",
       "node_modules/ffprobe-static-electron/package.json"
     ],
-    "copyright": "2019 BBC - Pietro Passarelli",
+    "copyright": "Pietro Passarelli CC0 2020",
     "mac": {
       "category": "public.app-category.productivity",
       "files": [
@@ -141,14 +141,14 @@
     "fibers": "^4.0.2",
     "jest-resolve": "^24.9.0",
     "jquery": "^3.4.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "npm": "^6.13.4",
     "sass": "^1.24.0",
     "typescript": "^3.7.4",
     "webpack": "^4.41.4"
   },
   "dependencies": {
-    "@bbc/digital-paper-edit-client": "^1.2.5",
+    "@pietrop/digital-paper-edit-client": "^1.2.7",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "deepspeech-node-wrapper": "^1.0.6",

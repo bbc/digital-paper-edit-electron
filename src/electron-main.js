@@ -62,7 +62,7 @@ function createMainWindow() {
       pathname: path.join(
         app.getAppPath(),
         'node_modules',
-        '@bbc',
+        '@pietrop',
         'digital-paper-edit-client',
         'index.html'
       ),
@@ -100,11 +100,11 @@ function createMainWindow() {
     settingsWindow = null;
   });
 
-  mainWindow.webContents.on('crashed', e => {
-    console.log(e);
-    app.relaunch();
-    // app.quit()
-  });
+  // mainWindow.webContents.on('crashed', e => {
+  //   console.log(e);
+  //   app.relaunch();
+  //   // app.quit()
+  // });
 }
 
 // This method will be called when Electron has finished
@@ -159,14 +159,14 @@ app.on('renderer-process-crashed', function(event, webContents, killed) {
   console.log('killed', killed);
 });
 
-app.setPath('temp', '/tmp/DPE');
+// app.setPath('temp', '/tmp/DPE');
 
-crashReporter.start({
-  productName: 'DPE_ELECTRON',
-  companyName: 'BBC',
-  submitURL: 'http://127.0.0.1:1127/post',
-  uploadToServer: true
-});
+// crashReporter.start({
+//   productName: 'DPE_ELECTRON',
+//   companyName: 'BBC',
+//   submitURL: 'http://127.0.0.1:1127/post',
+//   uploadToServer: true
+// });
 
 let promptResponse;
 ipcMain.on('prompt', function(eventRet, arg) {
