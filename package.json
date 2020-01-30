@@ -1,6 +1,6 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.3-alpha.3",
+  "version": "1.0.3-alpha.4",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -148,7 +148,7 @@
     "webpack": "^4.41.4"
   },
   "dependencies": {
-    "@pietrop/digital-paper-edit-client": "^1.2.8",
+    "@pietrop/digital-paper-edit-client": "^1.3.3-alpha.5",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "deepspeech-node-wrapper": "^1.0.6",
