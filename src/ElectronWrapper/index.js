@@ -451,7 +451,7 @@ class ElectronWrapper {
    * Helper SDK function to avoid making multiple calls client side when in Annotated Transcript view
    * Transcript + Annotations for that transcript + Labels for the project
    */
-  async get_TranscriptLabelsAnnotations(projectId, transcriptId) {
+  async getTranscriptLabelsAnnotations(projectId, transcriptId) {
     // GET Transcripts
     const transcriptResult = await this.getTranscript(projectId, transcriptId);
     // GET Labels for Project <-- or separate request in label component
