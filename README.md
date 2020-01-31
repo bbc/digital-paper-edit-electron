@@ -90,7 +90,27 @@ _TBC_
 ## Deployment
 <!-- _How to deploy the code/app into test/staging/production_ -->
 
-We use [Travis CI](https://travis-ci.org/bbc/digital-paper-edit-electron/builds/) to build. The Github access token (from newslabs_deploy user, which is the general News Labs deployment account) is used to deploy. This means that you **cannot** deploy directly by triggering a build via pushing to master. Because your access token isn't used. You would manually need to trigger the build through the Github UI (which is dumb), because then the changes you make from there is seen as the correct newslabs_deploy user by Travis CI.
-
-There is a ticket to address this workaround: [issue](https://github.com/bbc/digital-paper-edit-electron/issues/6)
+We use [Travis CI](https://travis-ci.org/pietrop/digital-paper-edit-electron/builds/) to build. And add new versions to [github releases](https://github.com/pietrop/digital-paper-edit-electron/releases).
 <!-- Probably through Travis or Circle CI -->
+
+However if you want to run a build and package the app locally you can use the npm scripts
+
+To build for mac, windows, and linux
+```
+npm run build:mwl
+```
+To build for mac only
+```
+npm run build:m
+```
+To build for windows only
+```
+npm run build:w
+```
+To build for linux only
+```
+npm run build:l
+```
+
+
+The build, packaged app will be in the `/dist` folder.
