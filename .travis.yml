@@ -1,5 +1,6 @@
 # Travis config to publish electron build for Mac, Windows and PC onto github releases 
 os: osx
+# https://docs.travis-ci.com/user/reference/osx/#macos-version
 osx_image: xcode11 #xcode9.4
 language: node_js
 node_js: "12.13.0" # one of node js travis pre installed versions
