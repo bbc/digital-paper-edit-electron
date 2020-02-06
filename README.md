@@ -4,7 +4,7 @@ Electron Cross Platform Desktop app
 
 ---> _Work in progress_ <--
 
-For a ready to use release of the desktop application, checkout the [user instructions](./docs/guides/user-instructions.md) for more details on how to get started.
+For a ready to use release of the desktop application, checkout the [user manual](https://autoedit.gitbook.io/digital-paper-edit-user-manual/installing) for more details on how to get started.
 
  
 [See here for overall project architecture info](https://github.com/bbc/digital-paper-edit-client#project-architecture)
