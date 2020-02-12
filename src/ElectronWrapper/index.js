@@ -39,6 +39,8 @@ class ElectronWrapper {
   async createProject(data) {
     const project = db.create('projects', data);
     project.id = project._id;
+    // TODO: ad this point need to run update otherwise 
+    // project.id in db is equal to null.
 
     return { status: 'ok', project };
   }
@@ -107,22 +109,14 @@ class ElectronWrapper {
           newTranscriptData.url = res.url;
         }
         newTranscriptData.clipName = res.clipName;
-        db.update(
-          'transcripts',
-          { _id: transcriptId, projectId },
-          newTranscriptData
-        );
+        db.update('transcripts', { _id: transcriptId },newTranscriptData );
       })
       .catch(err => {
         // TODO: audioUrl is not saved, and so cannot be deleted when deleting transcript
         console.error('Transcription error', err);
         newTranscriptData.status = 'error';
         newTranscriptData.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
-        db.update(
-          'transcripts',
-          { _id: transcriptId, projectId },
-          newTranscriptData
-        );
+        db.update('transcripts', { _id: transcriptId},newTranscriptData);
       });
 
     // TODO: UUIDs for converted media?
@@ -137,11 +131,7 @@ class ElectronWrapper {
         console.log('videoPreviewPath', videoPreviewPath);
         newTranscriptData.videoUrl = videoPreviewPath;
         newTranscriptData.url = videoPreviewPath;
-        db.update(
-          'transcripts',
-          { _id: transcriptId, projectId },
-          newTranscriptData
-        );
+        db.update('transcripts',{  _id: transcriptId},newTranscriptData);
       })
       .catch(err => {
         console.error('Error converting to video', err);
@@ -152,11 +142,7 @@ class ElectronWrapper {
     })
       .then(metadataResponse => {
         newTranscriptData.metadata = metadataResponse;
-        db.update(
-          'transcripts',
-          { _id: transcriptId, projectId },
-          newTranscriptData
-        );
+        db.update( 'transcripts', { _id: transcriptId}, newTranscriptData);
       })
       .catch(err => {
         console.error('Error reading metadata', err);
@@ -194,11 +180,7 @@ class ElectronWrapper {
         updatedTranscriptData.transcript.paragraphs = data.paragraphs;
       }
     }
-    const updated = db.update(
-      'transcripts',
-      { _id: transcriptId, projectId },
-      updatedTranscriptData
-    );
+    const updated = db.update(  'transcripts', { _id: transcriptId},updatedTranscriptData);
     updatedTranscriptData.id = transcriptId;
 
     return { ok: true, transcript: updatedTranscriptData };
@@ -334,11 +316,7 @@ class ElectronWrapper {
     const labelId = newLabel._id;
     newLabel.id = labelId;
     // temporary workaround to update the id
-    const updated = db.update(
-      'labels',
-      { _id: labelId, projectId },
-      newLabelData
-    );
+    const updated = db.update('labels',{  _id: labelId }, newLabelData);
     // TODO: clint requires to send all the ids back
     // when a new one is created - this should be refactored
     const labels = db.getAll('labels', { projectId });
@@ -431,11 +409,7 @@ class ElectronWrapper {
       paperEditData.elements = data.elements;
     }
 
-    const updated = db.update(
-      'paperedits',
-      { _id: paperEditId, projectId },
-      paperEditData
-    );
+    const updated = db.update( 'paperedits',{  _id: paperEditId }, paperEditData );
 
     return { ok: true, status: 'ok', paperedit: paperEditData };
   }
