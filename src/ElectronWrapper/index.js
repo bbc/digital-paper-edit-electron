@@ -89,6 +89,11 @@ class ElectronWrapper {
       status: 'in-progress'
     };
 
+    const newTranscriptDataSTTResult = {};
+    const newTranscriptDataError = {};
+    const newTranscriptDataVideo = {};
+    const newTranscriptDataMetadata = {};
+
     const newTranscript = db.create('transcripts', newTranscriptData);
     const transcriptId = newTranscript._id;
     newTranscript.id = transcriptId;
@@ -97,26 +102,26 @@ class ElectronWrapper {
     // const transcriptResult = await transcribe(data.path);
     transcribe(data.path)
       .then(res => {
+        newTranscriptDataSTTResult.status = 'done',
+        newTranscriptDataSTTResult.transcript= res.transcript;
+        newTranscriptDataSTTResult.audioUrl = res.url;
+        newTranscriptDataSTTResult.sttEngine = res.sttEngine;
+        newTranscriptDataSTTResult.clipName =res.clipName;
         console.log('transcribe', res);
-        newTranscriptData.status = 'done';
-        newTranscriptData.transcript = res.transcript;
-        newTranscriptData.audioUrl = res.url;
-        newTranscriptData.sttEngine = res.sttEngine;
         // edge case if video has already been processed then don't override the url
-        console.log('newTranscriptData.url', newTranscriptData.url);
-        if (!newTranscriptData.url) {
-          console.log('if newTranscriptData.url', newTranscriptData.url);
-          newTranscriptData.url = res.url;
+        console.log('newTranscriptDataSTTResult.url newTranscriptDataVideo.url', newTranscriptDataSTTResult.url, newTranscriptDataVideo.url);
+        if (!newTranscriptDataVideo.url) {
+          console.log('if !newTranscriptDataVideo.url', newTranscriptDataVideo.url)
+          newTranscriptDataSTTResult.url = res.url;
         }
-        newTranscriptData.clipName = res.clipName;
-        db.update('transcripts', { _id: transcriptId },newTranscriptData );
+        db.update('transcripts', { _id: transcriptId }, newTranscriptDataSTTResult );
       })
       .catch(err => {
         // TODO: audioUrl is not saved, and so cannot be deleted when deleting transcript
         console.error('Transcription error', err);
-        newTranscriptData.status = 'error';
-        newTranscriptData.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
-        db.update('transcripts', { _id: transcriptId},newTranscriptData);
+        newTranscriptDataError.status = 'error';
+        newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
+        db.update('transcripts', { _id: transcriptId}, newTranscriptDataError);
       });
 
     // TODO: UUIDs for converted media?
@@ -129,9 +134,9 @@ class ElectronWrapper {
     })
       .then(videoPreviewPath => {
         console.log('videoPreviewPath', videoPreviewPath);
-        newTranscriptData.videoUrl = videoPreviewPath;
-        newTranscriptData.url = videoPreviewPath;
-        db.update('transcripts',{  _id: transcriptId},newTranscriptData);
+          newTranscriptDataVideo.videoUrl = videoPreviewPath;
+          newTranscriptDataVideo.url = videoPreviewPath;
+        db.update('transcripts',{  _id: transcriptId},newTranscriptDataVideo);
       })
       .catch(err => {
         console.error('Error converting to video', err);
@@ -141,8 +146,8 @@ class ElectronWrapper {
       file: data.path
     })
       .then(metadataResponse => {
-        newTranscriptData.metadata = metadataResponse;
-        db.update( 'transcripts', { _id: transcriptId}, newTranscriptData);
+        newTranscriptDataMetadata.metadata = metadataResponse;
+        db.update( 'transcripts', { _id: transcriptId}, newTranscriptDataMetadata);
       })
       .catch(err => {
         console.error('Error reading metadata', err);
