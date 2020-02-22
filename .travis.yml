@@ -30,7 +30,7 @@ env:
     - YARN_GPG=no
 
 script:
-  - npm run build:mwl:publish:always;
+  - travis_wait npm run build:mwl:publish:always;
   - ls ./dist;
   - find . | grep .dmg;
   - find . | grep .AppImage;
