@@ -11,16 +11,16 @@ async function assemblyAiStt (inputPath) {
     assemblyai.setAPIKey(assemblyAiCredentials.sttAPIKey);
     try {
       // if in development, stub the response from STT
-      if (process.env.NODE_ENV === 'development') {
-        return sampleJson;
-      }
-      else {
+      // if (process.env.NODE_ENV === 'development') {
+      //   return sampleJson;
+      // }
+      // else {
         const transcript = new assemblyai.Upload(inputPath);
         const response = await transcript.create();
         const data = response.get();
 
         return data;
-      }
+      // }
     } catch (e) {
       // TODO: Do some error handling here
       console.error('error calling AssemblyAi SDK', e);
