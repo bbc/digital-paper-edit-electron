@@ -2,14 +2,14 @@
 const fs = require('fs');
 const path = require('path');
 const { app } = require('electron').remote;
+const { ipcRenderer } = require('electron')
 const dataPath = app.getPath('userData');
 
-const db = require('./dbWrapper.js');
 const mediaDir = path.join(dataPath, 'media');
-
-const transcribe = require('./lib/transcriber');
+const db = require('./dbWrapper.js');
 const convertToVideo = require('./lib/convert-to-video');
 const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
+
 class ElectronWrapper {
   /**
    * Projects
@@ -89,7 +89,6 @@ class ElectronWrapper {
       status: 'in-progress'
     };
 
-    const newTranscriptDataSTTResult = {};
     const newTranscriptDataError = {};
     const newTranscriptDataVideo = {};
     const newTranscriptDataMetadata = {};
@@ -98,60 +97,75 @@ class ElectronWrapper {
     const transcriptId = newTranscript._id;
     newTranscript.id = transcriptId;
 
-    // Start transcript
-    // const transcriptResult = await transcribe(data.path);
-    transcribe(data.path)
-      .then(res => {
-        newTranscriptDataSTTResult.status = 'done',
-        newTranscriptDataSTTResult.transcript= res.transcript;
-        newTranscriptDataSTTResult.audioUrl = res.url;
-        newTranscriptDataSTTResult.sttEngine = res.sttEngine;
-        newTranscriptDataSTTResult.clipName =res.clipName;
-        console.log('transcribe', res);
-        // edge case if video has already been processed then don't override the url
-        console.log('newTranscriptDataSTTResult.url newTranscriptDataVideo.url', newTranscriptDataSTTResult.url, newTranscriptDataVideo.url);
-        if (!newTranscriptDataVideo.url) {
-          console.log('if !newTranscriptDataVideo.url', newTranscriptDataVideo.url)
-          newTranscriptDataSTTResult.url = res.url;
-        }
-        db.update('transcripts', { _id: transcriptId }, newTranscriptDataSTTResult );
+      ////////////////////////////////////////////////
+      convertToVideo({
+        src: data.path,
+        outputFullPathName: path.join(
+          mediaDir,
+          path.parse(data.path).name + '.mp4'
+        )
       })
-      .catch(err => {
-        // TODO: audioUrl is not saved, and so cannot be deleted when deleting transcript
-        console.error('Transcription error', err);
-        newTranscriptDataError.status = 'error';
-        newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ err.message }.`;
-        db.update('transcripts', { _id: transcriptId}, newTranscriptDataError);
-      });
-
-    // TODO: UUIDs for converted media?
-    convertToVideo({
-      src: data.path,
-      outputFullPathName: path.join(
-        mediaDir,
-        path.parse(data.path).name + '.mp4'
-      )
-    })
       .then(videoPreviewPath => {
-        console.log('videoPreviewPath', videoPreviewPath);
           newTranscriptDataVideo.videoUrl = videoPreviewPath;
           newTranscriptDataVideo.url = videoPreviewPath;
-        db.update('transcripts',{  _id: transcriptId},newTranscriptDataVideo);
+          console.log('newTranscriptDataVideo', newTranscriptDataVideo, 'transcriptId',transcriptId);
+          db.update('transcripts',{  _id: transcriptId},newTranscriptDataVideo);
       })
       .catch(err => {
         console.error('Error converting to video', err);
       });
-
-    readMetadataForEDL({
-      file: data.path
-    })
+      ////////////////////////////////////////////////
+      ////////////////////////////////////////////////
+      readMetadataForEDL({
+        file: data.path
+      })
       .then(metadataResponse => {
         newTranscriptDataMetadata.metadata = metadataResponse;
+        console.log('readMetadataForEDL', newTranscriptDataMetadata, 'transcriptId', transcriptId);
         db.update( 'transcripts', { _id: transcriptId}, newTranscriptDataMetadata);
       })
       .catch(err => {
         console.error('Error reading metadata', err);
       });
+      ///////////////////////////////////////////////
+      ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        console.log('asynchronous-reply',arg) // prints "pong"
+          const res = JSON.parse(arg);
+          console.log('transcribe', res);
+          if(res.status==='error'){
+            newTranscriptDataError.status = 'error';
+            newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ res.errorMessage }.`;
+            db.update('transcripts', { _id: res.id}, newTranscriptDataError);
+          }else{
+            const newTranscriptDataSTTResultRes = res;
+            newTranscriptDataSTTResultRes.status = 'done',
+            newTranscriptDataSTTResultRes.transcript= res.transcript;
+            newTranscriptDataSTTResultRes.audioUrl = res.url;
+            newTranscriptDataSTTResultRes.sttEngine = res.sttEngine;
+            newTranscriptDataSTTResultRes.clipName =res.clipName;
+            // edge case if video has already been processed then don't override the url
+            // but if it hasn't used the audio url instead 
+            const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
+            if (!tmpTranscript.url) {
+              newTranscriptDataSTTResultRes.url = res.url;
+            }
+            else{
+              newTranscriptDataSTTResultRes.url = tmpTranscript.url
+            }
+            db.update('transcripts', { _id: newTranscriptDataSTTResultRes.id }, newTranscriptDataSTTResultRes );
+          }
+      })
+      
+
+    // TODO: re introduce offline error 
+    // but not for pocketsphinx and mozilla deepspeech as those run offline 
+    // so only for AssemblyAI and Speechmatics 
+    // if (!navigator.onLine) {
+    //   throw new Error("You don't seem to be connected to the internet");
+    // }
+      const transcriberMessageData = JSON.stringify({...newTranscript})
+      ipcRenderer.send('asynchronous-message', transcriberMessageData)
+      ////////////////////////////////////////////////
 
     return {
       status: 'ok',

@@ -1,9 +1,6 @@
 const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
-
-const { crashReporter } = require('electron');
-
 const makeMenuTemplate = require('./make-menu-template.js');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -100,11 +97,43 @@ function createMainWindow() {
     settingsWindow = null;
   });
 
-  // mainWindow.webContents.on('crashed', e => {
-  //   console.log(e);
-  //   app.relaunch();
-  //   // app.quit()
-  // });
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // create hidden worker window
+  const workerWindow = new BrowserWindow({
+    show: false, // TODO: unless development + add to menu to open up for inspection - could show progress 
+    webPreferences: { nodeIntegration: true }
+  });
+
+  workerWindow.loadURL(
+    url.format({
+      pathname: path.join(
+        app.getAppPath(),
+        'src','worker.html'
+      ),
+      protocol: 'file:',
+      slashes: true
+    })
+  );
+  //////////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  // receive request from render process of react client app
+  // sends it to worker window render process to offload the work
+  // TODO: change name, `asynchronous-message` to something better
+  ipcMain.on('asynchronous-message', (event, arg) => {
+    const data = JSON.parse(arg);
+    workerWindow.webContents.send('transcribe', data);
+  })
+
+  // receives the 
+  ipcMain.on('asynchronous-message-transcribed', (event, arg) => {
+    // workerWindow.close()
+    mainWindow.webContents.send('asynchronous-reply', arg);
+  })
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
 }
 
 // This method will be called when Electron has finished
@@ -159,14 +188,6 @@ app.on('renderer-process-crashed', function(event, webContents, killed) {
   console.log('killed', killed);
 });
 
-// app.setPath('temp', '/tmp/DPE');
-
-// crashReporter.start({
-//   productName: 'DPE_ELECTRON',
-//   companyName: 'BBC',
-//   submitURL: 'http://127.0.0.1:1127/post',
-//   uploadToServer: true
-// });
 
 let promptResponse;
 ipcMain.on('prompt', function(eventRet, arg) {
