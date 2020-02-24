@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>I'm a hidden worker</title>
+</head>
+<body>
+  Transcriber Worker
+  <script>
+    // Background code here
+    const electron = require('electron');
+    const ipcRenderer = electron.ipcRenderer;
+    const path = require('path');
+    const transcribe = require('./ElectronWrapper/lib/transcriber');
+
+    const dataPath = electron.remote.app.getPath("userData");
+    const mediaDir = path.join(dataPath, "media");
+
+    ipcRenderer.on('transcribe', (event, data) => {
+      console.log('transcribe', data)
+      transcribe(data, mediaDir)
+        .then(res => {
+          console.log('transcribe res', res)
+          ipcRenderer.send('asynchronous-message-transcribed', JSON.stringify(res))
+        })
+        .catch(err => {
+          const errResp = {}
+          errResp.status = 'error';
+          errResp.errorMessage = `There was an error transcribing this file: ${err.message}.`;
+          ipcRenderer.send('asynchronous-message-transcribed', JSON.stringify(errResp))
+        });
+    });
+  </script>
+</body>
+</html>

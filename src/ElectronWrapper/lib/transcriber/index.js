@@ -1,7 +1,6 @@
 /* eslint-disable no-case-declarations */
 const fs = require("fs");
 const path = require("path");
-const { app } = require("electron").remote;
 const convertToAudio = require("../convert-to-audio/index.js");
 const convertAssemblyAIToDpeJson = require("./assemblyai/assemblyai-to-dpe/index.js");
 const assemblyAiStt = require("./assemblyai/index");
@@ -13,9 +12,6 @@ const convertPocketsphinxOutputToDpe = require("./pocketsphinx-stt/pocketsphinx-
 const { getDefaultStt } = require("../../../stt-settings/default-stt.js");
 const { getDeepSpeechModelPath } = require("../../../stt-settings/credentials.js");
 
-const dataPath = app.getPath("userData");
-const mediaDir = path.join(dataPath, "media");
-
 function getDefaultSttAndLanguage() {
   // const pathToDefaultStt = path.join(dataPath, 'default-stt.json');
   // const defaultStt = JSON.parse(fs.readFileSync(pathToDefaultStt).toString());
@@ -25,20 +21,18 @@ function getDefaultSttAndLanguage() {
   return defaultStt;
 }
 
-const transcriber = async inputFilePath => {
+const transcriber = async (data, mediaDir) => {
+  const inputFilePath = data.path;
   // default stt engine and language
   const { provider, language } = getDefaultSttAndLanguage();
   if (!provider) {
     // TODO: should probably do this check and throw this error before converting video preview as well?
     throw new Error("Default STT Engine has not been set");
   }
-
-  if (!navigator.onLine) {
-    throw new Error("You don't seem to be connected to the internet");
-  }
   const defaultSttEngine = provider;
-
-  const response = {};
+  // returning the data from the transcription
+  // as a way to preserve the id for this transcription job 
+  const response = {...data};
   //   check media folder exits
   if (!fs.existsSync(mediaDir)) {
     fs.mkdirSync(mediaDir);
