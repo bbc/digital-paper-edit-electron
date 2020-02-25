@@ -4,7 +4,9 @@ const electron = require('electron');
 const appUserDataPath = electron.remote.app.getPath('userData');
 
 const defaultSttTemplate = {
-  provider: '',
+  // Provider could be '' unspecified, 
+  // or pocketsphinx, to give a working default to the app.
+  provider: 'pocketsphinx',
   language:''
 };
 
