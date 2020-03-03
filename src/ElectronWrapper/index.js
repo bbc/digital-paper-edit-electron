@@ -489,21 +489,29 @@ class ElectronWrapper {
     );
 
     const annotationsJson = await Promise.all(
-      transcriptsResult.transcripts.map(transcript => {
-        const annotations = this.getAllAnnotations(projectId, transcript.id);
+      transcriptsResult.transcripts.map(async (transcript) => {
+        const annotations = await this.getAllAnnotations(projectId, transcript.id);
 
         return annotations;
       })
     );
 
+    console.log('ApiWrapper annotationsJson', annotationsJson);
+
     // add annotations to transcript
     transcriptsJson.forEach(tr => {
       // get annotations for transcript
       const currentAnnotationsSet = annotationsJson.find(a => {
-        return a.transcriptId === tr.id;
+        console.log('a',a, a.annotations)
+        if(a.annotations.length!== 0){
+          return a.annotations[0].transcriptId === tr.id;
+        }
+        
       });
+      console.log('currentAnnotationsSet',currentAnnotationsSet)
       // if there are annotations for this transcript add them to it
       if (currentAnnotationsSet) {
+        console.log('if currentAnnotationsSet',currentAnnotationsSet)
         tr.annotations = currentAnnotationsSet.annotations;
 
         return;
