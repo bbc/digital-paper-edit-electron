@@ -28,7 +28,7 @@ const ingest = (data, tmpDir) => {
       }).name;
   
     //   ff.audioCodec('copy').videoCodec('copy');
-      ff.videoCodec('libx264').audioCodec('aac')//.format('mp4')
+      ff.videoCodec('libx264').audioCodec('aac')
 
       ff.output(input.path);
   
@@ -89,9 +89,7 @@ const ingest = (data, tmpDir) => {
 
 module.exports = function (data, callback) {
   const tmpDir = tmp.dirSync({
-      // TODO: turn back to true when done 
       unsafeCleanup: true
-    // unsafeCleanup: false
   });
 
   if (data.limit) {
