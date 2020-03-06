@@ -9,7 +9,7 @@ const mediaDir = path.join(dataPath, 'media');
 const db = require('./dbWrapper.js');
 const convertToVideo = require('./lib/convert-to-video');
 const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
-const remix = require('ffmpeg-remix');
+const remix = require('./ffmpeg-remix/index.js');
 const ffmpeg = require('ffmpeg-static-electron');
 
 class ElectronWrapper {
@@ -532,7 +532,9 @@ class ElectronWrapper {
 
     return results;
   }
-  async exportVideo(data){
+  async exportVideo(data, fileName){
+    // const outputFileName = fileName?fileName: 'sample.mp4';
+
     return new Promise((resolve, reject) => {
       // In electron prompt for file destination 
       // default to desktop on first pass 
@@ -544,8 +546,14 @@ class ElectronWrapper {
           return evt
         }), 
         // TODO: change this path
-        output: path.join(mediaDir, 'sample.mp4'),
-        ffmpegPath: ffmpeg.path//add electron ffmpeg bin 
+        // output: path.join(mediaDir, 'sample.mp4'),
+
+        // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+        // app.getPath('desktop')
+           output: path.join( app.getPath('desktop'),'sample.mp4'),
+        // output: path.join(require('os').homedir(), 'Desktop','sample.mp4'),
+        ffmpegPath: ffmpeg.path,
+        limit: 2
       }
       console.log(ffmpegRemixData)
       remix(ffmpegRemixData, function(err, result) {
