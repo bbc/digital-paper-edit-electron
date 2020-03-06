@@ -1,14 +1,16 @@
 /* eslint-disable class-methods-use-this */
 const fs = require('fs');
 const path = require('path');
-const { app } = require('electron').remote;
-const { ipcRenderer } = require('electron')
+const { app, dialog } = require('electron').remote;
+const { ipcRenderer } = require('electron');
 const dataPath = app.getPath('userData');
 
 const mediaDir = path.join(dataPath, 'media');
 const db = require('./dbWrapper.js');
 const convertToVideo = require('./lib/convert-to-video');
 const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
+const remix = require('./ffmpeg-remix/index.js');
+const ffmpeg = require('ffmpeg-static-electron');
 
 class ElectronWrapper {
   /**
@@ -496,30 +498,22 @@ class ElectronWrapper {
       })
     );
 
-    console.log('ApiWrapper annotationsJson', annotationsJson);
-
     // add annotations to transcript
     transcriptsJson.forEach(tr => {
       // get annotations for transcript
       const currentAnnotationsSet = annotationsJson.find(a => {
-        console.log('a',a, a.annotations)
         if(a.annotations.length!== 0){
           return a.annotations[0].transcriptId === tr.id;
         }
-        
       });
-      console.log('currentAnnotationsSet',currentAnnotationsSet)
       // if there are annotations for this transcript add them to it
       if (currentAnnotationsSet) {
-        console.log('if currentAnnotationsSet',currentAnnotationsSet)
         tr.annotations = currentAnnotationsSet.annotations;
-
         return;
       } else {
         tr.annotations = [];
       }
     });
-    console.log('ApiWrapper transcriptsJson', transcriptsJson);
 
     // getting program script for paperEdit
     const paperEditResult = await this.getPaperEdit(projectId, papereditId);
@@ -535,9 +529,104 @@ class ElectronWrapper {
       transcripts: transcriptsJson,
       labels: labelsResults.labels
     };
-    console.log('ApiWrapper - results', results);
 
     return results;
+  }
+  async exportVideo(data, fileName){
+    return new Promise((resolve, reject) => {
+      // In electron prompt for file destination 
+      // default to desktop on first pass 
+      // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+      dialog.showOpenDialog( {
+        title:'Export Video',
+        buttonLabel:'Choose folder destination for the video',
+        properties: ['openDirectory', 'createDirectory',{message: 'choose a folder to save the video preview'}],
+        message: 'choose a folder to save the video preview'
+      }).then(result => {
+          console.log(result.canceled)
+          if(result.canceled){
+            reject(result.canceled)
+          }
+          console.log(result.filePaths)
+          // prompt for file name 
+          let userFileName = prompt('Choose a name for your video file', fileName)
+          if(userFileName){
+            // Making sure the user's file name input has got the right extension 
+            if(path.parse(userFileName).ext !=='.mp4'){
+              userFileName = `${userFileName}.mp4`
+            } 
+          }else{
+            userFileName = fileName;
+          }
+          const ffmpegRemixData = {
+            input: data,
+            output: path.join(result.filePaths[0],userFileName),
+            ffmpegPath: ffmpeg.path
+          }
+          console.log(ffmpegRemixData)
+          remix(ffmpegRemixData, function(err, result) {
+            if(err){
+              reject(err)
+            }
+            alert('finished exporting')
+            resolve(result)
+          });
+
+      }).catch(err => {
+        console.log(err)
+      })
+    })
+  }
+
+  async exportAudio(data,fileName){
+    return new Promise((resolve, reject) => {
+      // In electron prompt for file destination 
+      // default to desktop on first pass 
+      // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+      dialog.showOpenDialog( {
+        title:'Export Audio',
+        buttonLabel:'Choose folder destination for the audio',
+        properties: ['openDirectory', 'createDirectory',{message: 'choose a folder to save the audio preview'}],
+        message: 'choose a folder to save the audio preview'
+      }).then(result => {
+          console.log(result.canceled)
+          if(result.canceled){
+            reject(result.canceled)
+          }
+          console.log(result.filePaths)
+          // prompt for file name 
+          let userFileName = prompt('Choose a name for your audio file', fileName)
+          if(userFileName){
+            // Making sure the user's file name input has got the right extension 
+            if(path.parse(userFileName).ext !=='.wav'){
+              userFileName = `${userFileName}.wav`
+            } 
+          }else{
+            userFileName = fileName;
+          }
+          const ffmpegRemixData = {
+            // input: data.map((evt)=>{
+            //   evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
+            //   evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
+            //   return evt
+            // }), 
+            input: data,
+            output: path.join(result.filePaths[0],userFileName),
+            ffmpegPath: ffmpeg.path
+          }
+          console.log(ffmpegRemixData)
+          remix(ffmpegRemixData, function(err, result) {
+            if(err){
+              reject(err)
+            }
+            alert('finished exporting')
+            resolve(result)
+          });
+
+      }).catch(err => {
+        console.log(err)
+      })
+    })
   }
 }
 
