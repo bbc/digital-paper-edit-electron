@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 const fs = require('fs');
 const path = require('path');
-const { app } = require('electron').remote;
-const { ipcRenderer } = require('electron')
+const { app, dialog } = require('electron').remote;
+const { ipcRenderer } = require('electron');
 const dataPath = app.getPath('userData');
 
 const mediaDir = path.join(dataPath, 'media');
@@ -534,37 +534,51 @@ class ElectronWrapper {
   }
   async exportVideo(data, fileName){
     // const outputFileName = fileName?fileName: 'sample.mp4';
-
     return new Promise((resolve, reject) => {
       // In electron prompt for file destination 
       // default to desktop on first pass 
-
-      const ffmpegRemixData = {
-        input: data.map((evt)=>{
-          evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
-          evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
-          return evt
-        }), 
-        // TODO: change this path
-        // output: path.join(mediaDir, 'sample.mp4'),
-
-        // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-        // app.getPath('desktop')
-           output: path.join( app.getPath('desktop'),'sample.mp4'),
-        // output: path.join(require('os').homedir(), 'Desktop','sample.mp4'),
-        ffmpegPath: ffmpeg.path,
-        limit: 2
-      }
-      console.log(ffmpegRemixData)
-      remix(ffmpegRemixData, function(err, result) {
-        if(err){
-          reject(err)
-        }
-        alert('finished exporting')
-        resolve(result)
-      });
-
       
+      // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+      dialog.showOpenDialog( {
+        properties: ['openDirectory']
+      }).then(result => {
+        console.log(result.canceled)
+        if(result.canceled){
+          reject(result.canceled)
+        }
+        console.log(result.filePaths)
+        
+
+          const ffmpegRemixData = {
+            input: data.map((evt)=>{
+              evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
+              evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
+              return evt
+            }), 
+            // TODO: change this path
+            // output: path.join(mediaDir, 'sample.mp4'),
+
+            // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+            // app.getPath('desktop')
+              // output: path.join( app.getPath('desktop'),'sample.mp4'),
+             output: path.join(result.filePaths[0],fileName),
+            // output: path.join(require('os').homedir(), 'Desktop','sample.mp4'),
+            ffmpegPath: ffmpeg.path,
+            limit: 2
+          }
+          console.log(ffmpegRemixData)
+          remix(ffmpegRemixData, function(err, result) {
+            if(err){
+              reject(err)
+            }
+            alert('finished exporting')
+            resolve(result)
+          });
+
+      }).catch(err => {
+        console.log(err)
+      })
+
 
     
     })
