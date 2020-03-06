@@ -150,12 +150,13 @@
     "webpack": "^4.41.4"
   },
   "dependencies": {
-    "@pietrop/digital-paper-edit-client": "^1.4.5",
+    "@pietrop/digital-paper-edit-client": "^1.4.5-alpha.2",
     "assemblyai": "^1.0.1",
     "bootstrap-css-only": "^4.3.1",
     "deepspeech-node-wrapper": "^1.0.7",
     "diskdb": "^0.1.17",
     "electron-updater": "^4.1.2",
+    "ffmpeg-remix": "^0.1.0",
     "ffmpeg-static-electron": "^2.0.1",
     "ffprobe-static-electron": "^2.0.0",
     "fluent-ffmpeg": "^2.1.2",

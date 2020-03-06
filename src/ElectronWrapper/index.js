@@ -9,6 +9,8 @@ const mediaDir = path.join(dataPath, 'media');
 const db = require('./dbWrapper.js');
 const convertToVideo = require('./lib/convert-to-video');
 const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
+const remix = require('ffmpeg-remix');
+const ffmpeg = require('ffmpeg-static-electron');
 
 class ElectronWrapper {
   /**
@@ -496,30 +498,22 @@ class ElectronWrapper {
       })
     );
 
-    console.log('ApiWrapper annotationsJson', annotationsJson);
-
     // add annotations to transcript
     transcriptsJson.forEach(tr => {
       // get annotations for transcript
       const currentAnnotationsSet = annotationsJson.find(a => {
-        console.log('a',a, a.annotations)
         if(a.annotations.length!== 0){
           return a.annotations[0].transcriptId === tr.id;
         }
-        
       });
-      console.log('currentAnnotationsSet',currentAnnotationsSet)
       // if there are annotations for this transcript add them to it
       if (currentAnnotationsSet) {
-        console.log('if currentAnnotationsSet',currentAnnotationsSet)
         tr.annotations = currentAnnotationsSet.annotations;
-
         return;
       } else {
         tr.annotations = [];
       }
     });
-    console.log('ApiWrapper transcriptsJson', transcriptsJson);
 
     // getting program script for paperEdit
     const paperEditResult = await this.getPaperEdit(projectId, papereditId);
@@ -535,9 +529,43 @@ class ElectronWrapper {
       transcripts: transcriptsJson,
       labels: labelsResults.labels
     };
-    console.log('ApiWrapper - results', results);
 
     return results;
+  }
+  async exportVideo(data){
+    return new Promise((resolve, reject) => {
+      // In electron prompt for file destination 
+      // default to desktop on first pass 
+
+      const ffmpegRemixData = {
+        input: data.map((evt)=>{
+          evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
+          evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
+          return evt
+        }), 
+        // TODO: change this path
+        output: path.join(mediaDir, 'sample.mp4'),
+        ffmpegPath: ffmpeg.path//add electron ffmpeg bin 
+      }
+      console.log(ffmpegRemixData)
+      remix(ffmpegRemixData, function(err, result) {
+        if(err){
+          reject(err)
+        }
+        alert('finished exporting')
+        resolve(result)
+      });
+
+      
+
+    
+    })
+  }
+
+  async exportAudio(data){
+    return new Promise((resolve, reject) => {
+      resolve(data)
+    })
   }
 }
 
