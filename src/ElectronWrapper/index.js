@@ -533,38 +533,35 @@ class ElectronWrapper {
     return results;
   }
   async exportVideo(data, fileName){
-    // const outputFileName = fileName?fileName: 'sample.mp4';
     return new Promise((resolve, reject) => {
       // In electron prompt for file destination 
       // default to desktop on first pass 
-      
       // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
       dialog.showOpenDialog( {
-        properties: ['openDirectory']
+        title:'Export Video',
+        buttonLabel:'Choose folder destination for the video',
+        properties: ['openDirectory', 'createDirectory',{message: 'choose a folder to save the video preview'}],
+        message: 'choose a folder to save the video preview'
       }).then(result => {
-        console.log(result.canceled)
-        if(result.canceled){
-          reject(result.canceled)
-        }
-        console.log(result.filePaths)
-        
-
+          console.log(result.canceled)
+          if(result.canceled){
+            reject(result.canceled)
+          }
+          console.log(result.filePaths)
+          // prompt for file name 
+          let userFileName = prompt('Choose a name for your video file', fileName)
+          if(userFileName){
+            // Making sure the user's file name input has got the right extension 
+            if(path.parse(userFileName).ext !=='.mp4'){
+              userFileName = `${userFileName}.mp4`
+            } 
+          }else{
+            userFileName = fileName;
+          }
           const ffmpegRemixData = {
-            input: data.map((evt)=>{
-              evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
-              evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
-              return evt
-            }), 
-            // TODO: change this path
-            // output: path.join(mediaDir, 'sample.mp4'),
-
-            // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-            // app.getPath('desktop')
-              // output: path.join( app.getPath('desktop'),'sample.mp4'),
-             output: path.join(result.filePaths[0],fileName),
-            // output: path.join(require('os').homedir(), 'Desktop','sample.mp4'),
-            ffmpegPath: ffmpeg.path,
-            limit: 2
+            input: data,
+            output: path.join(result.filePaths[0],userFileName),
+            ffmpegPath: ffmpeg.path
           }
           console.log(ffmpegRemixData)
           remix(ffmpegRemixData, function(err, result) {
@@ -578,15 +575,57 @@ class ElectronWrapper {
       }).catch(err => {
         console.log(err)
       })
-
-
-    
     })
   }
 
-  async exportAudio(data){
+  async exportAudio(data,fileName){
     return new Promise((resolve, reject) => {
-      resolve(data)
+      // In electron prompt for file destination 
+      // default to desktop on first pass 
+      // https://www.electronjs.org/docs/api/dialog#dialogshowopendialogbrowserwindow-options
+      dialog.showOpenDialog( {
+        title:'Export Audio',
+        buttonLabel:'Choose folder destination for the audio',
+        properties: ['openDirectory', 'createDirectory',{message: 'choose a folder to save the audio preview'}],
+        message: 'choose a folder to save the audio preview'
+      }).then(result => {
+          console.log(result.canceled)
+          if(result.canceled){
+            reject(result.canceled)
+          }
+          console.log(result.filePaths)
+          // prompt for file name 
+          let userFileName = prompt('Choose a name for your audio file', fileName)
+          if(userFileName){
+            // Making sure the user's file name input has got the right extension 
+            if(path.parse(userFileName).ext !=='.wav'){
+              userFileName = `${userFileName}.wav`
+            } 
+          }else{
+            userFileName = fileName;
+          }
+          const ffmpegRemixData = {
+            // input: data.map((evt)=>{
+            //   evt.start = parseFloat(parseFloat(evt.start).toFixed(2))
+            //   evt.end = parseFloat(parseFloat(evt.end).toFixed(2))
+            //   return evt
+            // }), 
+            input: data,
+            output: path.join(result.filePaths[0],userFileName),
+            ffmpegPath: ffmpeg.path
+          }
+          console.log(ffmpegRemixData)
+          remix(ffmpegRemixData, function(err, result) {
+            if(err){
+              reject(err)
+            }
+            alert('finished exporting')
+            resolve(result)
+          });
+
+      }).catch(err => {
+        console.log(err)
+      })
     })
   }
 }
