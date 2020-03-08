@@ -5,7 +5,7 @@ const debug = require('debug');
 const d = debug('ffmpeg-remix');
 tmp.setGracefulCleanup();
 
-const ingest = (data, tmpDir) => {
+const ingest = (data, tmpDir,waveForm) => {
     if(data.ffmpegPath){
       ffmpeg.setFfmpegPath(data.ffmpegPath);
     }
@@ -30,6 +30,14 @@ const ingest = (data, tmpDir) => {
     //   ff.audioCodec('copy').videoCodec('copy');
       ff.videoCodec('libx264').audioCodec('aac')
 
+      if(waveForm){
+        // wave form reference https://trac.ffmpeg.org/wiki/Waveform
+        // https://ffmpeg.org/ffmpeg-filters.html#showwaves 
+        // TODO: colour, and mode could be optional parameter, for mode eg line, point,p2p,cline.
+        ff.complexFilter('[0:a]showwaves=s=1920x1080:colors=Red:mode=p2p,format=yuv420p[v]')
+        // ff.complexFilter('[0:a]showwaves=s=1920x1080:colors=DodgerBlue:mode=cline,format=yuv420p[v]')
+        ff.outputOption(['-map [v]','-map', '0:a'])
+      }
       ff.output(input.path);
   
       ff.on('start', (commandLine) => {
@@ -87,14 +95,14 @@ const ingest = (data, tmpDir) => {
   };
   
 
-module.exports = function (data, callback) {
+module.exports = function (data,waveForm, callback) {
   const tmpDir = tmp.dirSync({
       unsafeCleanup: true
   });
 
   if (data.limit) {
-    async.mapLimit(data.input, data.limit, ingest(data, tmpDir), concat(data, tmpDir, callback));
+    async.mapLimit(data.input, data.limit, ingest(data, tmpDir,waveForm), concat(data, tmpDir, callback));
   } else {
-    async.map(data.input, ingest(data, tmpDir), concat(data, tmpDir, callback));
+    async.map(data.input, ingest(data, tmpDir,waveForm), concat(data, tmpDir, callback));
   }
 }

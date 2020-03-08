@@ -564,7 +564,7 @@ class ElectronWrapper {
             ffmpegPath: ffmpeg.path
           }
           console.log(ffmpegRemixData)
-          remix(ffmpegRemixData, function(err, result) {
+          remix(ffmpegRemixData, null, function(err, result) {
             if(err){
               reject(err)
             }
@@ -578,7 +578,8 @@ class ElectronWrapper {
     })
   }
 
-  async exportAudio(data,fileName){
+  async exportAudio(data,fileName,waveForm){
+    console.log('waveForm',waveForm)
     return new Promise((resolve, reject) => {
       // In electron prompt for file destination 
       // default to desktop on first pass 
@@ -598,7 +599,9 @@ class ElectronWrapper {
           let userFileName = prompt('Choose a name for your audio file', fileName)
           if(userFileName){
             // Making sure the user's file name input has got the right extension 
-            if(path.parse(userFileName).ext !=='.wav'){
+            if(waveForm && (path.parse(userFileName).ext !=='.mp4')){
+              userFileName = `${userFileName}.mp4`
+            } else if(!waveForm && (path.parse(userFileName).ext !=='.wav')){
               userFileName = `${userFileName}.wav`
             } 
           }else{
@@ -615,7 +618,7 @@ class ElectronWrapper {
             ffmpegPath: ffmpeg.path
           }
           console.log(ffmpegRemixData)
-          remix(ffmpegRemixData, function(err, result) {
+          remix(ffmpegRemixData, waveForm, function(err, result) {
             if(err){
               reject(err)
             }
