@@ -61,8 +61,27 @@ class ElectronWrapper {
   }
 
   async deleteProject(id) {
-    db.delete('projects', { _id: id });
-
+    const projectId = id;
+    const confirmation = confirm('Deleting a project, will delete all included transcript and paperedits, are you sure you want to continue?')
+    if(confirmation){
+      // deleting project
+      db.delete('projects', { _id: id });
+      // deleting transcripts belonging to that project
+      const transcripts = db.getAll('transcripts', { projectId });
+      if(transcripts){
+        // deleting transcript and corresponding media media 
+        transcripts.forEach((transcript)=>{
+          const transcriptId = transcript._id;
+          this.deleteTranscript(projectId, transcriptId)
+        })
+      }
+     // deleting paper edits belonging to the project
+      db.delete('paperedits', { projectId: id });
+    }
+    else{
+      alert('Nothing was deleted');
+    }
+ 
     return { ok: true, status: 'ok', project: {} };
   }
 
@@ -99,7 +118,7 @@ class ElectronWrapper {
     const transcriptId = newTranscript._id;
     newTranscript.id = transcriptId;
     // updating id
-    db.update('transcripts',{  _id: transcriptId},newTranscript);
+    db.update('transcripts',{  _id: transcriptId}, newTranscript);
       ////////////////////////////////////////////////
       convertToVideo({
         src: data.path,
@@ -214,25 +233,33 @@ class ElectronWrapper {
     // Deleting associated media
     const transcript = db.get('transcripts', { _id: transcriptId, projectId });
     if (transcript.videoUrl) {
-      fs.unlink(transcript.videoUrl, function(err) {
-        if (err)
-          return console.error(
-            'Error deleting video file for this transcript',
-            err
-          );
-        console.log('video file deleted successfully');
-      });
+      try{
+        fs.unlink(transcript.videoUrl, function(err) {
+          if (err)
+            return console.error(
+              'Error deleting video file for this transcript',
+              err
+            );
+          console.log('video file deleted successfully');
+        });
+      }catch(e){
+        console.error('Error deleting video file for this transcript')
+      }
     }
 
     if (transcript.audioUrl) {
-      fs.unlink(transcript.audioUrl, function(err) {
-        if (err)
-          return console.error(
-            'Error deleting audio file for this transcript',
-            err
-          );
-        console.log('audio file deleted successfully');
-      });
+      try{
+        fs.unlink(transcript.audioUrl, function(err) {
+          if (err)
+            return console.error(
+              'Error deleting audio file for this transcript',
+              err
+            );
+          console.log('audio file deleted successfully');
+        });
+      }catch(e){
+        console.error('Error deleting audio file for this transcript')
+      }
     }
 
     // deleting transcript
