@@ -1,6 +1,6 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
