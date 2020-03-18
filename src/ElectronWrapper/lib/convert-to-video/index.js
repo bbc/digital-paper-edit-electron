@@ -53,7 +53,8 @@ const convertToVideo = function({ src, outputFullPathName }) {
       .output(outputFullPathName)
       .withVideoCodec('libx264')
     // for details on the ffmpeg flags see https://trac.ffmpeg.org/wiki/Encode/H.264
-      .addOptions([ '-preset ultrafast', '-f mp4', '-vf scale=-1:360', '-crf 28', '-tune zerolatency', '-movflags +faststart' ])
+    // removing '-vf scale=-1:360' to make it compatible with vertical videos. In vertical video it would work as '-vf scale=360:-1'
+      .addOptions([ '-preset ultrafast', '-f mp4', '-crf 28', '-tune zerolatency', '-movflags +faststart' ])
     // .withVideoBitrate(1024)
       .withAudioCodec('aac')
       .on('end', () => {

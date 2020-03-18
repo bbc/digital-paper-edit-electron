@@ -41,9 +41,9 @@ class ElectronWrapper {
   async createProject(data) {
     const project = db.create('projects', data);
     project.id = project._id;
-    // TODO: ad this point need to run update otherwise 
+    // At this point need to run update otherwise 
     // project.id in db is equal to null.
-
+    db.update('projects', { _id: project._id }, project);
     return { status: 'ok', project };
   }
 
@@ -98,7 +98,8 @@ class ElectronWrapper {
     const newTranscript = db.create('transcripts', newTranscriptData);
     const transcriptId = newTranscript._id;
     newTranscript.id = transcriptId;
-
+    // updating id
+    db.update('transcripts',{  _id: transcriptId},newTranscript);
       ////////////////////////////////////////////////
       convertToVideo({
         src: data.path,
@@ -147,7 +148,9 @@ class ElectronWrapper {
             newTranscriptDataSTTResultRes.clipName =res.clipName;
             // edge case if video has already been processed then don't override the url
             // but if it hasn't used the audio url instead 
-            const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
+            // TODO: removing get with projectId to avoid collision in tretrieving results?
+            // const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
+            const tmpTranscript = db.get('transcripts', { _id: res.id });
             if (!tmpTranscript.url) {
               newTranscriptDataSTTResultRes.url = res.url;
             }
