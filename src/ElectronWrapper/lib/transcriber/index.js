@@ -23,6 +23,7 @@ function getDefaultSttAndLanguage() {
 
 const transcriber = async (data, mediaDir) => {
   const inputFilePath = data.path;
+  const uid = data.id;
   // default stt engine and language
   const { provider, language } = getDefaultSttAndLanguage();
   if (!provider) {
@@ -46,7 +47,7 @@ const transcriber = async (data, mediaDir) => {
   const audioFileOutput = path.join(mediaDir, inputFileName);
 
   // TODO: add try catch
-  const newAudioFile = await convertToAudio(inputFilePath, audioFileOutput);
+  const newAudioFile = await convertToAudio(inputFilePath, audioFileOutput, uid);
   response.url = await newAudioFile;
 
   // transcribe

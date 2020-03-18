@@ -21,13 +21,19 @@ ffmpeg.setFfmpegPath(ffmpegBinPath);
  * this also allows the file extension in output file name/path to be optional
  * @param {string} path - path to an audio file
  */
-function wavFileExtension(filePath) {
+function wavFileExtension(filePath, uid) {
   let audioFileOutputPath = filePath;
   // https://nodejs.org/api/path.html#path_path_parse_path
   const pathParsed = path.parse(audioFileOutputPath);
   if (pathParsed.ext !== '.wav') {
     // audioFileOutputPath = path.join(pathParsed.root, pathParsed.dir, `${ pathParsed.name }.wav`);
-    audioFileOutputPath = path.join(pathParsed.dir, `${ pathParsed.name }.wav`);
+    if(uid){
+      audioFileOutputPath = path.join(pathParsed.dir, `${ pathParsed.name }.${uid}.wav`);
+    }
+    else{
+      audioFileOutputPath = path.join(pathParsed.dir, `${ pathParsed.name }.wav`);
+    }
+   
   }
 
   return audioFileOutputPath;
@@ -39,8 +45,8 @@ function wavFileExtension(filePath) {
  * @param {string} audioFileOutput - path to output wav audio file - needs to have .wav extension
  * @returns {callback} callback - callback to return audio file path as string.
 */
-function convertToAudio(file, audioFileOutput) {
-  const audioFileOutputPath = wavFileExtension(audioFileOutput);
+function convertToAudio(file, audioFileOutput, uid) {
+  const audioFileOutputPath = wavFileExtension(audioFileOutput, uid);
 
   return new Promise((resolve, reject) => {
     ffmpeg(file)

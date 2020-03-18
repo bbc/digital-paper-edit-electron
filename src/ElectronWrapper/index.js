@@ -123,8 +123,7 @@ class ElectronWrapper {
       convertToVideo({
         src: data.path,
         outputFullPathName: path.join(
-          mediaDir,
-          path.parse(data.path).name + '.mp4'
+          mediaDir,`${path.parse(data.path).name}.${transcriptId}.mp4`
         )
       })
       .then(videoPreviewPath => {
