@@ -1,6 +1,7 @@
 {
   "name": "digital-paper-edit-electron",
-  "version": "1.0.15",
+  "productName":"autoEdit 3",
+  "version": "1.0.16",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
