@@ -24,7 +24,7 @@ function createNewSettingsWindow() {
     y: 0,
     minWidth: 1000,
     minHeight: 670,
-    title: "autoEdit3 - Settings",
+    title: "autoEdit 3 - Settings",
     titleBarStyle: 'show',
     // preload: __dirname + '/prompt.js',
     webPreferences: {
@@ -56,7 +56,7 @@ function createMainWindow() {
     minHeight: 670,
     titleBarStyle: 'show',
     // preload: __dirname + '/prompt.js',
-    title: "autoEdit3",
+    title: "autoEdit 3",
     webPreferences: {
       // webSecurity: false,
       nodeIntegration: true,
