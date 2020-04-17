@@ -1,6 +1,14 @@
 const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
-const path = require('path');
 const url = require('url');
+const path = require('path');
+// set userData to use `digital-paper-edit-electron` to be backward compatible before name change from `digital-paper-edit-electron` to `autoEdit 3`;
+// https://www.electronjs.org/docs/api/app#appsetpathname-path
+// https://stackoverflow.com/questions/48587035/electron-how-to-set-a-custom-directory-for-user-data-user-data-dir
+// https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+// const userDataPath = app.getPath ('userData');
+const appData = app.getPath ('appData');
+app.setPath ('userData', path.join(appData,"digital-paper-edit-electron"));
+
 const makeMenuTemplate = require('./make-menu-template.js');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -16,6 +24,7 @@ function createNewSettingsWindow() {
     y: 0,
     minWidth: 1000,
     minHeight: 670,
+    title: "autoEdit3 - Settings",
     titleBarStyle: 'show',
     // preload: __dirname + '/prompt.js',
     webPreferences: {
@@ -47,6 +56,7 @@ function createMainWindow() {
     minHeight: 670,
     titleBarStyle: 'show',
     // preload: __dirname + '/prompt.js',
+    title: "autoEdit3",
     webPreferences: {
       // webSecurity: false,
       nodeIntegration: true,
