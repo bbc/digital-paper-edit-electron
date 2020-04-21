@@ -9,6 +9,9 @@ For a ready to use release of the desktop application, checkout the [user manual
  
 [See here for overall project architecture info](https://github.com/bbc/digital-paper-edit-client#project-architecture)
 
+
+[Github project board (for my forks) - across linked repos](https://github.com/users/pietrop/projects/1)
+
 ## Setup
 <!-- _stack - optional_
 _How to build and run the code/app_ -->
