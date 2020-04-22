@@ -33,6 +33,7 @@
       import Alert from "react-bootstrap/Alert";
       import { getDefaultStt, setDefaultStt } from "./default-stt.js";
       import speechmaticsLanguages from "./language-options/speechmatics.json";
+      import assemblyAiLanguages from "./language-options/assemblyai.json";
       import {
         getCredentials,
         setCredentials,
@@ -84,18 +85,20 @@
           super(props);
           this.state = {
             defaultStt: "",
-            defaultLanguage: "en-GB"
+            defaultLanguage: "en-GB",
+            languageModel: null
           };
         }
 
         componentDidMount() {
-          const { provider, language } = getDefaultStt();
+          const { provider, language , languageModel } = getDefaultStt();
           console.log("provider, language", provider, language);
           const isDeepspeechModelSet = getIsDeepspeechModelSet();
           this.setState({
             defaultStt: provider,
             defaultLanguage: language,
             isDeepspeechModelSet: isDeepspeechModelSet,
+            languageModel: languageModel,
             downloadingDeepspeech: false
           });
         }
@@ -114,10 +117,18 @@
           });
         };
 
+        handleChangeDefautLanguageModel = e => {
+          this.setState({
+            languageModel: e.target.value,
+            saved: false
+          });
+        };
+
         handleSave = () => {
           setDefaultStt({
             language: this.state.defaultLanguage,
-            provider: this.state.defaultStt
+            provider: this.state.defaultStt,
+            languageModel: this.state.languageModel
           });
           this.setState({
             saved: true
@@ -160,13 +171,31 @@
                 </option>
               );
             });
+          } 
+          else if (this.state.defaultStt === "AssemblyAI") {
+            languagesOptions = assemblyAiLanguages.map((language, index) => {
+              return (
+                <option key={language.code} value={language.code}>
+                  {language.language}
+                </option>
+              );
+            });
           }
+          
 
           let languageToDisplay = "English";
           console.log("this.state.provider ", this.state.defaultStt);
           if (this.state.defaultStt === "Speechmatics") {
             console.log("here!");
             languageToDisplay = speechmaticsLanguages.find(language => {
+              return language.code === this.state.defaultLanguage;
+            });
+            if (languageToDisplay) {
+              languageToDisplay = languageToDisplay.language;
+            }
+          }else if (this.state.defaultStt === "AssemblyAI") {
+            console.log("here!");
+            languageToDisplay = assemblyAiLanguages.find(language => {
               return language.code === this.state.defaultLanguage;
             });
             if (languageToDisplay) {
@@ -217,7 +246,8 @@
                 </Form.Text>
               </Form.Group>
 
-              {this.state.defaultStt !== "AssemblyAI" &&
+              {
+                // this.state.defaultStt !== "AssemblyAI" &&
               this.state.defaultStt !== "pocketsphinx" &&
               this.state.defaultStt !== "deepspeech" ? (
                 <Form.Group controlId="exampleForm.ControlSelect1">
@@ -281,7 +311,29 @@
                   ): null}
                 </React.Fragment>
               )}
-              <br />
+
+
+              {this.state.defaultStt === "AssemblyAI" &&
+              <React.Fragment>
+                
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>Default Language model</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={this.state.languageModel}
+                  onChange={this.handleChangeDefautLanguageModel}
+                >
+                  <option value="assemblyai_default">Default</option>
+                  <option value="assemblyai_media">Media</option>
+                </Form.Control>
+                <Form.Text className="text-muted">
+                  Choose the default language model to boost accuracy. <br/>
+                 <code>default</code> is best for conversational data like phone calls and meetings.<br/>
+                 <code>assemblyai_media</code> is best for broadcast news and radio and at recognizing proper nouns, this model has a much larger vocabulary than the default model.
+                </Form.Text>
+              </Form.Group>
+              </React.Fragment>
+              }
               <Button onClick={this.handleSave} variant="outline-primary" block>
                 Save default configuration
               </Button>

@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const fs = require('fs');
 const path = require('path');
+const ffmpeg = require('ffmpeg-static-electron');
 const { app, dialog } = require('electron').remote;
 const { ipcRenderer } = require('electron');
 const dataPath = app.getPath('userData');
@@ -9,8 +10,17 @@ const mediaDir = path.join(dataPath, 'media');
 const db = require('./dbWrapper.js');
 const convertToVideo = require('./lib/convert-to-video');
 const { readMetadataForEDL } = require('./lib/av-metadata-reader/index.js');
+const transcribe = require('./lib/transcriber');
 const remix = require('./ffmpeg-remix/index.js');
-const ffmpeg = require('ffmpeg-static-electron');
+const { getDefaultStt } = require("../stt-settings/default-stt.js");
+function getDefaultSttAndLanguageProvider() {
+  // const pathToDefaultStt = path.join(dataPath, 'default-stt.json');
+  // const defaultStt = JSON.parse(fs.readFileSync(pathToDefaultStt).toString());
+  const defaultStt = getDefaultStt();
+  console.log("getDefaultSttAndLanguage", defaultStt, defaultStt.provider);
+
+  return defaultStt.provider;
+}
 
 class ElectronWrapper {
   /**
@@ -148,47 +158,93 @@ class ElectronWrapper {
       .catch(err => {
         console.error('Error reading metadata', err);
       });
-      ///////////////////////////////////////////////
-      ipcRenderer.on('asynchronous-reply', (event, arg) => {
-        console.log('asynchronous-reply',arg) // prints "pong"
-          const res = JSON.parse(arg);
-          console.log('transcribe', res);
-          if(res.status==='error'){
-            newTranscriptDataError.status = 'error';
-            newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ res.errorMessage }.`;
-            db.update('transcripts', { _id: res.id}, newTranscriptDataError);
-          }else{
-            const newTranscriptDataSTTResultRes = res;
-            newTranscriptDataSTTResultRes.status = 'done',
-            newTranscriptDataSTTResultRes.transcript= res.transcript;
-            newTranscriptDataSTTResultRes.audioUrl = res.url;
-            newTranscriptDataSTTResultRes.sttEngine = res.sttEngine;
-            newTranscriptDataSTTResultRes.clipName =res.clipName;
-            // edge case if video has already been processed then don't override the url
-            // but if it hasn't used the audio url instead 
-            // TODO: removing get with projectId to avoid collision in tretrieving results?
-            // const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
-            const tmpTranscript = db.get('transcripts', { _id: res.id });
-            if (!tmpTranscript.url) {
-              newTranscriptDataSTTResultRes.url = res.url;
+      console.log('about to call  ipcRenderer - deepspeech 1', getDefaultSttAndLanguageProvider())
+      if(getDefaultSttAndLanguageProvider() ==='deepspeech'){
+        console.log('about to call  ipcRenderer - deepspeech 2')
+        ///////////////////////////////////////////////
+        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+          console.log('asynchronous-reply',arg) // prints "pong"
+            const res = JSON.parse(arg);
+            console.log('transcribe', res);
+            if(res.status==='error'){
+              newTranscriptDataError.status = 'error';
+              newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ res.errorMessage }.`;
+              db.update('transcripts', { _id: res.id}, newTranscriptDataError);
+            }else{
+              const newTranscriptDataSTTResultRes = res;
+              newTranscriptDataSTTResultRes.status = 'done',
+              newTranscriptDataSTTResultRes.transcript= res.transcript;
+              newTranscriptDataSTTResultRes.audioUrl = res.url;
+              newTranscriptDataSTTResultRes.sttEngine = res.sttEngine;
+              newTranscriptDataSTTResultRes.clipName =res.clipName;
+              // edge case if video has already been processed then don't override the url
+              // but if it hasn't used the audio url instead 
+              // TODO: removing get with projectId to avoid collision in tretrieving results?
+              // const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
+              const tmpTranscript = db.get('transcripts', { _id: res.id });
+              if (!tmpTranscript.url) {
+                newTranscriptDataSTTResultRes.url = res.url;
+              }
+              else{
+                newTranscriptDataSTTResultRes.url = tmpTranscript.url
+              }
+              db.update('transcripts', { _id: newTranscriptDataSTTResultRes.id }, newTranscriptDataSTTResultRes );
             }
-            else{
-              newTranscriptDataSTTResultRes.url = tmpTranscript.url
-            }
-            db.update('transcripts', { _id: newTranscriptDataSTTResultRes.id }, newTranscriptDataSTTResultRes );
+        })
+        
+
+      // TODO: re introduce offline error 
+      // but not for pocketsphinx and mozilla deepspeech as those run offline 
+      // so only for AssemblyAI and Speechmatics 
+      // if (!navigator.onLine) {
+      //   throw new Error("You don't seem to be connected to the internet");
+      // }
+        const transcriberMessageData = JSON.stringify({...newTranscript})
+        ipcRenderer.send('asynchronous-message', transcriberMessageData)
+        ////////////////////////////////////////////////
+     }else{
+      transcribe(newTranscript, mediaDir)
+      .then(res => {
+        console.log('transcribe res', res)
+        // ipcRenderer.send('asynchronous-message-transcribed', JSON.stringify(res))
+        if(res.status==='error'){
+          newTranscriptDataError.status = 'error';
+          newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${ res.errorMessage }.`;
+          db.update('transcripts', { _id: res.id}, newTranscriptDataError);
+        }else{
+          const newTranscriptDataSTTResultRes = res;
+          newTranscriptDataSTTResultRes.status = 'done',
+          newTranscriptDataSTTResultRes.transcript= res.transcript;
+          newTranscriptDataSTTResultRes.audioUrl = res.url;
+          newTranscriptDataSTTResultRes.sttEngine = res.sttEngine;
+          newTranscriptDataSTTResultRes.clipName =res.clipName;
+          // edge case if video has already been processed then don't override the url
+          // but if it hasn't used the audio url instead 
+          // TODO: removing get with projectId to avoid collision in tretrieving results?
+          // const tmpTranscript = db.get('transcripts', { _id: res.id, projectId: res.projectId });
+          const tmpTranscript = db.get('transcripts', { _id: res.id });
+          if (!tmpTranscript.url) {
+            newTranscriptDataSTTResultRes.url = res.url;
           }
+          else{
+            newTranscriptDataSTTResultRes.url = tmpTranscript.url
+          }
+          db.update('transcripts', { _id: newTranscriptDataSTTResultRes.id }, newTranscriptDataSTTResultRes );
+        }
       })
+      .catch(err => {
+        console.error('There was an error transcribing', err)
+        // const errResp = {}
+        // errResp.status = 'error';
+        // errResp.errorMessage = `There was an error transcribing this file: ${err.message}.`;
+        // newTranscriptDataError.status = 'error';
+        // newTranscriptDataError.errorMessage = `There was an error transcribing this file: ${err.message}.`;
+        // db.update('transcripts', { _id: res.id}, newTranscriptDataError);
+        // ipcRenderer.send('asynchronous-message-transcribed', JSON.stringify(errResp))
+      });
       
 
-    // TODO: re introduce offline error 
-    // but not for pocketsphinx and mozilla deepspeech as those run offline 
-    // so only for AssemblyAI and Speechmatics 
-    // if (!navigator.onLine) {
-    //   throw new Error("You don't seem to be connected to the internet");
-    // }
-      const transcriberMessageData = JSON.stringify({...newTranscript})
-      ipcRenderer.send('asynchronous-message', transcriberMessageData)
-      ////////////////////////////////////////////////
+    }
 
     return {
       status: 'ok',
