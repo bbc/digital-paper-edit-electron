@@ -25,7 +25,7 @@ const transcriber = async (data, mediaDir) => {
   const inputFilePath = data.path;
   const uid = data.id;
   // default stt engine and language
-  const { provider, language } = getDefaultSttAndLanguage();
+  const { provider, language, languageModel } = getDefaultSttAndLanguage();
   if (!provider) {
     // TODO: should probably do this check and throw this error before converting video preview as well?
     throw new Error("Default STT Engine has not been set");
@@ -53,7 +53,7 @@ const transcriber = async (data, mediaDir) => {
   // transcribe
   switch (defaultSttEngine) {
     case "AssemblyAI":
-      const assemblyAITranscript = await assemblyAiStt(newAudioFile);
+      const assemblyAITranscript = await assemblyAiStt(newAudioFile, language, languageModel);
       response.transcript = await convertAssemblyAIToDpeJson(
         assemblyAITranscript
       );

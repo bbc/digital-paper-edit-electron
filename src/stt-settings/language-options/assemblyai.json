@@ -1,0 +1,18 @@
+[
+    {
+        "code": "assemblyai_default",
+        "language": "English - All accents" 
+      },
+    {
+        "code": "assemblyai_en_uk",
+        "language": "English – British"
+      },
+      {
+        "code": "assemblyai_en_au",
+        "language": "English – Australian"
+      },
+      {
+        "code": "assemblyai_en_za",
+        "language": "English – South Africa"
+      }
+]
