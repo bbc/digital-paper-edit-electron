@@ -85,28 +85,49 @@
           super(props);
           this.state = {
             defaultStt: "",
-            defaultLanguage: "en-GB",
+            defaultLanguage: null,
             languageModel: null
           };
         }
 
         componentDidMount() {
-          const { provider, language , languageModel } = getDefaultStt();
-          console.log("provider, language", provider, language);
+          const { provider
+            // , language , languageModel 
+          } = getDefaultStt();
+          // console.log("provider, language", provider, language);
           const isDeepspeechModelSet = getIsDeepspeechModelSet();
           this.setState({
             defaultStt: provider,
-            defaultLanguage: language,
+            // defaultLanguage: language,
             isDeepspeechModelSet: isDeepspeechModelSet,
-            languageModel: languageModel,
+            // languageModel: languageModel,
             downloadingDeepspeech: false
           });
         }
         handleChangeDefaultStt = e => {
           console.log(e, e.target.value);
-          this.setState({
-            defaultStt: e.target.value,
-            saved: false
+          const tmpDefaultStt = e.target.value;
+          let tmpLangueModel = this.state.languageModel;
+          let tmpLanguage = this.state.defaultLanguage;
+
+          if((tmpDefaultStt==='AssemblyAI') && (!tmpLangueModel)){
+            tmpLangueModel = 'assemblyai_default';
+          } 
+        
+          if((tmpDefaultStt==='AssemblyAI') && (!tmpLanguage)){
+            tmpLanguage = 'assemblyai_default'
+          } 
+          else if(tmpDefaultStt==='Speechmatics'){
+            tmpLanguage='en';
+          }
+
+          this.setState((prevState, props)=>{
+            return {           
+                defaultStt: tmpDefaultStt,
+                languageModel: tmpLangueModel, 
+                defaultLanguage:tmpLanguage, 
+                saved: false
+              }
           });
         };
 
@@ -190,6 +211,7 @@
             languageToDisplay = speechmaticsLanguages.find(language => {
               return language.code === this.state.defaultLanguage;
             });
+            console.log("languageToDisplay",languageToDisplay);
             if (languageToDisplay) {
               languageToDisplay = languageToDisplay.language;
             }

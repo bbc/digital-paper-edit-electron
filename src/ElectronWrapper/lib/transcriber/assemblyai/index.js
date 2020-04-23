@@ -4,25 +4,13 @@ const { getCredentials, areCredentialsSet } = require('../../../../stt-settings/
 
 const sampleJson = require('./assemblyai-to-dpe/assemblyai-sample.json');
 
-async function assemblyAiStt (filePath, language='assemblyai_default', languageModel= 'assemblyai_media') {
+async function assemblyAiStt (filePath, language, languageModel) {
   let assemblyAiCredentials;
   if (areCredentialsSet('AssemblyAI')) {
  assemblyAiCredentials = getCredentials('AssemblyAI');
  const  ApiKey = assemblyAiCredentials.sttAPIKey;
  console.log('language' ,language ,'languageModel', languageModel);
- // assemblyai.setAPIKey(assemblyAiCredentials.sttAPIKey);
     try {
-      // if in development, stub the response from STT
-      // if (process.env.NODE_ENV === 'development') {
-      //   return sampleJson;
-      // }
-      // else {
-        // const transcript = new assemblyai.Upload(inputPath);
-        // const response = await transcript.create();
-        // const data = response.get();
-
-        // return data;
-
         const response = await assemblyai({
           ApiKey, 
           filePath,
