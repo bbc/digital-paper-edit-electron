@@ -264,12 +264,15 @@ class ElectronWrapper {
   }
 
   async updateTranscript(projectId, transcriptId, queryParamsOptions, data) {
+    console.log('updateTranscript', projectId,transcriptId,data)
     const updatedTranscriptData = {
       id: transcriptId,
       projectId,
-      title: data.title,
-      description: data.description
+      title: data.title
     };
+    if(data.description){
+      updatedTranscriptData.description = data.description;
+    }
     // TODO: this part is for when correcting transcript with react-transcript-editor as it's not ready
     if (data.words) {
       updatedTranscriptData.transcript = {};
