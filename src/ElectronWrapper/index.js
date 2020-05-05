@@ -652,7 +652,7 @@ class ElectronWrapper {
             ffmpegPath: ffmpeg.path
           }
           console.log(ffmpegRemixData)
-          remix(ffmpegRemixData, null, function(err, result) {
+          remix(ffmpegRemixData, null,null, function(err, result) {
             if(err){
               reject(err)
             }
@@ -666,7 +666,7 @@ class ElectronWrapper {
     })
   }
 
-  async exportAudio(data,fileName,waveForm){
+  async exportAudio(data,fileName,waveForm, waveFormMode, waveFormColor){
     console.log('waveForm',waveForm)
     return new Promise((resolve, reject) => {
       // In electron prompt for file destination 
@@ -706,7 +706,8 @@ class ElectronWrapper {
             ffmpegPath: ffmpeg.path
           }
           console.log(ffmpegRemixData)
-          remix(ffmpegRemixData, waveForm, function(err, result) {
+          console.log('remix-electron exportAudio::', ffmpegRemixData, waveForm, waveFormMode,waveFormColor)
+          remix(ffmpegRemixData, waveForm, waveFormMode,waveFormColor ,function(err, result) {
             if(err){
               reject(err)
             }

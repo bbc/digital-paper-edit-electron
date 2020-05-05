@@ -75,12 +75,6 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
     {
       label: 'Speech To Text Settings',
       submenu: [
-        // {
-        //     label: "Project Page",
-        //     click() {
-        //         require("electron").shell.openExternal("https://autoEdit.io");
-        //         }
-        // },
         {
           label: 'Edit Speech To Text configuration',
           click() {
@@ -90,29 +84,41 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
         }
       ]
     },
+    // {
+    //   label: 'Search',
+    //   submenu: [
+    //     {
+    //       label: 'Electron Search',
+    //       click() {        
+    //         // electronSearch();
+    //       },
+    //       accelerator: 'CmdOrCtrl+F'
+    //     }
+    //   ]
+    // },
     {
       role: 'help',
       submenu: [
-        // {
-        //   label: "Project Page",
-        //   click() {
-        //     require("electron").shell.openExternal("https://autoEdit.io");
-        //   }
-        // },
-        // {
-        //   label: "User Manual",
-        //   click() {
-        //     require("electron").shell.openExternal(
-        //       "https://pietropassarelli.gitbooks.io/autoedit2-user-manual/content/"
-        //     );
-        //   }
-        // },
-        // {
-        //   label: "Advanced - Developer Console",
-        //   click() {
-        //     win.webContents.toggleDevTools();
-        //   }
-        // }
+        {
+          label: "Project Page",
+          click() {
+            require("electron").shell.openExternal("https://www.autoedit.io");
+          }
+        },
+        {
+          label: "User Manual",
+          click() {
+            require("electron").shell.openExternal(
+              "https://autoedit.gitbook.io/autoedit-3-user-manual"
+            );
+          }
+        },
+        {
+          label: "Advanced - Developer Console",
+          click() {
+            win.webContents.toggleDevTools();
+          }
+        }
       ]
     }
   ];

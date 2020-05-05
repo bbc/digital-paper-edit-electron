@@ -85,6 +85,24 @@ function createMainWindow() {
     });
   }
 
+  // ////////////// not fully implemented
+  /// https://stackoverflow.com/questions/40987229/how-do-i-search-text-in-a-single-page-reactjs-electron-application
+  mainWindow.webContents.on('found-in-page', (event, result) => {
+    if (result.finalUpdate) {
+      mainWindow.webContents.stopFindInPage('keepSelection');
+    }
+    });
+    ipcMain.on('search-text', (event, arg) => {
+      mainWindow.webContents.findInPage(arg,{
+        forward: true, 
+        findNext: true,
+        matchCase: false,
+        wordStart: true,
+        medialCapitalAsWordStart: false
+      });
+    });
+    // //////////////
+
   // https://github.com/electron/electron/issues/1095
   mainWindow.dataPath = app.getPath('userData');
   mainWindow.appPath = app.getAppPath();

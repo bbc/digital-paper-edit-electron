@@ -5,7 +5,8 @@ const debug = require('debug');
 const d = debug('ffmpeg-remix');
 tmp.setGracefulCleanup();
 
-const ingest = (data, tmpDir,waveForm) => {
+const ingest = (data, tmpDir,waveForm, waveFormMode, waveFormColor) => {
+console.log('ingest', data, tmpDir,waveForm, waveFormMode, waveFormColor);
     if(data.ffmpegPath){
       ffmpeg.setFfmpegPath(data.ffmpegPath);
     }
@@ -31,10 +32,20 @@ const ingest = (data, tmpDir,waveForm) => {
       ff.videoCodec('libx264').audioCodec('aac')
 
       if(waveForm){
+        // default for waveform mode type
+        let tmpWaveFormMode = 'p2p';
+        // but also option to customise, within available options
+        if(waveFormMode &&(waveFormMode==='p2p'|| waveFormMode==='cline'||waveFormMode==='point'||waveFormMode==='line')){
+          tmpWaveFormMode = waveFormMode;
+        }
+        let tmpWaveFormColor = 'Red';
+        if(waveFormColor){
+          tmpWaveFormColor = waveFormColor;
+        }
         // wave form reference https://trac.ffmpeg.org/wiki/Waveform
         // https://ffmpeg.org/ffmpeg-filters.html#showwaves 
         // TODO: colour, and mode could be optional parameter, for mode eg line, point,p2p,cline.
-        ff.complexFilter('[0:a]showwaves=s=1920x1080:colors=Red:mode=p2p,format=yuv420p[v]')
+        ff.complexFilter(`[0:a]showwaves=s=1920x1080:colors=${tmpWaveFormColor}:mode=${tmpWaveFormMode},format=yuv420p[v]`)
         // ff.complexFilter('[0:a]showwaves=s=1920x1080:colors=DodgerBlue:mode=cline,format=yuv420p[v]')
         ff.outputOption(['-map [v]','-map', '0:a'])
       }
@@ -95,14 +106,15 @@ const ingest = (data, tmpDir,waveForm) => {
   };
   
 
-module.exports = function (data,waveForm, callback) {
+module.exports = function (data,waveForm, waveFormMode,waveFormColor, callback) {
+  console.log('exports',data,waveForm, waveFormMode,waveFormColor,);
   const tmpDir = tmp.dirSync({
       unsafeCleanup: true
   });
 
   if (data.limit) {
-    async.mapLimit(data.input, data.limit, ingest(data, tmpDir,waveForm), concat(data, tmpDir, callback));
+    async.mapLimit(data.input, data.limit, ingest(data, tmpDir,waveForm, waveFormMode, waveFormColor), concat(data, tmpDir, callback));
   } else {
-    async.map(data.input, ingest(data, tmpDir,waveForm), concat(data, tmpDir, callback));
+    async.map(data.input, ingest(data, tmpDir,waveForm,  waveFormMode, waveFormColor), concat(data, tmpDir, callback));
   }
 }
