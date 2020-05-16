@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>I'm a hidden worker</title>
 </head>
+
 <body>
   Transcriber Worker
   <script>
@@ -12,8 +14,7 @@
     const ipcRenderer = electron.ipcRenderer;
     const path = require('path');
     const transcribe = require('./ElectronWrapper/lib/transcriber');
-
-    const dataPath = electron.remote.app.getPath("userData");
+    const dataPath = ipcRenderer.sendSync('synchronous-message-get-user-data-folder', 'ping');
     const mediaDir = path.join(dataPath, "media");
 
     ipcRenderer.on('transcribe', (event, data) => {
@@ -32,4 +33,5 @@
     });
   </script>
 </body>
+
 </html>

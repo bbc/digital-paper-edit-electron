@@ -5,10 +5,8 @@ const path = require('path');
 // https://www.electronjs.org/docs/api/app#appsetpathname-path
 // https://stackoverflow.com/questions/48587035/electron-how-to-set-a-custom-directory-for-user-data-user-data-dir
 // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-// const userDataPath = app.getPath ('userData');
-const appData = app.getPath ('appData');
-app.setPath ('userData', path.join(appData,"digital-paper-edit-electron"));
-
+const appData = app.getPath('appData');
+app.setPath('userData', path.join(appData, 'digital-paper-edit-electron'));
 const makeMenuTemplate = require('./make-menu-template.js');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -24,25 +22,18 @@ function createNewSettingsWindow() {
     y: 0,
     minWidth: 1000,
     minHeight: 670,
-    title: "autoEdit 3 - Settings",
+    title: 'autoEdit 3 - Settings',
     titleBarStyle: 'show',
-    // preload: __dirname + '/prompt.js',
     webPreferences: {
-      // webSecurity: false,
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(
-        app.getAppPath(),
-        'src',
-        'stt-settings',
-        'index.html'
-      ),
+      pathname: path.join(app.getAppPath(), 'src', 'stt-settings', 'index.html'),
       protocol: 'file:',
-      slashes: true
+      slashes: true,
     })
   );
 }
@@ -55,26 +46,18 @@ function createMainWindow() {
     minWidth: 1000,
     minHeight: 670,
     titleBarStyle: 'show',
-    // preload: __dirname + '/prompt.js',
-    title: "autoEdit 3",
+    title: 'autoEdit 3',
     webPreferences: {
-      // webSecurity: false,
       nodeIntegration: true,
-      preload: path.join(app.getAppPath(), 'src', 'prompt.js')
-    }
+      preload: path.join(app.getAppPath(), 'src', 'prompt.js'),
+    },
   });
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(
-        app.getAppPath(),
-        'node_modules',
-        '@pietrop',
-        'digital-paper-edit-client',
-        'index.html'
-      ),
+      pathname: path.join(app.getAppPath(), 'node_modules', '@pietrop', 'digital-paper-edit-client', 'index.html'),
       protocol: 'file:',
-      slashes: true
+      slashes: true,
     })
   );
 
@@ -85,24 +68,7 @@ function createMainWindow() {
     });
   }
 
-  // ////////////// not fully implemented
-  /// https://stackoverflow.com/questions/40987229/how-do-i-search-text-in-a-single-page-reactjs-electron-application
-  mainWindow.webContents.on('found-in-page', (event, result) => {
-    if (result.finalUpdate) {
-      mainWindow.webContents.stopFindInPage('keepSelection');
-    }
-    });
-    ipcMain.on('search-text', (event, arg) => {
-      mainWindow.webContents.findInPage(arg,{
-        forward: true, 
-        findNext: true,
-        matchCase: false,
-        wordStart: true,
-        medialCapitalAsWordStart: false
-      });
-    });
-    // //////////////
-
+  // TODO: is this needed?
   // https://github.com/electron/electron/issues/1095
   mainWindow.dataPath = app.getPath('userData');
   mainWindow.appPath = app.getAppPath();
@@ -110,7 +76,7 @@ function createMainWindow() {
   const template = makeMenuTemplate({
     app,
     createNewSettingsWindow,
-    createMainWindow
+    createMainWindow,
   });
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
@@ -125,22 +91,18 @@ function createMainWindow() {
     settingsWindow = null;
   });
 
-
   //////////////////////////////////////////////////////////////////////////////////
   // create hidden worker window
   const workerWindow = new BrowserWindow({
-    show: false, // TODO: unless development + add to menu to open up for inspection - could show progress 
-    webPreferences: { nodeIntegration: true }
+    show: false, // TODO: unless development + add to menu to open up for inspection - could show progress
+    webPreferences: { nodeIntegration: true },
   });
 
   workerWindow.loadURL(
     url.format({
-      pathname: path.join(
-        app.getAppPath(),
-        'src','worker.html'
-      ),
+      pathname: path.join(app.getAppPath(), 'src', 'worker.html'),
       protocol: 'file:',
-      slashes: true
+      slashes: true,
     })
   );
   //////////////////////////////////////////////////////////////////////////////////
@@ -150,16 +112,16 @@ function createMainWindow() {
   // receive request from render process of react client app
   // sends it to worker window render process to offload the work
   // TODO: change name, `asynchronous-message` to something better
-  ipcMain.on('asynchronous-message', (event, arg) => {
+  ipcMain.on('asynchronous-message-start-transcription', (event, arg) => {
     const data = JSON.parse(arg);
     workerWindow.webContents.send('transcribe', data);
-  })
+  });
 
-  // receives the 
+  // receives the
   ipcMain.on('asynchronous-message-transcribed', (event, arg) => {
     // workerWindow.close()
     mainWindow.webContents.send('asynchronous-reply', arg);
-  })
+  });
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 }
@@ -216,7 +178,19 @@ app.on('renderer-process-crashed', function(event, webContents, killed) {
   console.log('killed', killed);
 });
 
+ipcMain.on('synchronous-message-get-app-path', (event, arg) => {
+  event.returnValue = app.getAppPath();
+});
 
+ipcMain.on('synchronous-message-get-user-data-folder', (event, arg) => {
+  event.returnValue = app.getPath('userData');
+});
+
+ipcMain.on('synchronous-message-get-app-version', (event, arg) => {
+  event.returnValue = app.getVersion();
+});
+
+// prompt implementation, see prompt.js file
 let promptResponse;
 ipcMain.on('prompt', function(eventRet, arg) {
   promptResponse = null;
@@ -229,12 +203,12 @@ ipcMain.on('prompt', function(eventRet, arg) {
     alwaysOnTop: true,
     frame: false,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
   arg.val = arg.val || '';
-  const promptHtml = `<label for="val"> ${ arg.title }</label>
-  <textarea rows="10" cols="50" id="val" autofocus >${ arg.val }</textarea>
+  const promptHtml = `<label for="val"> ${arg.title}</label>
+  <textarea rows="10" cols="50" id="val" autofocus >${arg.val}</textarea>
   <button onclick="require('electron').ipcRenderer.send('prompt-response', document.getElementById('val').value);window.close()">Ok</button>
   <button onclick="window.close()">Cancel</button>
   <style>

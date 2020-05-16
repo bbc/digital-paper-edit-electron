@@ -1,12 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const electron = require("electron");
-const downloadDeepSpeechModel = require("deepspeech-node-wrapper")
-  .downloadDeepSpeechModel;
-const appUserDataPath = electron.remote.app.getPath("userData");
+const fs = require('fs');
+const path = require('path');
+const downloadDeepSpeechModel = require('deepspeech-node-wrapper').downloadDeepSpeechModel;
+const { ipcRenderer } = require('electron');
+const appUserDataPath = ipcRenderer.sendSync('synchronous-message-get-user-data-folder', 'ping');
 // TODO: consider moving deepspeech logic to a separate file from credentials.js?
 
-function getDeepSpeechModelFolderName( modelVersion = "0.6.0") {
+function getDeepSpeechModelFolderName(modelVersion = '0.6.0') {
   return `deepspeech-${modelVersion}-models`;
 }
 
@@ -24,51 +23,40 @@ function getIsDeepspeechModelSet() {
   const isDeepSpeechModelPath = fs.existsSync(deepSpeechModelPath);
   // Extra checks to make sure the files needed by the model exists
   //  "output_graph.pbmm"
-  const outputGraphPbmmPath = path.join(
-    deepSpeechModelPath,
-    "output_graph.pbmm"
-  );
+  const outputGraphPbmmPath = path.join(deepSpeechModelPath, 'output_graph.pbmm');
   const isOutputGraphPbmmPath = fs.existsSync(outputGraphPbmmPath);
   //  "lm.binary"
-  const lmBinaryPath = path.join(deepSpeechModelPath, "lm.binary");
+  const lmBinaryPath = path.join(deepSpeechModelPath, 'lm.binary');
   const islBinaryPath = fs.existsSync(lmBinaryPath);
   // "trie"
-  const triePath = path.join(deepSpeechModelPath, "trie");
+  const triePath = path.join(deepSpeechModelPath, 'trie');
   const isTriePath = fs.existsSync(triePath);
 
-  return (
-    isDeepSpeechModelPath &&
-    isTriePath &&
-    islBinaryPath &&
-    isOutputGraphPbmmPath
-  );
+  return isDeepSpeechModelPath && isTriePath && islBinaryPath && isOutputGraphPbmmPath;
 }
 
 function setDeepSpeechModel() {
-  console.log("setDeepSpeechModel");
-  const outputPath = path.join(appUserDataPath)//getDeepSpeechModelPath();
+  console.log('setDeepSpeechModel');
+  const outputPath = path.join(appUserDataPath); //getDeepSpeechModelPath();
 
   return new Promise((resolve, reject) => {
-  downloadDeepSpeechModel(outputPath)
-    .then(res => {
-      console.log("res", res);
-      resolve(res);
-    })
-    .catch(error => {
-      console.error(
-        "error setting up the Deepspeech model, during download",
-        error
-      );
-      reject(error)
-    });
-  })
+    downloadDeepSpeechModel(outputPath)
+      .then(res => {
+        console.log('res', res);
+        resolve(res);
+      })
+      .catch(error => {
+        console.error('error setting up the Deepspeech model, during download', error);
+        reject(error);
+      });
+  });
 }
 
 const credentialsTemplate = {
-  provider: "",
-  sttUserName: "",
-  sttAPIKey: "",
-  sttAPIUrl: ""
+  provider: '',
+  sttUserName: '',
+  sttAPIKey: '',
+  sttAPIUrl: '',
 };
 
 function deepCopy(data) {
@@ -80,10 +68,7 @@ function getCredentialsFilePath(provider) {
 }
 
 function setCredentials(data) {
-  fs.writeFileSync(
-    getCredentialsFilePath(data.provider),
-    JSON.stringify(data, null, 2)
-  );
+  fs.writeFileSync(getCredentialsFilePath(data.provider), JSON.stringify(data, null, 2));
 }
 
 function getCredentials(provider) {
@@ -103,10 +88,10 @@ function getCredentials(provider) {
 function areCredentialsSet(provider) {
   const credentials = getCredentials(provider);
   switch (provider) {
-    case "AssemblyAI":
-      return credentials.sttAPIKey !== "";
-    case "Speechmatics":
-      return credentials.sttUserName !== "" && credentials.sttAPIKey !== "";
+    case 'AssemblyAI':
+      return credentials.sttAPIKey !== '';
+    case 'Speechmatics':
+      return credentials.sttUserName !== '' && credentials.sttAPIKey !== '';
     default:
       console.error(`Could not find credentials for provier: ${provider}`);
 

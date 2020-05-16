@@ -1,10 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const electron = require('electron');
-const appUserDataPath = electron.remote.app.getPath('userData');
-
+const { ipcRenderer } = require('electron');
+const appUserDataPath = ipcRenderer.sendSync('synchronous-message-get-user-data-folder', 'ping');
 const defaultSttTemplate = {
-  // Provider could be '' unspecified, 
+  // Provider could be '' unspecified,
   // or pocketsphinx, to give a working default to the app.
   provider: 'pocketsphinx',
   // language:''
@@ -18,11 +17,11 @@ function getDefaultSttFilePath() {
   return path.join(appUserDataPath, 'default-stt.json');
 }
 
-function setDefaultStt (data) {
+function setDefaultStt(data) {
   fs.writeFileSync(getDefaultSttFilePath(), JSON.stringify(data, null, 2));
 }
 
-function getDefaultStt () {
+function getDefaultStt() {
   let defaultStt = deepCopy(defaultSttTemplate);
   //   defaultStt.provider = data.provider;
   //   defaultStt.language = data.language;
@@ -32,8 +31,7 @@ function getDefaultStt () {
     defaultStt = JSON.parse(fs.readFileSync(defaultSttFilePath).toString());
 
     return defaultStt;
-  }
-  else {
+  } else {
     return defaultStt;
   }
 }
