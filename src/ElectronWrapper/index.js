@@ -627,7 +627,7 @@ class ElectronWrapper {
               ffmpegPath: ffmpeg.path,
             };
             console.log(ffmpegRemixData);
-            remix(ffmpegRemixData, null, null, function(err, result) {
+            remix(ffmpegRemixData, null, null, null, function(err, result) {
               if (err) {
                 reject(err);
               }
