@@ -101,12 +101,14 @@
       ]
     },
     "win": {
-      "target": "portable",
+      "target": [ {
+"target":"portable",
 
  "arch": [
-            "x64"
-          ],
-
+             "x64",
+          "ia32"
+          ]
+}],
       "icon": "build/icon.ico",
       "files": [
         "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
