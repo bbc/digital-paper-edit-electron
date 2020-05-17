@@ -1,7 +1,7 @@
 {
   "name": "digital-paper-edit-electron",
   "productName": "autoEdit 3",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -102,6 +102,11 @@
     },
     "win": {
       "target": "portable",
+
+ "arch": [
+            "x64"
+          ],
+
       "icon": "build/icon.ico",
       "files": [
         "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
