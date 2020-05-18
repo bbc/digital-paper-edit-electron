@@ -44,7 +44,6 @@ ffmpeg.setFfprobePath(ffprobePath);
  * @returns {callback} config.callback - Optional callback to return when ffprobe done reading. It returns an json object.
  */
 function readMetadata({ file }) {
-
   // if ( ffprobePath ) {
   //   //setting ffprobe bin
   //   ffmpeg.setFfprobePath(ffprobePath);
@@ -71,7 +70,6 @@ function readMetadata({ file }) {
  * @returns {callback} config.callback - Optional callback to return when ffprobe done reading. It returns an object containing metadata info needed for EDL(Edit Decision List): filePathName,fileName,date, reelName, timecode, fps, duration,
  */
 function readMetadataForEDL({ file }) {
-
   const video = {};
 
   // if ( ffprobePath ) {
@@ -82,8 +80,8 @@ function readMetadataForEDL({ file }) {
   // }
 
   return new Promise((resolve, reject) => {
-  //running ffprobe
-    ffmpeg.ffprobe(file, function(err, metadata ) {
+    //running ffprobe
+    ffmpeg.ffprobe(file, function(err, metadata) {
       if (err) {
         reject(err);
       }
@@ -91,7 +89,7 @@ function readMetadataForEDL({ file }) {
       //eg if format does not exist ad an attribtue then filename attribute will not be found under format.
 
       //reading file name
-      if (metadata !== undefined && metadata.format !== undefined && metadata.format.filename !== undefined ) {
+      if (metadata !== undefined && metadata.format !== undefined && metadata.format.filename !== undefined) {
         video.filePathName = metadata.format.filename;
         var filePathO = path.parse(video.filePathName);
         video.fileName = filePathO.base;
@@ -101,30 +99,83 @@ function readMetadataForEDL({ file }) {
       }
 
       // reading date
-      if ( metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].tags !== undefined && metadata.streams[0].tags.creation_time !== undefined ) {
+      if (
+        metadata !== undefined &&
+        metadata.streams[0] !== undefined &&
+        metadata.streams[0].tags !== undefined &&
+        metadata.streams[0].tags.creation_time !== undefined
+      ) {
         video.date = metadata.streams[0].tags.creation_time;
       } else {
         video.date = 'NA';
       }
 
       // reading reel
-      if (metadata !== undefined && metadata.streams[2] !== undefined && metadata.streams[2].tags !== undefined && metadata.streams[2].tags.reel_name !== undefined) {
+      if (
+        metadata !== undefined &&
+        metadata.streams[0] !== undefined &&
+        metadata.streams[0].tags !== undefined &&
+        metadata.streams[0].tags.reel_name !== undefined
+      ) {
+        video.reelName = metadata.streams[0].tags.reel_name;
+      } else if (
+        metadata !== undefined &&
+        metadata.streams[1] !== undefined &&
+        metadata.streams[1].tags !== undefined &&
+        metadata.streams[1].tags.reel_name !== undefined
+      ) {
+        video.reelName = metadata.streams[1].tags.reel_name;
+      } else if (
+        metadata !== undefined &&
+        metadata.streams[2] !== undefined &&
+        metadata.streams[2].tags !== undefined &&
+        metadata.streams[2].tags.reel_name !== undefined
+      ) {
         video.reelName = metadata.streams[2].tags.reel_name;
       } else {
         video.reelName = 'NA';
       }
 
       // reading timecode eg "00:00:00:00"
-      if (metadata !== undefined && metadata.format !== undefined && metadata.format.tags !== undefined && metadata.format.tags.timecode !== undefined) {
+      if (
+        metadata !== undefined &&
+        metadata.format !== undefined &&
+        metadata.format.tags !== undefined &&
+        metadata.format.tags.timecode !== undefined
+      ) {
         video.timecode = metadata.format.tags.timecode;
+      } else if (
+        metadata !== undefined &&
+        metadata.streams !== undefined &&
+        metadata.streams[0] !== undefined &&
+        metadata.streams[0].tags !== undefined &&
+        metadata.streams[0].tags.timecode !== undefined
+      ) {
+        video.timecode = metadata.streams[0].tags.timecode;
+      } else if (
+        metadata !== undefined &&
+        metadata.streams !== undefined &&
+        metadata.streams[1] !== undefined &&
+        metadata.streams[1].tags !== undefined &&
+        metadata.streams[1].tags.timecode !== undefined
+      ) {
+        video.timecode = metadata.streams[1].tags.timecode;
+      } else if (
+        metadata !== undefined &&
+        metadata.streams !== undefined &&
+        metadata.streams[2] !== undefined &&
+        metadata.streams[2].tags !== undefined &&
+        metadata.streams[2].tags.timecode !== undefined
+      ) {
+        video.timecode = metadata.streams[2].tags.timecode;
       } else {
         video.timecode = 'NA';
       }
 
       // reading fps eg "1/25"
-      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].r_frame_rate !== undefined ) {
-      //https://www.ffmpeg.org/ffmpeg-all.html#Video-rate
-      // frame rate eg `30000/1001` is 30000/1001 = 29.97 => Ntsc
+      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].r_frame_rate !== undefined) {
+        //https://www.ffmpeg.org/ffmpeg-all.html#Video-rate
+        // frame rate eg `30000/1001` is 30000/1001 = 29.97 => Ntsc
         video.r_frame_rate = metadata.streams[0].r_frame_rate;
         //converting to frames per seconds
         //TODO: find out why the r_frame_rate would ever be `0/0`. encountered that in an mp4. 0/0 = NaN. which then messes up the EDL.
@@ -132,38 +183,35 @@ function readMetadataForEDL({ file }) {
           var firstNumber = parseInt(video.r_frame_rate.split('/')[0]);
           var lastNumber = parseInt(video.r_frame_rate.split('/')[1]);
           //covering other edge cases where it could be equal to NaN
-          if ((firstNumber / lastNumber) !== NaN) {
-            video.fps = parseFloat(parseFloat(firstNumber / lastNumber ).toFixed( 2 ));
+          if (firstNumber / lastNumber !== NaN) {
+            video.fps = parseFloat(parseFloat(firstNumber / lastNumber).toFixed(2));
           } else {
             video.fps = 'NA';
           }
-
         } else {
-        //otherwise fps not available
+          //otherwise fps not available
           video.fps = 'NA';
         }
-
       } else {
         video.r_frame_rate = 'NA';
         video.fps = 'NA';
       }
 
       // reading duration eg in secods
-      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].duration !== undefined ) {
+      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].duration !== undefined) {
         video.duration = metadata.streams[0].duration;
       } else {
         video.duration = 'NA';
       }
 
       // sample_rate
-      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].sample_rate !== undefined ) {
+      if (metadata !== undefined && metadata.streams[0] !== undefined && metadata.streams[0].sample_rate !== undefined) {
         video.sampleRate = metadata.streams[0].sample_rate;
       } else {
-      // if it's video it would be on the second stream (?)
-        if (metadata !== undefined && metadata.streams[1] !== undefined && metadata.streams[1].sample_rate !== undefined ) {
+        // if it's video it would be on the second stream (?)
+        if (metadata !== undefined && metadata.streams[1] !== undefined && metadata.streams[1].sample_rate !== undefined) {
           video.sampleRate = metadata.streams[1].sample_rate;
-        }
-        else {
+        } else {
           video.sampleRate = 'NA';
         }
       }
