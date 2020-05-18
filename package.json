@@ -1,7 +1,7 @@
 {
   "name": "digital-paper-edit-electron",
   "productName": "autoEdit 3",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Digital Paper Edit app",
   "main": "src/electron-main.js",
   "scripts": {
@@ -11,10 +11,10 @@
     "start:dev": "cross-env NODE_ENV=development electron .",
     "start:prod": "cross-env NODE_ENV=production electron .",
     "build:m": "cross-env NODE_ENV=production electron-builder -m",
-    "build:w": "cross-env NODE_ENV=production electron-builder -w --x64",
+    "build:w": "cross-env NODE_ENV=production electron-builder -w",
     "build:l": "cross-env NODE_ENV=production electron-builder -l",
     "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
-    "build:mwl:publish:always": "electron-builder -mwl --x64 --publish always",
+    "build:mwl:publish:always": "electron-builder -mwl --x64 --ia32 --publish always",
     "build:m:publish:always": "electron-builder -m --publish always",
     "build:mw:publish:always": "electron-builder -mw --publish always",
     "build": "npx cross-env NODE_ENV=production electron-builder -m"
@@ -41,6 +41,7 @@
       "repo": "digital-paper-edit-electron"
     },
     "appId": "org.dpe.dpe-electron",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
     "asar": false,
     "directories": {
       "buildResources": "assets"
@@ -101,14 +102,16 @@
       ]
     },
     "win": {
-      "target": [ {
-"target":"portable",
-
- "arch": [
-             "x64",
-          "ia32"
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
           ]
-}],
+        }
+      ],
       "icon": "build/icon.ico",
       "files": [
         "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
