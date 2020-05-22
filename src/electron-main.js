@@ -53,6 +53,12 @@ function createMainWindow() {
     },
   });
 
+  // https://stackoverflow.com/questions/31749625/make-a-link-from-electron-open-in-browser
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
+
   mainWindow.loadURL(
     url.format({
       pathname: path.join(app.getAppPath(), 'node_modules', '@pietrop', 'digital-paper-edit-client', 'index.html'),
