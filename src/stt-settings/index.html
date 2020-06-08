@@ -88,16 +88,14 @@
       }
 
       componentDidMount() {
-        const { provider
-          // , language , languageModel 
-        } = getDefaultStt();
+        const { provider, language, languageModel } = getDefaultStt();
         // console.log("provider, language", provider, language);
         const isDeepspeechModelSet = getIsDeepspeechModelSet();
         this.setState({
           defaultStt: provider,
-          // language: language,
+          language: language,
           isDeepspeechModelSet: isDeepspeechModelSet,
-          // languageModel: languageModel,
+          languageModel: languageModel,
           downloadingDeepspeech: false
         });
       }
@@ -107,15 +105,22 @@
         let tmpLangueModel = this.state.languageModel;
         let tmpLanguage = this.state.language;
 
-        if ((tmpDefaultStt === 'AssemblyAI') && (!tmpLangueModel)) {
+        if ((tmpDefaultStt === 'AssemblyAI') && (!tmpLangueModel || !tmpLangueModel.includes('assemblyai_'))) {
           tmpLangueModel = 'assemblyai_default';
         }
 
-        if ((tmpDefaultStt === 'AssemblyAI') && (!tmpLanguage)) {
+        if ((tmpDefaultStt === 'AssemblyAI') && (!tmpLanguage || !tmpLanguage.includes('assemblyai_'))) {
           tmpLanguage = 'assemblyai_default'
         }
         else if (tmpDefaultStt === 'Speechmatics') {
           tmpLanguage = 'en';
+          tmpLangueModel = null;
+        } else if (tmpDefaultStt === 'pocketsphinx') {
+          tmpLanguage = null;
+          tmpLangueModel = null;
+        } else if (tmpDefaultStt === 'deepspeech') {
+          tmpLanguage = null;
+          tmpLangueModel = null;
         }
 
         this.setState((prevState, props) => {

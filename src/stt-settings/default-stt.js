@@ -6,7 +6,8 @@ const defaultSttTemplate = {
   // Provider could be '' unspecified,
   // or pocketsphinx, to give a working default to the app.
   provider: 'pocketsphinx',
-  // language:''
+  language: null,
+  languageModel: null,
 };
 
 function deepCopy(data) {
