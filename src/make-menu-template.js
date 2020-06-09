@@ -5,7 +5,7 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
       submenu: [
         {
           label: 'About Application',
-          selector: 'orderFrontStandardAboutPanel:'
+          selector: 'orderFrontStandardAboutPanel:',
         },
         { type: 'separator' },
         {
@@ -13,9 +13,9 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
           accelerator: 'Command+Q',
           click: function() {
             app.quit();
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     {
       label: 'Edit',
@@ -31,17 +31,17 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
         {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
+          selector: 'selectAll:',
         },
         { type: 'separator' },
         {
           label: 'Speech',
           submenu: [
             { role: 'startspeaking', accelerator: 'CmdOrCtrl+E' }, //perhaps add keyboard shortcut?
-            { role: 'stopspeaking', accelerator: 'CmdOrCtrl+Shift+E' } //perhaps add keyboard shortcut?
-          ]
-        }
-      ]
+            { role: 'stopspeaking', accelerator: 'CmdOrCtrl+Shift+E' }, //perhaps add keyboard shortcut?
+          ],
+        },
+      ],
     },
     {
       label: 'View',
@@ -54,8 +54,8 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
         { role: 'zoomin' },
         { role: 'zoomout' },
         { type: 'separator' },
-        { role: 'togglefullscreen' }
-      ]
+        { role: 'togglefullscreen' },
+      ],
     },
     {
       role: 'window',
@@ -68,9 +68,9 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
           click() {
             createMainWindow();
           },
-          accelerator: 'CmdOrCtrl+N'
-        }
-      ]
+          accelerator: 'CmdOrCtrl+N',
+        },
+      ],
     },
     {
       label: 'Speech To Text Settings',
@@ -80,16 +80,16 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
           click() {
             createNewSettingsWindow();
           },
-          accelerator: 'CmdOrCtrl+S+T'
-        }
-      ]
+          accelerator: 'CmdOrCtrl+S+T',
+        },
+      ],
     },
     // {
     //   label: 'Search',
     //   submenu: [
     //     {
     //       label: 'Electron Search',
-    //       click() {        
+    //       click() {
     //         // electronSearch();
     //       },
     //       accelerator: 'CmdOrCtrl+F'
@@ -100,27 +100,19 @@ makeMenuTemplate = ({ app, createNewSettingsWindow, createMainWindow, checkForUp
       role: 'help',
       submenu: [
         {
-          label: "Project Page",
+          label: 'Project Page',
           click() {
-            require("electron").shell.openExternal("https://www.autoedit.io");
-          }
+            require('electron').shell.openExternal('https://www.autoedit.io');
+          },
         },
         {
-          label: "User Manual",
+          label: 'User Manual',
           click() {
-            require("electron").shell.openExternal(
-              "https://autoedit.gitbook.io/autoedit-3-user-manual"
-            );
-          }
+            require('electron').shell.openExternal('https://autoedit.gitbook.io/autoedit-3-user-manual');
+          },
         },
-        {
-          label: "Advanced - Developer Console",
-          click() {
-            win.webContents.toggleDevTools();
-          }
-        }
-      ]
-    }
+      ],
+    },
   ];
 
   return template;
