@@ -141,7 +141,7 @@
     "fibers": "^4.0.2",
     "jest-resolve": "^24.9.0",
     "jquery": "^3.4.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "npm": "^6.13.4",
     "sass": "^1.24.0",
     "typescript": "^3.7.4",
